@@ -17,7 +17,6 @@
     pkgs.alejandra
     pkgs.wormhole-rs
     pkgs.magic-wormhole
-    unstable.vscode-fhs
   ];
 
   programs.home-manager.enable = true; # Let Home Manager install and manage itself.
