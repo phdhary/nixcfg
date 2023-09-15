@@ -6,7 +6,7 @@
   programs.vscode = {
     enable = true;
     package = unstable.vscode;
-    extensions = with vsc-extensions; [
+    extensions = with vsc-extensions.vscode-marketplace; [
       aaron-bond.better-comments
       albert.tabout
       bradlc.vscode-tailwindcss

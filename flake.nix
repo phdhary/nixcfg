@@ -19,15 +19,16 @@
     ...
   }: let
     system = "x86_64-linux";
+    user = "laken";
     config = {allowUnfree = true;};
     pkgs = import nixpkgs {inherit system config;};
     unstable = import nixpkgs-unstable {inherit system config;};
-    vsc-extensions = nix-vscode-extensions.extensions.${system}.vscode-marketplace;
+    vsc-extensions = nix-vscode-extensions.extensions.${system};
   in {
-    homeConfigurations."laken" = home-manager.lib.homeManagerConfiguration {
+    homeConfigurations."${user}" = home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
       modules = [./home];
-      extraSpecialArgs = {inherit unstable vsc-extensions;};
+      extraSpecialArgs = {inherit user unstable vsc-extensions;};
     };
   };
 }
