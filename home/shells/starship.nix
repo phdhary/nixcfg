@@ -20,7 +20,6 @@
         "$character"
       ];
       fill.symbol = " ";
-      git_branch.style = "bright-black";
       git_commit.style = "bright-black";
       git_status.style = "bright-black";
       git_state.style = "bright-black";
@@ -29,6 +28,10 @@
       hostname.format = "[$ssh_symbol$hostname]($style) in ";
       shell = {
         disabled = false;
+        style = "bright-black";
+      };
+      git_branch = {
+        format = "on [$branch(:$remote_branch)]($style)";
         style = "bright-black";
       };
       character = {
