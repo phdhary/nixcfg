@@ -28,14 +28,4 @@
     '';
     # if [ -e /home/laken/.nix-profile/etc/profile.d/nix.sh ]; then . /home/laken/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
   };
-
-  # home.file.".inputrc".source = ./.inputrc;
-
-  programs.readline = {
-    enable = true;
-    variables = {
-      editing-mode = "vi";
-      keymap = "vi";
-    };
-  };
 }

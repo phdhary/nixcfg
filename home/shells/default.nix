@@ -7,13 +7,8 @@
     ./bash.nix
     ./zsh.nix
     ./starship.nix
+    ./readline.nix
   ];
-
-  programs.zoxide = {
-    enable = true;
-    enableBashIntegration = true;
-    enableZshIntegration = true;
-  };
 
   home.sessionVariables = {
     EDITOR = "${config.xdg.dataHome}/bob/nvim-bin";
