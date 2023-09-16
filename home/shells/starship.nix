@@ -31,7 +31,7 @@
         style = "bright-black";
       };
       git_branch = {
-        format = "on [$branch(:$remote_branch)]($style)";
+        format = "on [$branch(:$remote_branch)]($style) ";
         style = "bright-black";
       };
       character = {
