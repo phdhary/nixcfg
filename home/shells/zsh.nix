@@ -1,4 +1,4 @@
-{
+{unstable, ...}: {
   programs.zsh = {
     enable = true;
     enableAutosuggestions = true;
@@ -22,4 +22,5 @@
       . "$HOME/.cargo/env"
     '';
   };
+  home.packages = with unstable; [zsh-completions];
 }

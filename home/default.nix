@@ -10,7 +10,6 @@
     ./shells
   ];
 
-  # Home Manager needs a bit of information about you and the paths it should manage.
   home.username = "${user}";
   home.homeDirectory = "/home/${user}";
   home.stateVersion = "23.05"; # Please read the comment before changing.
@@ -24,5 +23,5 @@
   #   unstable.hello
   # ];
 
-  programs.home-manager.enable = true; # Let Home Manager install and manage itself.
+  programs.home-manager.enable = true;
 }
