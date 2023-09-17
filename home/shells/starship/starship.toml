@@ -22,27 +22,39 @@ format = "[$duration]($style) "
 
 [directory]
 style = "blue"
-truncate_to_repo = true
 truncation_length = 8
 
 [fill]
 symbol = " "
 
 [git_branch]
-format = "on [$branch(:$remote_branch)]($style) "
+format = "[$branch]($style)"
 style = "bright-black"
 
 [git_commit]
 style = "bright-black"
 
 [git_state]
+format = '\([$state( $progress_current/$progress_total)]($style)\)'
 style = "bright-black"
 
 [git_status]
-style = "bright-black"
+format = "[[(*$conflicted$untracked$modified$staged$renamed$deleted)](bright-black) ($ahead_behind$stashed)]($style) "
+style = "cyan"
+conflicted = "​"
+untracked = "​"
+modified = "​"
+staged = "​"
+renamed = "​"
+deleted = "​"
+stashed = "≡"
 
 [hostname]
 format = "[$ssh_symbol$hostname]($style) in "
+
+[nix_shell]
+format = 'with [$symbol$state( \($name\))]($style) '
+symbol = "❄️ "
 
 [shell]
 disabled = false
