@@ -4,9 +4,9 @@
   ...
 }: {
   imports = [
+    ./starship
     ./bash.nix
     ./zsh.nix
-    ./starship.nix
     ./readline.nix
   ];
 
