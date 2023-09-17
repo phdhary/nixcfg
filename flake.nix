@@ -27,7 +27,10 @@
   in {
     homeConfigurations."${user}" = home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
-      modules = [./home];
+      modules = [
+        ./home
+        ./home/extra_options.nix
+      ];
       extraSpecialArgs = {inherit user unstable vsc-extensions;};
     };
   };
