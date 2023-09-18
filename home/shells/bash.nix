@@ -19,8 +19,6 @@
           # export FZF_DEFAULT_OPTS=" \
           # --preview 'bat --color=always --style=numbers --line-range=:500 {}'"
       fi
-
-      source "$HOME/.some-function"
     '';
     bashrcExtra = ''
       export SDKMAN_DIR="$HOME/.sdkman"

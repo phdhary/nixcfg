@@ -4,14 +4,14 @@
   ...
 }: {
   imports = [
-    ./starship
     ./bash.nix
-    ./zsh.nix
     ./readline.nix
+    ./starship
+    ./zsh
   ];
 
   home.sessionVariables = {
-    EDITOR = "${config.xdg.dataHome}/bob/nvim-bin";
+    EDITOR = "nvim";
     FREETYPE_PROPERTIES = "cff:no-stem-darkening=0";
     FVM_HOME = "$HOME/development/fvm";
     MANPAGER = "nvim -c Man!";
@@ -30,10 +30,10 @@
     "$HOME/Android/Sdk/platform-tools"
     "$HOME/development/flutter"
     "$HOME/go/bin"
-    "${config.home.sessionVariables.EDITOR}"
     "${config.home.sessionVariables.FVM_HOME}/default/bin"
     "${config.home.sessionVariables.PNPM_HOME}"
     "${config.xdg.dataHome}/JetBrains/Toolbox/scripts"
+    "${config.xdg.dataHome}/bob/nvim-bin"
     "${config.xdg.dataHome}/nvim/mason/bin"
   ];
 
@@ -60,6 +60,7 @@
       ranger = ". ranger";
       rm = "rm -i";
       svim = "sudo -e";
+      hm = "home-manager";
     }
     {
       # dnf

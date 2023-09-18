@@ -1,4 +1,11 @@
-{unstable, ...}: {
+{
+  config,
+  unstable,
+  ...
+}: let
+  inherit (config.lib.file) mkOutOfStoreSymlink;
+  inherit (config.home.additionalUserInfo) hmConfigPath;
+in {
   programs.zsh = {
     enable = true;
     enableAutosuggestions = true;
@@ -17,10 +24,12 @@
       # bindkey -M vicmd 'V' edit-command-line
       bindkey -s '^z' 'fg^M'
       source "$HOME/.profile"
+      source "$HOME/.some-function"
     '';
     envExtra = ''
       . "$HOME/.cargo/env"
     '';
   };
   home.packages = with unstable; [zsh-completions];
+  home.file.".some-function".source = mkOutOfStoreSymlink "${hmConfigPath}/home/shells/zsh/.some-function";
 }
