@@ -9,9 +9,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
+    nixpkgs-mozilla.url = "github:mozilla/nixpkgs-mozilla";
   };
 
-  outputs = {
+  outputs = inputs @ {
     nixpkgs,
     nixpkgs-unstable,
     home-manager,
@@ -27,9 +28,10 @@
   in {
     homeConfigurations."${user}" = home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
-      extraSpecialArgs = {inherit unstable vsc-extensions;};
+      extraSpecialArgs = {inherit inputs unstable vsc-extensions;};
       modules = [
         ./home
+        ./overlays
         ./home/extra_options.nix
         {
           home.username = "${user}";
