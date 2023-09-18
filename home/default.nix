@@ -1,27 +1,23 @@
 {
   config,
   pkgs,
-  unstable,
-  user,
   ...
-}: {
+}: let
+  inherit (config.home) homeDirectory;
+in {
   imports = [
     ./programs
     ./shells
   ];
 
-  home.username = "${user}";
-  home.homeDirectory = "/home/${user}";
-  home.stateVersion = "23.05"; # Please read the comment before changing.
-
   home.packages = with pkgs; [
     alejandra
     wormhole-rs
-    magic-wormhole
   ];
-  # ++ [
-  #   unstable.hello
-  # ];
+
+  xdg.systemDirs.data = [
+    "${homeDirectory}/.nix-profile/share" # to make .desktop files detected by DE
+  ];
 
   programs.home-manager.enable = true;
 }

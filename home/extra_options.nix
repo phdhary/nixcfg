@@ -1,3 +1,4 @@
+# this is how to add custom config
 {
   lib,
   config,
