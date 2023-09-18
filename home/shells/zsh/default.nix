@@ -14,7 +14,8 @@ in {
     autocd = true;
     initExtra = ''
       zstyle ':completion:*' menu select
-      zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+      # zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+      zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'r:|=*' 'l:|=* r:|=*'
       # mappings
       KEYTIMEOUT=1 # 10ms for key sequences
       bindkey '^[[Z' reverse-menu-complete
