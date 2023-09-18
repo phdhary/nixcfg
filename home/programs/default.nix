@@ -4,5 +4,6 @@
     ./vscode.nix
     ./mpv.nix
     ./zoxide.nix
+    ./firefox.nix
   ];
 }

@@ -1,6 +1,6 @@
 {
+  pkgs,
   config,
-  lib,
   ...
 }: {
   imports = [
@@ -10,19 +10,25 @@
     ./zsh
   ];
 
-  home.sessionVariables = {
-    EDITOR = "nvim";
-    FREETYPE_PROPERTIES = "cff:no-stem-darkening=0";
-    FVM_HOME = "$HOME/development/fvm";
-    MANPAGER = "nvim -c Man!";
-    NEOVIDE_FRAMELESS = "true";
-    NEOVIDE_MULTIGRID = "true";
-    PAGER = "bat";
-    PNPM_HOME = "${config.xdg.dataHome}/pnpm";
-    SYSTEMD_EDITOR = "nvim";
-    TERMINAL = "kitty";
-    NIXOS_OZONE_WL = "1";
-  };
+  home.sessionVariables = let
+    inherit (pkgs.lib) optionalAttrs isWayland;
+  in
+    {
+      EDITOR = "nvim";
+      FREETYPE_PROPERTIES = "cff:no-stem-darkening=0";
+      FVM_HOME = "$HOME/development/fvm";
+      MANPAGER = "nvim -c Man!";
+      NEOVIDE_FRAMELESS = "true";
+      NEOVIDE_MULTIGRID = "true";
+      PAGER = "bat";
+      PNPM_HOME = "${config.xdg.dataHome}/pnpm";
+      SYSTEMD_EDITOR = "nvim";
+      TERMINAL = "kitty";
+    }
+    // optionalAttrs isWayland
+    {
+      NIXOS_OZONE_WL = "1";
+    };
 
   home.sessionPath = [
     "$HOME/.cargo/bin"
@@ -38,8 +44,9 @@
     "${config.xdg.dataHome}/nvim/mason/bin"
   ];
 
-  home.shellAliases =
-    lib.recursiveUpdate
+  home.shellAliases = let
+    inherit (pkgs.lib) optionalAttrs isOS;
+  in
     {
       "build_runner:build" = "flutter pub run build_runner build --delete-conflicting-outputs";
       "build_runner:watch" = "flutter pub run build_runner watch --delete-conflicting-outputs";
@@ -63,7 +70,7 @@
       svim = "sudo -e";
       hm = "home-manager";
     }
-    {
+    // optionalAttrs (isOS "fedora") {
       # dnf
       dnfl = "dnf list";
       dnfli = "dnf list installed";
