@@ -21,6 +21,7 @@
     PNPM_HOME = "${config.xdg.dataHome}/pnpm";
     SYSTEMD_EDITOR = "nvim";
     TERMINAL = "kitty";
+    NIXOS_OZONE_WL = "1";
   };
 
   home.sessionPath = [
