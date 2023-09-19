@@ -9,6 +9,7 @@ in {
     ./programs
     ./shells
     ./wm
+    ./terminal-emulators
   ];
 
   home.packages = with pkgs; [

@@ -7,11 +7,11 @@
       lib = recursiveUpdate prev.lib {
         isWayland = getEnv "XDG_SESSION_TYPE" == "wayland";
         isOS = name: let
-          osRelease = readFile "/etc/os-release";
-          osLines = filter isString (split "\n" osRelease);
+          os_release = readFile "/etc/os-release";
+          os_lines = filter isString (split "\n" os_release);
           safeHead = xs: if length xs == 0 then null else head xs;
-          getOsField = key: safeHead (head (filter (x: x != null) (map (match key) osLines)));
-          osId = getOsField "ID=(.+)";
+          get_os_field = key: safeHead (head (filter (x: x != null) (map (match key) os_lines)));
+          osId = get_os_field "ID=(.+)";
         in
           osId == name;
       };
