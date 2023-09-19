@@ -1,0 +1,51 @@
+{
+  "float": [
+    {
+      "class": "pop-shell-example",
+      "title": "pop-shell-example"
+    },
+    {
+      "class": "wofi"
+    },
+    {
+      "class": "org.gnome.Calculator"
+    },
+    {
+      "class": "kitty",
+      "title": "ncmpcpp"
+    },
+    {
+      "class": "kitty",
+      "title": "notetaker"
+    },
+    {
+      "class": "eog"
+    },
+    {
+      "class": "totem"
+    },
+    {
+      "class": "vlc"
+    },
+    {
+      "class": "org.gnome.Solanum"
+    },
+    {
+      "class": "com.github.finefindus.eyedropper"
+    },
+    {
+      "class": "org.gnome.Calendar"
+    },
+    {
+      "class": "firefox",
+      "title": "^(?!.*Mozilla Firefox).*$",
+      "disabled": true
+    },
+    {
+      "class": "firefox-nightly",
+      "title": "Picture-in-Picture"
+    }
+  ],
+  "skiptaskbarhidden": [],
+  "log_on_focus": false
+}

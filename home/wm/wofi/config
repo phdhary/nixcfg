@@ -1,0 +1,6 @@
+allow_images=true
+allow_markup=true
+image_size=20
+insensitive=true
+normal_window=true
+show=drun

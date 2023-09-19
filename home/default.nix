@@ -8,6 +8,7 @@ in {
   imports = [
     ./programs
     ./shells
+    ./wm
   ];
 
   home.packages = with pkgs; [

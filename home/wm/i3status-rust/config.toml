@@ -1,0 +1,48 @@
+icons_format = "{icon}"
+
+[theme]
+theme = "roso"
+
+[icons]
+icons = "material-nf"
+
+[[block]]
+block = "cpu"
+interval = 1
+format = "[$icon CPU $utilization]"
+format_alt = "[$icon CPU $utilization $barchart]"
+
+[[block]]
+block = "memory"
+interval = 1
+format = "[$icon RAM $mem_used/$mem_total]"
+format_alt = "[$icon_swap SWAP $swap_used/$swap_total]"
+
+[[block]]
+block = "net"
+format = "[$icon {$ssid|Wired connection}]"
+format_alt = "[$icon {$ssid|Wired connection} ↑$speed_up ↓$speed_down]"
+missing_format = "  "
+
+[[block]]
+block = "sound"
+format = "[$icon $volume]"
+[[block.click]]
+button = "left"
+cmd = "pavucontrol"
+
+[[block]]
+block = "backlight"
+invert_icons = false
+format = "[$icon $brightness]"
+
+[[block]]
+block = "battery"
+format = "[$icon $percentage $power $time]"
+full_format = "[$icon $percentage $power $time]"
+not_charging_format = "[$icon $percentage $power $time]"
+
+[[block]]
+block = "time"
+interval = 5
+format = "[ $timestamp.datetime(f:'%a %d') · $icon $timestamp.datetime(f:'%R')]"

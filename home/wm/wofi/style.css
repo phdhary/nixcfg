@@ -1,0 +1,33 @@
+window {
+  font-family: "Inter";
+  font-size: 20px;
+}
+
+#img {
+  margin: 0 15px 0 15px;
+}
+
+#input {
+  margin: 10px;
+  border-radius: 10px;
+  border: none;
+}
+
+#inner-box {
+  margin: 10px;
+  border: none;
+}
+
+#outer-box {
+  border: none;
+}
+
+#entry:selected {
+  border-radius: 10px;
+  outline: none;
+}
+
+#entry:selected * {
+  border-radius: 0px;
+  outline: none;
+}
