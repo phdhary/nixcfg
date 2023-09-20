@@ -15,6 +15,7 @@ in {
   home.packages = with pkgs; [
     alejandra
     wormhole-rs
+    nixd
   ];
 
   xdg.systemDirs.data = [
