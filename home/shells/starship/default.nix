@@ -1,6 +1,6 @@
 {
   config,
-  unstable,
+  pkgs,
   ...
 }: let
   inherit (config.lib.file) mkOutOfStoreSymlink;
@@ -10,7 +10,7 @@ in {
     enable = true;
     enableZshIntegration = true;
     enableBashIntegration = true;
-    package = unstable.starship;
+    package = pkgs.unstable.starship;
   };
 
   home.file.".config/starship.toml".source = mkOutOfStoreSymlink "${hmConfigPath}/home/shells/starship/starship.toml";

@@ -1,6 +1,6 @@
 {
   config,
-  unstable,
+  pkgs,
   ...
 }: let
   inherit (config.lib.file) mkOutOfStoreSymlink;
@@ -31,6 +31,6 @@ in {
       . "$HOME/.cargo/env"
     '';
   };
-  home.packages = with unstable; [zsh-completions];
+  home.packages = with pkgs.unstable; [zsh-completions];
   home.file.".some-function".source = mkOutOfStoreSymlink "${hmConfigPath}/home/shells/zsh/.some-function";
 }

@@ -21,21 +21,18 @@
 
   outputs = inputs @ {
     nixpkgs,
-    nixpkgs-unstable,
     home-manager,
-    nix-vscode-extensions,
     ...
   }: let
     system = "x86_64-linux";
     user = "laken";
-    config = {allowUnfree = true;};
-    pkgs = import nixpkgs {inherit system config;};
-    unstable = import nixpkgs-unstable {inherit system config;};
-    vsc-extensions = nix-vscode-extensions.extensions.${system};
   in {
     homeConfigurations."${user}" = home-manager.lib.homeManagerConfiguration {
-      inherit pkgs;
-      extraSpecialArgs = {inherit inputs unstable vsc-extensions;};
+      pkgs = import nixpkgs {
+        inherit system;
+        config.allowUnfree = true;
+      };
+      extraSpecialArgs = inputs;
       modules = [
         ./home
         ./overlays
