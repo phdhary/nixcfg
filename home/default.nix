@@ -1,15 +1,15 @@
 {
   config,
+  inputs,
+  lib,
   pkgs,
   ...
-}: let
-  inherit (config.home) homeDirectory;
-in {
+}: {
   imports = [
     ./programs
     ./shells
-    ./wm
     ./terminal-emulators
+    ./wm
   ];
 
   home.packages = with pkgs; [
@@ -18,7 +18,11 @@ in {
     nixd
   ];
 
-  xdg.systemDirs.data = [
+  nixpkgs.overlays = import ../overlays {inherit inputs config lib;};
+
+  xdg.systemDirs.data = let
+    inherit (config.home) homeDirectory;
+  in [
     "${homeDirectory}/.nix-profile/share" # to make .desktop files detected by DE
   ];
 

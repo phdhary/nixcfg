@@ -32,10 +32,9 @@
         inherit system;
         config.allowUnfree = true;
       };
-      extraSpecialArgs = inputs;
+      extraSpecialArgs = {inherit inputs;};
       modules = [
         ./home
-        ./overlays
         ./home/extra_options.nix
         {
           home.username = "${user}";
