@@ -30,12 +30,13 @@
   }: let
     system = "x86_64-linux";
     user = "laken";
+    pkgs = import nixpkgs {
+      inherit system;
+      config.allowUnfree = true;
+    };
   in {
     homeConfigurations."${user}" = home-manager.lib.homeManagerConfiguration {
-      pkgs = import nixpkgs {
-        inherit system;
-        config.allowUnfree = true;
-      };
+      inherit pkgs;
       extraSpecialArgs = {inherit inputs;};
       modules = [
         ./home
@@ -47,5 +48,6 @@
         }
       ];
     };
+    devShells.${system}.default = import ./playground.nix {inherit pkgs;};
   };
 }
