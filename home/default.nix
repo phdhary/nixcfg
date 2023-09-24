@@ -14,8 +14,13 @@
 
   home.packages = with pkgs; [
     alejandra
-    wormhole-rs
+    amberol
+    insomnia
+    mousai
     nixd
+    gnome-solanum
+    unstable.obsidian
+    wormhole-rs
     # nixgl.auto.nixGLDefault
     nixgl.nixGLIntel
   ];
