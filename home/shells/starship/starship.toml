@@ -6,8 +6,8 @@ $git_branch\
 $git_commit\
 $git_state\
 $git_status\
-$cmd_duration\
 $nix_shell\
+$cmd_duration\
 $line_break\
 $character
 """
@@ -25,8 +25,8 @@ format = "[$duration]($style) "
 [directory]
 style = "blue"
 truncation_length = 8
-read_only = ""
-format = "[$path]($style) [$read_only]($read_only_style) "
+read_only = " "
+format = "[$path]($style)[$read_only]($read_only_style) "
 
 [fill]
 symbol = " "
