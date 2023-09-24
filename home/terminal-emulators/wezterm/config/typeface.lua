@@ -7,7 +7,7 @@ return {
 		"clig=0",
 		"liga=0",
 	},
-	font_size = 18,
+	font_size = 16,
 	line_height = 1.2,
 	warn_about_missing_glyphs = false,
 }
