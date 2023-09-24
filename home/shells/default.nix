@@ -23,7 +23,7 @@
       PAGER = "bat";
       PNPM_HOME = "${config.xdg.dataHome}/pnpm";
       SYSTEMD_EDITOR = "nvim";
-      TERMINAL = "kitty";
+      TERMINAL = "wezterm";
     }
     // optionalAttrs isWayland
     {
@@ -44,19 +44,19 @@
     "${config.xdg.dataHome}/nvim/mason/bin"
   ];
 
-  home.shellAliases = let
-    inherit (pkgs.lib) optionalAttrs isOS;
-  in
+  home.shellAliases =
     {
       "build_runner:build" = "flutter pub run build_runner build --delete-conflicting-outputs";
       "build_runner:watch" = "flutter pub run build_runner watch --delete-conflicting-outputs";
+      _ = "sudo";
       dlmp3pl = ''yt-dlp -f bestaudio -x --audio-format mp3 --audio-quality 320k --embed-thumbnail --add-metadata --postprocessor-args "-id3v2_version 3"'';
       g = "git";
       glo = "git log --oneline --decorate --graph";
       grl = "git reflog";
       gst = "git status";
-      lg = "lazygit";
+      hm = "home-manager";
       l = "ls -la";
+      lg = "lazygit";
       ls = "exa --icons";
       lzd = "lazydocker";
       nimv = "nvim";
@@ -68,9 +68,8 @@
       ranger = ". ranger";
       rm = "rm -i";
       svim = "sudo -e";
-      hm = "home-manager";
     }
-    // optionalAttrs (isOS "fedora") {
+    // {
       # dnf
       dnfl = "dnf list";
       dnfli = "dnf list installed";

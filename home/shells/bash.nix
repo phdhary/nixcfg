@@ -2,9 +2,6 @@
   programs.bash = {
     enable = true;
     enableCompletion = true;
-    shellAliases = {
-      _ = "sudo";
-    };
     profileExtra = ''
       if [ -d "/var/lib/flatpak/exports/bin" ] ; then
         PATH=$PATH:/var/lib/flatpak/exports/bin

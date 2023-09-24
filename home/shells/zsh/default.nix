@@ -30,6 +30,9 @@ in {
     envExtra = ''
       . "$HOME/.cargo/env"
     '';
+    initExtraBeforeCompInit = ''
+      fpath=(~/.zsh/completion $fpath)
+    '';
   };
   home.packages = with pkgs.unstable; [zsh-completions];
   home.file.".some-function".source = mkOutOfStoreSymlink "${hmConfigPath}/home/shells/zsh/.some-function";

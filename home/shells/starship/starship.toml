@@ -25,6 +25,8 @@ format = "[$duration]($style) "
 [directory]
 style = "blue"
 truncation_length = 8
+read_only = ""
+format = "[$path]($style) [$read_only]($read_only_style) "
 
 [fill]
 symbol = " "
