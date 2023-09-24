@@ -12,18 +12,26 @@
     ./wm
   ];
 
-  home.packages = with pkgs; [
-    alejandra
-    amberol
-    insomnia
-    mousai
-    nixd
-    gnome-solanum
-    unstable.obsidian
-    wormhole-rs
-    # nixgl.auto.nixGLDefault
-    nixgl.nixGLIntel
-  ];
+  home.packages = with pkgs;
+    [
+      alejandra
+      amberol
+      gnome-solanum
+      insomnia
+      mousai
+      pfetch
+      nixd
+      nixgl.nixGLIntel
+      unstable.obsidian
+      wormhole-rs
+    ]
+    ++ [
+      fira-code
+      ibm-plex
+      jetbrains-mono
+      source-code-pro
+      (unstable.nerdfonts.override {fonts = ["NerdFontsSymbolsOnly"];})
+    ];
 
   nixpkgs.overlays = import ../overlays {inherit inputs config lib;};
 
