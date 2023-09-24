@@ -1,22 +1,15 @@
-local wezterm = require "wezterm"
+local wezterm = require("wezterm")
 
-wezterm.on("format-tab-title", function(
-	tab --[[ , tabs, panes, config, hover, max_width ]]
-)
-	if tab.is_active then
-		return {
-			{ Text = "[" .. tab.tab_index + 1 .. " " .. tab.active_pane.title .. "]" },
-		}
-	end
-	return {
+wezterm.on("format-tab-title", function(tab)
+	return tab.is_active and {
+		{ Text = "[" .. tab.tab_index + 1 .. " " .. tab.active_pane.title .. "]" },
+	} or {
 		{ Text = " " .. tab.tab_index + 1 .. " " .. tab.active_pane.title .. " " },
 	}
 end)
 
 return {
 	color_scheme = require("config.colorscheme").color_scheme,
--- color_scheme_dirs = { '/home/laken/.config.wezterm/colors' },
-
 	default_cursor_style = "BlinkingBlock",
 	force_reverse_video_cursor = true,
 	cursor_thickness = 2,
