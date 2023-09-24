@@ -16,6 +16,8 @@
     alejandra
     wormhole-rs
     nixd
+    # nixgl.auto.nixGLDefault
+    nixgl.nixGLIntel
   ];
 
   nixpkgs.overlays = import ../overlays {inherit inputs config lib;};
