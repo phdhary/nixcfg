@@ -48,6 +48,5 @@
         }
       ];
     };
-    devShells.${system}.default = import ./playground.nix {inherit pkgs;};
   };
 }

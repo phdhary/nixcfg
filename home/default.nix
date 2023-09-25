@@ -10,28 +10,29 @@
     ./shells
     ./terminal-emulators
     ./wm
+    ./fonts.nix
   ];
 
-  home.packages = with pkgs;
-    [
-      alejandra
-      amberol
-      gnome-solanum
-      insomnia
-      mousai
-      pfetch
-      nixd
-      nixgl.nixGLIntel
-      unstable.obsidian
-      wormhole-rs
-    ]
-    ++ [
-      fira-code
-      ibm-plex
-      jetbrains-mono
-      source-code-pro
-      (unstable.nerdfonts.override {fonts = ["NerdFontsSymbolsOnly"];})
-    ];
+  home.packages = with pkgs; [
+    alejandra
+    amberol
+    dbeaver
+    dynamic-wallpaper
+    eartag
+    easyeffects
+    eyedropper
+    fragments
+    gnome-extension-manager
+    gnome-solanum
+    insomnia
+    mousai
+    nixd
+    nixgl.nixGLIntel
+    pfetch
+    textpieces
+    unstable.obsidian
+    wormhole-rs
+  ];
 
   nixpkgs.overlays = import ../overlays {inherit inputs config lib;};
 
