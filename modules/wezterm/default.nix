@@ -8,7 +8,6 @@
   inherit (lib) mkEnableOption mkIf;
   inherit (pkgs.lib) makeConfigSymlink;
   cfg = config.${namespace}.wezterm;
-  parentPath = "/home/modules/";
 in {
   options.${namespace}.wezterm = {
     enable = mkEnableOption "wezterm app";
@@ -16,8 +15,11 @@ in {
 
   config = mkIf cfg.enable {
     home.file =
-      makeConfigSymlink parentPath "wezterm/colors/"
-      // makeConfigSymlink parentPath "wezterm/config/";
+      makeConfigSymlink  "/home/modules/"
+      [
+        "wezterm/colors/"
+        "wezterm/config/"
+      ];
 
     programs.wezterm = {
       enable = true;
