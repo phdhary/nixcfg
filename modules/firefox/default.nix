@@ -22,7 +22,7 @@ in {
       package = pkgs.latest.firefox-nightly-bin;
     };
     home.sessionVariables =
-      optionalAttrs (firefox.enable && isWayland)
+      optionalAttrs isWayland
       {MOZ_ENABLE_WAYLAND = 1;}
       // optionalAttrs sway.enable {
         XDG_CURRENT_DESKTOP = "sway";

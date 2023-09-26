@@ -7,14 +7,14 @@
 }: let
   inherit (lib) mkEnableOption mkIf;
   inherit (pkgs.lib) mkConfigSymlink;
-  cfg = config.${namespace}.window-managers-symlink;
+  cfg = config.${namespace}.wms-symlink;
 in {
-  options.${namespace}.window-managers-symlink = {
+  options.${namespace}.wms-symlink = {
     enable = mkEnableOption "window managers symlink";
   };
   config = mkIf cfg.enable {
     home.file =
-      mkConfigSymlink "/modules/wm/"
+      mkConfigSymlink "/modules/wms-symlink/"
       [
         "avizo/config.ini"
         "i3/common.conf"

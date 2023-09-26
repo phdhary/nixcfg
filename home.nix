@@ -3,7 +3,9 @@
   pkgs,
   namespace,
   ...
-}: {
+}: let
+  inherit (config.${namespace}) enabled disabled;
+in {
   home.packages = with pkgs; [
     alejandra
     amberol
@@ -33,14 +35,18 @@
 
   programs.home-manager.enable = true;
 
-  ${namespace} = let
-    inherit (config.${namespace}) enabled disabled;
-  in {
-    wezterm = enabled;
-    kitty = enabled;
-    vscode = enabled;
-    # shells=enabled;
-    window-managers-symlink = enabled;
+  ${namespace} = {
+    apps = enabled;
     firefox = disabled;
+    fonts = enabled;
+    kitty = enabled;
+    session-things = {
+      enable = true;
+      enableDnfAliases = true;
+    };
+    shells = enabled;
+    vscode = enabled;
+    wezterm = enabled;
+    wms-symlink = enabled;
   };
 }
