@@ -34,19 +34,12 @@
       inherit system;
       config.allowUnfree = true;
     };
+    namespace = "mamamia";
   in {
     homeConfigurations."${user}" = home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
-      extraSpecialArgs = {inherit inputs;};
-      modules = [
-        ./home
-        ./home/extra_options.nix
-        {
-          home.username = "${user}";
-          home.homeDirectory = "/home/${user}";
-          home.stateVersion = "23.05";
-        }
-      ];
+      extraSpecialArgs = {inherit inputs user namespace;};
+      modules = import ./modules;
     };
   };
 }

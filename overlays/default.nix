@@ -1,23 +1,11 @@
-{
-  config,
-  inputs,
-  lib,
-  ...
-}: let
-  inherit (config.nixpkgs) system;
-  inherit (config.nixpkgs.config) allowUnfree;
-  inherit (inputs) nixd nixpkgs-unstable nixpkgs-mozilla nix-vscode-extensions nixgl;
-in [
-  (_: _: {
-    unstable = import nixpkgs-unstable {
-      inherit system;
-      config = {inherit allowUnfree;};
-    };
-    nixd = nixd.packages.${system}.nixd;
-    nix-vscode-extensions = nix-vscode-extensions.extensions.${system};
-  })
-  (import ./bool_checks.nix {inherit lib;})
-  (import ./make_path.nix {inherit config lib;})
-  nixpkgs-mozilla.overlays.firefox
-  nixgl.overlay
-]
+# import all nix files in the current folder, and execute them with args as parameters
+# The return value is a list of all execution results, which is the list of overlays
+args:
+# execute and import all overlay files in the current directory with the given args
+builtins.map
+(f: (import (./. + "/${f}") args)) # execute and import the overlay file
+
+(builtins.filter # find all overlay files in the current directory
+  
+  (f: f != "default.nix")
+  (builtins.attrNames (builtins.readDir ./.)))

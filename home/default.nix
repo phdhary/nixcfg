@@ -1,18 +1,9 @@
 {
   config,
-  inputs,
-  lib,
   pkgs,
+  namespace,
   ...
 }: {
-  imports = [
-    ./programs
-    ./shells
-    ./terminal-emulators
-    ./wm
-    ./fonts.nix
-  ];
-
   home.packages = with pkgs; [
     alejandra
     amberol
@@ -34,8 +25,6 @@
     wormhole-rs
   ];
 
-  nixpkgs.overlays = import ../overlays {inherit inputs config lib;};
-
   xdg.systemDirs.data = let
     inherit (config.home) homeDirectory;
   in [
@@ -43,4 +32,11 @@
   ];
 
   programs.home-manager.enable = true;
+
+  ${namespace} = {
+    wezterm.enable = true;
+    kitty.enable = true;
+    window-managers-symlink.enable = true;
+    # shells.enable = true;
+  };
 }
