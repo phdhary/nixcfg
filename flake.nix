@@ -30,11 +30,11 @@
   }: let
     system = "x86_64-linux";
     user = "laken";
+    namespace = "laken";
     pkgs = import nixpkgs {
       inherit system;
       config.allowUnfree = true;
     };
-    namespace = "mamamia";
   in {
     homeConfigurations."${user}" = home-manager.lib.homeManagerConfiguration {
       inherit pkgs;

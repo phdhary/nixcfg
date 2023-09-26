@@ -16,10 +16,10 @@
     gnome-extension-manager
     gnome-solanum
     insomnia
+    macchina
     mousai
     nixd
     nixgl.nixGLIntel
-    pfetch
     textpieces
     unstable.obsidian
     wormhole-rs
@@ -33,12 +33,14 @@
 
   programs.home-manager.enable = true;
 
-  ${namespace} = {
-    wezterm.enable = true;
-    kitty.enable = true;
-    vscode.enable = true;
-    # shells.enable = true;
-    window-managers-symlink.enable = true;
-    firefox.enable = false;
+  ${namespace} = let
+    inherit (config.${namespace}) enabled disabled;
+  in {
+    wezterm = enabled;
+    kitty = enabled;
+    vscode = enabled;
+    # shells=enabled;
+    window-managers-symlink = enabled;
+    firefox = disabled;
   };
 }

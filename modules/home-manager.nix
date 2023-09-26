@@ -1,4 +1,4 @@
-{user, ...} @ args: {
+args @ {user,pkgs, ...}: {
   home.stateVersion = "23.05";
   home.username = "${user}";
   home.homeDirectory = "/home/${user}";

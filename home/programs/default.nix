@@ -1,8 +1,7 @@
 {...}: {
-  imports = [
-    ./bat.nix
-    ./mpv.nix
-    ./zoxide.nix
-    ./ncmpcpp.nix
-  ];
+  imports =
+    builtins.map (f: ./. + "/${f}")
+    (builtins.filter (f: f != "default.nix")
+      (builtins.attrNames
+        (builtins.readDir ./.)));
 }

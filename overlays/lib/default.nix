@@ -5,7 +5,7 @@
 } @ args: let
   inherit (lib) recursiveUpdate;
   dude = args:
-    builtins.listToAttrs # name value
+    builtins.listToAttrs
     (builtins.map (f: (import (./. + "/${f}") args))
       (builtins.filter (f: f != "default.nix")
         (builtins.attrNames
