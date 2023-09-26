@@ -1,10 +1,11 @@
 {
   config,
   pkgs,
+  namespace,
   ...
 }: let
   inherit (config.lib.file) mkOutOfStoreSymlink;
-  inherit (config.home.additionalUserInfo) hmConfigPath;
+  inherit (config.${namespace}.additionalUserInfo) hmConfigPath;
 in {
   programs.starship = {
     enable = true;

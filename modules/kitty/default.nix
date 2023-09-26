@@ -6,7 +6,7 @@
   ...
 }: let
   inherit (lib) mkEnableOption mkIf;
-  inherit (pkgs.lib) makeConfigSymlink;
+  inherit (pkgs.lib) mkConfigSymlink;
   cfg = config.${namespace}.kitty;
 in {
   options.${namespace}.kitty = {
@@ -14,7 +14,7 @@ in {
   };
 
   config = mkIf cfg.enable {
-    home.file = makeConfigSymlink "/modules/" [
+    home.file = mkConfigSymlink "/modules/" [
       "kitty/kitty.conf"
       "kitty/scrollback-pager/init.lua"
       "kitty/themes/"

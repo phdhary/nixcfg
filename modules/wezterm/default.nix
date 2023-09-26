@@ -6,7 +6,7 @@
   ...
 }: let
   inherit (lib) mkEnableOption mkIf;
-  inherit (pkgs.lib) makeConfigSymlink;
+  inherit (pkgs.lib) mkConfigSymlink;
   cfg = config.${namespace}.wezterm;
 in {
   options.${namespace}.wezterm = {
@@ -15,7 +15,7 @@ in {
 
   config = mkIf cfg.enable {
     home.file =
-      makeConfigSymlink "/modules/"
+      mkConfigSymlink "/modules/"
       [
         "wezterm/colors/"
         "wezterm/config/"

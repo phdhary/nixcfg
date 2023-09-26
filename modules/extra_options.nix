@@ -2,13 +2,14 @@
 {
   lib,
   config,
+  namespace,
   ...
 }:
 with lib; {
-  options.home.additionalUserInfo = {
+  options.${namespace}.additionalUserInfo = {
     hmConfigPath = mkOption {type = types.str;};
   };
-  config.home.additionalUserInfo = {
+  config.${namespace}.additionalUserInfo = {
     hmConfigPath = "${config.home.homeDirectory}/.config/home-manager";
   };
 }
