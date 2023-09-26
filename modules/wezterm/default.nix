@@ -15,7 +15,7 @@ in {
 
   config = mkIf cfg.enable {
     home.file =
-      makeConfigSymlink  "/home/modules/"
+      makeConfigSymlink "/modules/"
       [
         "wezterm/colors/"
         "wezterm/config/"

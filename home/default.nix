@@ -36,7 +36,8 @@
   ${namespace} = {
     wezterm.enable = true;
     kitty.enable = true;
-    window-managers-symlink.enable = true;
+    vscode.enable = true;
     # shells.enable = true;
+    window-managers-symlink.enable = true;
   };
 }
