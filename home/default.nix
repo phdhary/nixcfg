@@ -39,5 +39,6 @@
     vscode.enable = true;
     # shells.enable = true;
     window-managers-symlink.enable = true;
+    firefox.enable = false;
   };
 }
