@@ -5,10 +5,10 @@
   ...
 }: let
   inherit (lib) mkEnableOption mkIf;
-  cfg = config.${namespace}.apps;
+  cfg = config.${namespace}.programs;
 in {
-  options.${namespace}.apps = {
-    enable = mkEnableOption "apps";
+  options.${namespace}.programs = {
+    enable = mkEnableOption "programs";
   };
 
   config = mkIf cfg.enable {
