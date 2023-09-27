@@ -5,19 +5,20 @@
   pkgs,
   ...
 }: let
-  inherit (lib) mkEnableOption mkIf;
-  inherit (pkgs.lib) mkConfigSymlink;
   cfg = config.${namespace}.kitty;
 in {
   options.${namespace}.kitty = {
-    enable = mkEnableOption "kitty terminal emulator";
+    enable = lib.mkEnableOption "kitty terminal emulator";
   };
 
-  config = mkIf cfg.enable {
-    home.file = mkConfigSymlink "/modules/" [
-      "kitty/kitty.conf"
-      "kitty/scrollback-pager/init.lua"
-      "kitty/themes/"
-    ];
+  config = lib.mkIf cfg.enable {
+    home.file = pkgs.lib.mkConfigSymlinkFromList {
+      relativePath = "/modules/";
+      paths = [
+        "kitty/kitty.conf"
+        "kitty/scrollback-pager/init.lua"
+        "kitty/themes/"
+      ];
+    };
   };
 }

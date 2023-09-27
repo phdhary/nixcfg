@@ -5,9 +5,8 @@
   pkgs,
   ...
 }: let
-  inherit (lib) mkEnableOption mkIf;
-  inherit (config.lib.file) mkOutOfStoreSymlink;
-  inherit (config.${namespace}.additionalUserInfo) hmConfigPath;
+  inherit (lib) mkEnableOption mkIf mkMerge;
+  inherit (pkgs.lib) mkSymlinkFromList mkConfigSymlinkFromList;
   cfg = config.${namespace}.shells;
 in {
   options.${namespace}.shells = {
@@ -69,7 +68,20 @@ in {
     };
 
     home.packages = with pkgs.unstable; [zsh-completions];
-    home.file.".some-function".source = mkOutOfStoreSymlink "${hmConfigPath}/modules/shells/.some-function";
+
+    home.file = let
+      relativePath = "/modules/shells/";
+    in
+      mkMerge [
+        (mkSymlinkFromList {
+          inherit relativePath;
+          paths = [".some-function"];
+        })
+        (mkConfigSymlinkFromList {
+          inherit relativePath;
+          paths = ["starship.toml"];
+        })
+      ];
 
     programs.starship = {
       enable = true;
@@ -77,7 +89,5 @@ in {
       enableBashIntegration = true;
       package = pkgs.unstable.starship;
     };
-
-    home.file.".config/starship.toml".source = mkOutOfStoreSymlink "${hmConfigPath}/modules/shells/starship.toml";
   };
 }

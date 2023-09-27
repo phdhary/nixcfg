@@ -5,21 +5,20 @@
   namespace,
   ...
 }: let
-  inherit (lib) mkEnableOption mkIf;
-  inherit (pkgs.lib) mkConfigSymlink;
   cfg = config.${namespace}.wezterm;
 in {
   options.${namespace}.wezterm = {
-    enable = mkEnableOption "wezterm app";
+    enable = lib.mkEnableOption "wezterm app";
   };
 
-  config = mkIf cfg.enable {
-    home.file =
-      mkConfigSymlink "/modules/"
-      [
+  config = lib.mkIf cfg.enable {
+    home.file = pkgs.lib.mkConfigSymlinkFromList {
+      relativePath = "/modules/";
+      paths = [
         "wezterm/colors/"
         "wezterm/config/"
       ];
+    };
 
     programs.wezterm = {
       enable = true;

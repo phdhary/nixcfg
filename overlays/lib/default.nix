@@ -4,7 +4,7 @@
   ...
 } @ args: let
   inherit (lib) recursiveUpdate;
-  dude = args:
+  importLib = args:
     builtins.listToAttrs
     (builtins.map (f: (import (./. + "/${f}") args))
       (builtins.filter (f: f != "default.nix")
@@ -12,5 +12,5 @@
           (builtins.readDir ./.))));
 in
   final: prev: {
-    lib = recursiveUpdate prev.lib (dude args);
+    lib = recursiveUpdate prev.lib (importLib args);
   }

@@ -34,6 +34,22 @@ in {
   ];
 
   programs.home-manager.enable = true;
+  programs.git = {
+    enable = true;
+    userName = "phdhary";
+    userEmail = "phdhary@gmail.com";
+    extraConfig = {
+      init = {
+        defaultBranch = "main";
+      };
+      core = {
+        autocrlf = "input";
+      };
+    };
+    aliases = {
+      unpushed = "log --oneline --decorate --graph origin/main^..main";
+    };
+  };
 
   ${namespace} = {
     apps = enabled;

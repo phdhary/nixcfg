@@ -5,17 +5,15 @@
   pkgs,
   ...
 }: let
-  inherit (lib) mkEnableOption mkIf;
-  inherit (pkgs.lib) mkConfigSymlink;
   cfg = config.${namespace}.wms-symlink;
 in {
   options.${namespace}.wms-symlink = {
-    enable = mkEnableOption "window managers symlink";
+    enable = lib.mkEnableOption "window managers symlink";
   };
-  config = mkIf cfg.enable {
-    home.file =
-      mkConfigSymlink "/modules/wms-symlink/"
-      [
+  config = lib.mkIf cfg.enable {
+    home.file = pkgs.lib.mkConfigSymlinkFromList {
+      relativePath = "/modules/wms-symlink/";
+      paths = [
         "avizo/config.ini"
         "i3/common.conf"
         "i3/config"
@@ -30,5 +28,6 @@ in {
         "wofi/config"
         "wofi/style.css"
       ];
+    };
   };
 }

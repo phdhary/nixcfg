@@ -8,15 +8,18 @@
   inherit (pkgs.lib) nameValuePair;
   inherit (config.${namespace}.additionalUserInfo) hmConfigPath;
 in {
-  name = "mkConfigSymlink";
-  value = parent_path: list_of_path:
+  name = "mkConfigSymlinkFromList";
+  value = {
+    relativePath,
+    paths,
+  }:
     builtins.listToAttrs
     (builtins.map
       (
-        file_path: (
-          nameValuePair ".config/${file_path}"
-          {source = mkOutOfStoreSymlink "${hmConfigPath}${parent_path}${file_path}";}
+        filePath: (
+          nameValuePair ".config/${filePath}"
+          {source = mkOutOfStoreSymlink "${hmConfigPath}${relativePath}${filePath}";}
         )
       )
-      list_of_path);
+      paths);
 }

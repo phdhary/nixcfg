@@ -5,14 +5,13 @@
   pkgs,
   ...
 }: let
-  inherit (lib) mkEnableOption mkIf;
   cfg = config.${namespace}.vscode;
 in {
   options.${namespace}.vscode = {
-    enable = mkEnableOption "visual studio code";
+    enable = lib.mkEnableOption "visual studio code";
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     programs.vscode = {
       enable = true;
       package = pkgs.unstable.vscode;
