@@ -1,5 +1,5 @@
 {
-  description = "Nix - Configuration";
+  description = "Nix Configuration";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
@@ -42,4 +42,5 @@
       modules = import ./modules;
     };
   };
+
 }
