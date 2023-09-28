@@ -86,5 +86,6 @@ in {
     vscode = enabled;
     wezterm = enabled;
     wms-symlink = enabled;
+    services.batresudah = enabled;
   };
 }
