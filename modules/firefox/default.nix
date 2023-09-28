@@ -6,8 +6,7 @@
   ...
 }: let
   inherit (lib) mkEnableOption mkIf;
-  inherit (pkgs.lib) optionalAttrs isWayland;
-  inherit (config.programs) firefox;
+  inherit (pkgs.lib) optionalAttrs;
   inherit (config.wayland.windowManager) sway;
   cfg = config.${namespace}.firefox;
 in {
@@ -22,7 +21,6 @@ in {
       package = pkgs.latest.firefox-nightly-bin;
     };
     home.sessionVariables =
-      optionalAttrs isWayland
       {MOZ_ENABLE_WAYLAND = 1;}
       // optionalAttrs sway.enable {
         XDG_CURRENT_DESKTOP = "sway";
