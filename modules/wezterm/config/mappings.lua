@@ -7,7 +7,11 @@ local copy_mode = default_key_tables.copy_mode
 local copy_mode_extra = {
 	key = "Escape",
 	mods = "NONE",
-	action = act.DisableDefaultAssignment,
+	action = act.Multiple({
+		act.ClearSelection,
+		act.CopyMode "ClearSelectionMode" ,
+	}),
+	-- action = act.DisableDefaultAssignment,
 }
 
 table.insert(copy_mode, copy_mode_extra)

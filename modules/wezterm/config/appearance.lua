@@ -19,7 +19,7 @@ return {
 	-- cursor_blink_ease_out = "Linear",
 	window_decorations = "RESIZE",
 	window_padding = {
-		left = 3,
+		left = 0,
 		right = 0,
 		top = 0,
 		bottom = 0,

@@ -7,3 +7,59 @@
   - [x] reproducible vscode with extensions
 - [ ] pure (home-manager still look up `/etc/os-release` for `fedora`)
 - [ ] nixos
+
+
+programs to migrate
+
+- [ ] btop
+- [ ] htop
+- [ ] hyperfine
+- [ ] fd
+- [ ] ripgrep
+- [ ] asciiquarium
+- [ ] duf
+- [ ] cmatrix
+- [ ] sl
+- [ ] distrobox
+- [ ] gh
+- [ ] glow
+- [ ] gitui
+- [ ] fzf
+- [ ] gparted
+- [ ] gum
+- [ ] httpie
+- [ ] lf
+- [ ] ranger
+- [ ] mendeley
+- [ ] lolcat
+- [ ] mpd
+- [ ] ncmpcpp
+- [ ] ncdu
+- [ ] nvtop/nvtop-nvidia
+- [ ] nyancat
+- [ ] rawtherapee
+- [ ] rofi
+- [ ] shc
+- [ ] speedtest-cli
+- [ ] unrar
+- [ ] trash-cli
+- [ ] tldr
+- [ ] tokei
+- [ ] wl-clipboard
+- [ ] xclip
+- [ ] wireshark
+- [ ] wireshark-cli
+- [ ] yt-dlp
+- [ ] zathura
+- [ ] zathuraPkgs...
+- [ ] zellij
+- [ ] vim
+- [ ] nvim
+- [ ] screenkey
+- [ ] corefonts
+- [ ] vistafonts
+- [ ] espeak
+- [ ] fontforge
+- [ ] git-crypt
+- [ ] gradience
+- [ ] lshw

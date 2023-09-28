@@ -5,7 +5,7 @@
   namespace,
   ...
 }: let
-  inherit (lib) mkEnableOption mkIf;
+  inherit (lib) mkEnableOption mkIf mkMerge;
   inherit (pkgs.lib) optionalAttrs isWayland;
   cfg = config.${namespace}.session-things;
 in {
@@ -16,22 +16,21 @@ in {
 
   config = mkIf cfg.enable {
     home.sessionVariables =
-      {
-        EDITOR = "nvim";
-        FREETYPE_PROPERTIES = "cff:no-stem-darkening=0";
-        FVM_HOME = "$HOME/development/fvm";
-        MANPAGER = "nvim -c Man!";
-        NEOVIDE_FRAMELESS = "true";
-        NEOVIDE_MULTIGRID = "true";
-        PAGER = "bat";
-        PNPM_HOME = "${config.xdg.dataHome}/pnpm";
-        SYSTEMD_EDITOR = "nvim";
-        TERMINAL = "wezterm";
-      }
-      // optionalAttrs isWayland
-      {
-        NIXOS_OZONE_WL = "1";
-      };
+      mkMerge
+      [
+        {
+          EDITOR = "nvim";
+          FREETYPE_PROPERTIES = "cff:no-stem-darkening=0";
+          FVM_HOME = "$HOME/development/fvm";
+          MANPAGER = "nvim -c Man!";
+          PAGER = "bat";
+          PNPM_HOME = "${config.xdg.dataHome}/pnpm";
+          SYSTEMD_EDITOR = "nvim";
+          TERMINAL = "wezterm";
+          NIXOS_OZONE_WL = "1";
+        }
+        # (optionalAttrs isWayland {NIXOS_OZONE_WL = "1";})
+      ];
 
     home.sessionPath = [
       "$HOME/.cargo/bin"
@@ -51,7 +50,8 @@ in {
       {
         "build_runner:build" = "flutter pub run build_runner build --delete-conflicting-outputs";
         "build_runner:watch" = "flutter pub run build_runner watch --delete-conflicting-outputs";
-        _ = "sudo";
+        # _ = "sudo";
+        _ = ''sudo -s PATH="$PATH" exec "$@"'';
         dlmp3pl = ''yt-dlp -f bestaudio -x --audio-format mp3 --audio-quality 320k --embed-thumbnail --add-metadata --postprocessor-args "-id3v2_version 3"'';
         g = "git";
         glo = "git log --oneline --decorate --graph";
@@ -59,7 +59,6 @@ in {
         gst = "git status";
         hm = "home-manager";
         l = "ls -la";
-        lg = "lazygit";
         ls = "exa --icons";
         lzd = "lazydocker";
         nimv = "nvim";

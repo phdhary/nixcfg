@@ -55,5 +55,24 @@ in {
         vue.volar
       ];
     };
+
+    # xdg.desktopEntries."code" = {
+    #   actions = {
+    #     new-empty-window = {
+    #       exec = "NIXOS_OZONE_WL=1 code --new-window %F";
+    #       icon = "vscode";
+    #       name = "New Empty Window";
+    #     };
+    #   };
+    #   categories = ["Utility" "TextEditor" "Development" "IDE"];
+    #   comment = "Code Editing. Redefined.";
+    #   exec = "NIXOS_OZONE_WL=1 code %F";
+    #   name = "Visual Studio Code";
+    #   genericName = "Text Editor";
+    #   icon = "vscode";
+    #   mimeType = ["text/plain" "inode/directory"];
+    #   startupNotify = true;
+    #   type = "Application";
+    # };
   };
 }

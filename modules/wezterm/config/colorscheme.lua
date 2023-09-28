@@ -1,3 +1,3 @@
 return {
-	color_scheme = "Kanagawa (Gogh)",
+	color_scheme = "catppuccin-mocha",
 }

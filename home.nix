@@ -25,12 +25,38 @@ in {
     textpieces
     unstable.obsidian
     wormhole-rs
+    #
+    btop
+    exa
+    htop
+    hyperfine
+    fd
+    ripgrep
+    asciiquarium
+    duf
+    cmatrix
+    sl
+    glow
+    gitui
+    fzf
+    gum
+    httpie
+    lolcat
+    ncdu
+    trash-cli
+    speedtest-cli
+    tldr
+    tokei
+    wireshark
+    zellij
+    yt-dlp
+    screenkey
+    lshw
+    espeak
   ];
 
-  xdg.systemDirs.data = let
-    inherit (config.home) homeDirectory;
-  in [
-    "${homeDirectory}/.nix-profile/share" # to make .desktop files detected by DE
+  xdg.systemDirs.data = [
+    "${config.home.homeDirectory}/.nix-profile/share" # to make .desktop files detected by DE
   ];
 
   programs.home-manager.enable = true;
@@ -39,12 +65,8 @@ in {
     userName = "phdhary";
     userEmail = "phdhary@gmail.com";
     extraConfig = {
-      init = {
-        defaultBranch = "main";
-      };
-      core = {
-        autocrlf = "input";
-      };
+      init = {defaultBranch = "main";};
+      core = {autocrlf = "input";};
     };
     aliases = {
       unpushed = "log --oneline --decorate --graph origin/main^..main";
@@ -52,7 +74,7 @@ in {
   };
 
   ${namespace} = {
-    apps = enabled;
+    programs = enabled;
     firefox = disabled;
     fonts = enabled;
     kitty = enabled;
