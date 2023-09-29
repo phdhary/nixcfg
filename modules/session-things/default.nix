@@ -70,6 +70,7 @@ in {
         ranger = ". ranger";
         rm = "rm -i";
         svim = "sudo -e";
+        # hm-rollback = "cd $(hm generations | head -2 | tail -1 | awk -F ' ' '{print $7}'); ./activate;cd;";
       }
       // optionalAttrs cfg.enableDnfAliases {
         # dnf

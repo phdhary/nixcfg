@@ -2,6 +2,8 @@
   config,
   namespace,
   lib,
+  pkgs,
+  packages,
   ...
 }: let
   inherit (lib) mkEnableOption mkIf;
@@ -12,58 +14,51 @@ in {
   };
 
   config = mkIf cfg.enable {
-    programs = {
-      bat = {
-        enable = true;
-        config = {
-          theme = "ansi";
-          style = "numbers,changes,header";
-        };
-      };
-      mpv = {
-        enable = true;
-        config = {
-          # sub-font = "SF Pro Display";
-          sub-font = "Arial Regular";
-          sub-border-size = 1;
-          sub-color = "#CDCDCD";
-          sub-shadow = 3;
-          sub-shadow-color = "#33000000";
-          sub-shadow-offset = 2;
-          save-position-on-quit = "yes";
-        };
-      };
-      readline = {
-        enable = true;
-        variables = {
-          editing-mode = "vi";
-          keymap = "vi";
-        };
-      };
-      zoxide = {
-        enable = true;
-        enableBashIntegration = true;
-        enableZshIntegration = true;
-      };
-      fzf = {
-        enable = true;
-        defaultCommand = "rg --files";
-        defaultOptions = ["--color=16"];
-        colors = {
-          fg = "grey";
-          hl = "blue";
-          "hl+" = "blue";
-        };
-      };
-    };
-
-    xdg.desktopEntries."my.dude.ncmpcpp" = {
-      name = "ncmpcpp";
-      comment = "ncmpcpp cli app";
-      icon = "io.bassi.Amberol";
-      exec = "launch-ncmpcpp";
-      categories = ["AudioVideo" "Music" "Audio" "ConsoleOnly"];
-      terminal = true;
-    };
+    home.packages = with pkgs;
+      [
+        alejandra
+        amberol
+        asciiquarium
+        cmatrix
+        dbeaver
+        duf
+        dynamic-wallpaper
+        eartag
+        easyeffects
+        espeak
+        exa
+        eyedropper
+        fd
+        fragments
+        glow
+        gnome-extension-manager
+        gnome-solanum
+        gum
+        htop
+        httpie
+        hyperfine
+        insomnia
+        lolcat
+        lshw
+        macchina
+        mousai
+        ncdu
+        nixd
+        nixgl.nixGLIntel
+        ripgrep
+        screenkey
+        sl
+        speedtest-cli
+        textpieces
+        tldr
+        tokei
+        trash-cli
+        unstable.obsidian
+        wireshark
+        wormhole-rs
+        yt-dlp
+        zellij
+      ]
+      ++ [packages.hm-cleanup];
   };
 }

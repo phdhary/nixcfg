@@ -13,7 +13,7 @@ return {
 		"Symbols Nerd Font",
 	}),
 	harfbuzz_features = { "calt=0", "clig=0", "liga=0" },
-	font_size = 13,
+	font_size = 14,
 	line_height = 1.2,
 	warn_about_missing_glyphs = false,
 }

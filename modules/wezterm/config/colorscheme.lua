@@ -1,3 +1,3 @@
 return {
-	color_scheme = "catppuccin-mocha",
+	color_scheme = "rose-pine-moon",
 }

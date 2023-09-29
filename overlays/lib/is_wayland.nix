@@ -1,6 +1,10 @@
 {...}: let
   inherit (builtins) getEnv;
-in {
-  name = "isWayland";
-  value = getEnv "XDG_SESSION_TYPE" == "wayland";
-}
+in
+  final: prev: {
+    lib =
+      prev.lib
+      // {
+        isWayland = getEnv "XDG_SESSION_TYPE" == "wayland";
+      };
+  }
