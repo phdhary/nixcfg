@@ -1,14 +1,13 @@
 {
-  pkgs,
   config,
   lib,
   namespace,
+  packages,
   ...
 }: let
   inherit (lib) mkEnableOption mkIf;
   name = "batresudah";
   cfg = config.${namespace}.services.${name};
-  script = pkgs.writeShellScriptBin name (builtins.readFile ./batresudah.sh);
 in {
   options.${namespace}.services.${name} = {
     enable = mkEnableOption "${name} service";
@@ -17,8 +16,8 @@ in {
   config = mkIf cfg.enable {
     systemd.user.services."${name}" = {
       Unit = {Description = "battery notifications";};
-      Service = {ExecStart = "${script}/bin/${name}";};
-      Install = {WantedBy = ["multi-user.target"];};
+      Service = {ExecStart = "${packages.batresudah}/bin/${name}";};
+      Install = {WantedBy = ["default.target"];};
     };
   };
 }
