@@ -5,11 +5,10 @@
   ...
 }: let
   inherit (lib) mkEnableOption mkIf;
-  name = "mpv";
-  cfg = config.${namespace}.programs.cli-apps.${name};
+  cfg = config.${namespace}.programs.cli-apps.mpv;
 in {
-  options.${namespace}.programs.cli-apps.${name} = {
-    enable = mkEnableOption "${name}";
+  options.${namespace}.programs.cli-apps.mpv = {
+    enable = mkEnableOption "mpv";
   };
 
   config = mkIf cfg.enable {

@@ -8,9 +8,9 @@
   inherit (lib) mkEnableOption mkIf;
   inherit (pkgs.lib) optionalAttrs;
   inherit (config.wayland.windowManager) sway;
-  cfg = config.${namespace}.firefox;
+  cfg = config.${namespace}.programs.gui-apps.firefox;
 in {
-  options.${namespace}.firefox = {
+  options.${namespace}.programs.gui-apps.firefox= {
     enable = mkEnableOption "Firefox Browser";
   };
 

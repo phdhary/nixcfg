@@ -5,11 +5,10 @@
   ...
 }: let
   inherit (lib) mkEnableOption mkIf;
-  name = "readline";
-  cfg = config.${namespace}.programs.cli-apps.${name};
+  cfg = config.${namespace}.programs.cli-apps.readline;
 in {
-  options.${namespace}.programs.cli-apps.${name} = {
-    enable = mkEnableOption "${name}";
+  options.${namespace}.programs.cli-apps.readline = {
+    enable = mkEnableOption "readline";
   };
 
   config = mkIf cfg.enable {

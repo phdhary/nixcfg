@@ -5,11 +5,10 @@
   ...
 }: let
   inherit (lib) mkEnableOption mkIf;
-  name = "git";
-  cfg = config.${namespace}.programs.cli-apps.${name};
+  cfg = config.${namespace}.programs.cli-apps.git;
 in {
-  options.${namespace}.programs.cli-apps.${name} = {
-    enable = mkEnableOption "${name}";
+  options.${namespace}.programs.cli-apps.git = {
+    enable = mkEnableOption "git";
   };
 
   config = mkIf cfg.enable {

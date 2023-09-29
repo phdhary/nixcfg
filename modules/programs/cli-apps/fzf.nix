@@ -6,10 +6,10 @@
 }: let
   inherit (lib) mkEnableOption mkIf;
   name = "fzf";
-  cfg = config.${namespace}.programs.cli-apps.${name};
+  cfg = config.${namespace}.programs.cli-apps.fzf;
 in {
-  options.${namespace}.programs.cli-apps.${name} = {
-    enable = mkEnableOption "${name}";
+  options.${namespace}.programs.cli-apps.fzf = {
+    enable = mkEnableOption "fzf";
   };
 
   config = mkIf cfg.enable {

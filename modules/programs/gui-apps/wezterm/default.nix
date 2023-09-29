@@ -5,15 +5,15 @@
   namespace,
   ...
 }: let
-  cfg = config.${namespace}.wezterm;
+  cfg = config.${namespace}.programs.gui-apps.wezterm;
 in {
-  options.${namespace}.wezterm = {
-    enable = lib.mkEnableOption "wezterm app";
+  options.${namespace}.programs.gui-apps.wezterm = {
+    enable = lib.mkEnableOption "wezterm terminal emulator";
   };
 
   config = lib.mkIf cfg.enable {
     home.file = pkgs.lib.mkConfigSymlinkFromList {
-      relativePath = "/modules/";
+      relativePath = "/modules/programs/gui-apps/";
       paths = [
         "wezterm/colors/"
         "wezterm/config/"

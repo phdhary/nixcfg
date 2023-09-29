@@ -5,11 +5,10 @@
   ...
 }: let
   inherit (lib) mkEnableOption mkIf;
-  name = "bat";
-  cfg = config.${namespace}.programs.cli-apps.${name};
+  cfg = config.${namespace}.programs.cli-apps.bat;
 in {
-  options.${namespace}.programs.cli-apps.${name} = {
-    enable = mkEnableOption "${name}";
+  options.${namespace}.programs.cli-apps.bat = {
+    enable = mkEnableOption "bat";
   };
 
   config = mkIf cfg.enable {

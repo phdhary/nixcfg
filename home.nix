@@ -12,8 +12,8 @@ in {
   programs.home-manager.enable = true;
 
   ${namespace} = {
+    fonts = enabled;
     programs = {
-      enable = true;
       cli-apps = {
         bat = enabled;
         btop = enabled;
@@ -24,18 +24,21 @@ in {
         readline = enabled;
         zoxide = enabled;
       };
+      gui-apps = {
+        firefox = disabled;
+        kitty = enabled;
+        vscode = enabled;
+        wezterm = enabled;
+      };
     };
-    firefox = disabled;
-    fonts = enabled;
-    kitty = enabled;
+    services = {
+      batresudah = enabled;
+    };
     session-things = {
       enable = true;
       enableDnfAliases = true;
     };
     shells = enabled;
-    vscode = enabled;
-    wezterm = enabled;
     wms-symlink = enabled;
-    services.batresudah = enabled;
   };
 }

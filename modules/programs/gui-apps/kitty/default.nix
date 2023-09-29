@@ -5,15 +5,15 @@
   pkgs,
   ...
 }: let
-  cfg = config.${namespace}.kitty;
+  cfg = config.${namespace}.programs.gui-apps.kitty;
 in {
-  options.${namespace}.kitty = {
+  options.${namespace}.programs.gui-apps.kitty = {
     enable = lib.mkEnableOption "kitty terminal emulator";
   };
 
   config = lib.mkIf cfg.enable {
     home.file = pkgs.lib.mkConfigSymlinkFromList {
-      relativePath = "/modules/";
+      relativePath = "/modules/programs/gui-apps/";
       paths = [
         "kitty/kitty.conf"
         "kitty/scrollback-pager/init.lua"
