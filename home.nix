@@ -2,58 +2,60 @@
   config,
   pkgs,
   namespace,
+  packages,
   ...
 }: let
   inherit (config.${namespace}) enabled disabled;
 in {
-  home.packages = with pkgs; [
-    alejandra
-    amberol
-    dbeaver
-    dynamic-wallpaper
-    eartag
-    easyeffects
-    eyedropper
-    fragments
-    gnome-extension-manager
-    gnome-solanum
-    insomnia
-    macchina
-    mousai
-    nixd
-    nixgl.nixGLIntel
-    textpieces
-    unstable.obsidian
-    wormhole-rs
-    #
-    btop
-    exa
-    htop
-    hyperfine
-    fd
-    ripgrep
-    asciiquarium
-    duf
-    cmatrix
-    sl
-    glow
-    gitui
-    fzf
-    gum
-    httpie
-    lolcat
-    ncdu
-    trash-cli
-    speedtest-cli
-    tldr
-    tokei
-    wireshark
-    zellij
-    yt-dlp
-    screenkey
-    lshw
-    espeak
-  ];
+  home.packages = with pkgs;
+    [
+      alejandra
+      amberol
+      dbeaver
+      dynamic-wallpaper
+      eartag
+      easyeffects
+      eyedropper
+      fragments
+      gnome-extension-manager
+      gnome-solanum
+      insomnia
+      macchina
+      mousai
+      nixd
+      nixgl.nixGLIntel
+      textpieces
+      unstable.obsidian
+      wormhole-rs
+      #
+      btop
+      exa
+      htop
+      hyperfine
+      fd
+      ripgrep
+      asciiquarium
+      duf
+      cmatrix
+      sl
+      glow
+      gitui
+      gum
+      httpie
+      lolcat
+      ncdu
+      trash-cli
+      speedtest-cli
+      tldr
+      tokei
+      wireshark
+      zellij
+      yt-dlp
+      screenkey
+      lshw
+      espeak
+    ]
+    ++ [packages.hm-cleanup];
 
   xdg.systemDirs.data = [
     "${config.home.homeDirectory}/.nix-profile/share" # to make .desktop files detected by DE

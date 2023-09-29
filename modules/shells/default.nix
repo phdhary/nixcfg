@@ -22,16 +22,6 @@ in {
         if [ -d "/var/lib/flatpak/exports/bin" ] ; then
           PATH=$PATH:/var/lib/flatpak/exports/bin
         fi
-        # FZF
-        if type rg &> /dev/null; then
-            export FZF_DEFAULT_COMMAND='rg --files'
-            export FZF_DEFAULT_OPTS="
-            --color=16
-            --color=fg:grey,hl:blue
-            --color=hl+:blue"
-            # export FZF_DEFAULT_OPTS=" \
-            # --preview 'bat --color=always --style=numbers --line-range=:500 {}'"
-        fi
         # added by Nix installer
         if [ -e ${homeDirectory}/.nix-profile/etc/profile.d/nix.sh ]; then
           . ${homeDirectory}/.nix-profile/etc/profile.d/nix.sh;

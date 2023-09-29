@@ -45,6 +45,16 @@ in {
         enableBashIntegration = true;
         enableZshIntegration = true;
       };
+      fzf = {
+        enable = true;
+        defaultCommand = "rg --files";
+        defaultOptions = ["--color=16"];
+        colors = {
+          fg = "grey";
+          hl = "blue";
+          "hl+" = "blue";
+        };
+      };
     };
 
     xdg.desktopEntries."my.dude.ncmpcpp" = {
