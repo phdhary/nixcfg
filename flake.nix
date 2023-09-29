@@ -27,6 +27,7 @@
   };
 
   outputs = inputs @ {
+    self,
     nixpkgs,
     home-manager,
     ...
@@ -38,11 +39,13 @@
       inherit system;
       config.allowUnfree = true;
     };
+    packages = self.outputs.packages.${system};
   in {
     homeConfigurations."${user}" = home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
-      extraSpecialArgs = {inherit inputs user namespace;};
+      extraSpecialArgs = {inherit inputs packages user namespace;};
       modules = import ./modules;
     };
+    packages.${system} = import ./packages pkgs;
   };
 }
