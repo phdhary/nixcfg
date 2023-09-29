@@ -7,6 +7,7 @@
 }: let
   inherit (lib) mkEnableOption mkIf mkMerge;
   inherit (pkgs.lib) mkSymlinkFromList mkConfigSymlinkFromList;
+  inherit (config.home) homeDirectory;
   cfg = config.${namespace}.shells;
 in {
   options.${namespace}.shells = {
@@ -31,6 +32,10 @@ in {
             # export FZF_DEFAULT_OPTS=" \
             # --preview 'bat --color=always --style=numbers --line-range=:500 {}'"
         fi
+        # added by Nix installer
+        if [ -e ${homeDirectory}/.nix-profile/etc/profile.d/nix.sh ]; then
+          . ${homeDirectory}/.nix-profile/etc/profile.d/nix.sh;
+        fi
       '';
       bashrcExtra = ''
         export SDKMAN_DIR="$HOME/.sdkman"
@@ -48,7 +53,7 @@ in {
         zstyle ':completion:*' menu select
         # zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
         zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'r:|=*' 'l:|=* r:|=*'
-        # mappings
+        # MAPPINGS
         KEYTIMEOUT=1 # 10ms for key sequences
         bindkey '^[[Z' reverse-menu-complete
         bindkey -v # vi mode
@@ -56,11 +61,11 @@ in {
         bindkey '^f' forward-word
         # bindkey -M vicmd 'V' edit-command-line
         bindkey -s '^z' 'fg^M'
-        source "$HOME/.profile"
-        source "$HOME/.some-function"
       '';
       envExtra = ''
         . "$HOME/.cargo/env"
+        . "$HOME/.profile"
+        . "$HOME/.some-function"
       '';
       initExtraBeforeCompInit = ''
         fpath=(~/.zsh/completion $fpath)
