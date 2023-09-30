@@ -19,8 +19,6 @@ let
   nixpkgs = from_lock nodes.nixpkgs;
   nixpkgs-unstable =
     import (from_lock nodes.nixpkgs-unstable) { inherit system config; };
-  nixpkgs-mozilla =
-    import "${from_lock nodes.nixpkgs-mozilla}/firefox-overlay.nix";
   # rust-mozilla = import "${from_lock nodes.nixpkgs-mozilla}/rust-overlay.nix";
   pkgs = import nixpkgs {
     inherit system config;
@@ -29,11 +27,10 @@ let
         unstable = nixpkgs-unstable;
         nixgl = import (from_lock nodes.nixgl) { inherit pkgs; };
       })
-      nixpkgs-mozilla
     ];
   };
 in {
-  inherit pkgs;
+  # inherit pkgs;
   default = pkgs.mkShell {
     name = "playground";
     packages = with pkgs; [ macchina ];

@@ -1,4 +1,4 @@
-{ config, namespace, lib, pkgs, packages, ... }: {
+{ pkgs, packages, ... }: {
   home.packages = with pkgs;
     [
       alejandra
