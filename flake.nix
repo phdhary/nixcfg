@@ -26,26 +26,23 @@
     };
   };
 
-  outputs = inputs @ {
-    self,
-    nixpkgs,
-    home-manager,
-    ...
-  }: let
-    system = "x86_64-linux";
-    user = "laken";
-    namespace = "laken";
-    pkgs = import nixpkgs {
-      inherit system;
-      config.allowUnfree = true;
+  outputs = inputs@{ self, nixpkgs, home-manager, ... }:
+    let
+      system = "x86_64-linux";
+      user = "laken";
+      namespace = "laken";
+      pkgs = import nixpkgs {
+        inherit system;
+        config.allowUnfree = true;
+      };
+      packages = self.outputs.packages.${system};
+    in {
+      homeConfigurations."${user}" = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        extraSpecialArgs = { inherit inputs packages user namespace; };
+        modules = import ./modules;
+      };
+      packages.${system} = import ./packages pkgs;
+      formatter.${system} = pkgs.nixfmt;
     };
-    packages = self.outputs.packages.${system};
-  in {
-    homeConfigurations."${user}" = home-manager.lib.homeManagerConfiguration {
-      inherit pkgs;
-      extraSpecialArgs = {inherit inputs packages user namespace;};
-      modules = import ./modules;
-    };
-    packages.${system} = import ./packages pkgs;
-  };
 }

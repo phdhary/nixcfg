@@ -1,1 +1,1 @@
-{inputs, ...}: inputs.nixgl.overlay
+{ inputs, ... }: inputs.nixgl.overlay

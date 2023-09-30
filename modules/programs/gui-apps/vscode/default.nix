@@ -1,11 +1,5 @@
-{
-  config,
-  lib,
-  namespace,
-  pkgs,
-  ...
-}: let
-  cfg = config.${namespace}.programs.gui-apps.vscode;
+{ config, lib, namespace, pkgs, ... }:
+let cfg = config.${namespace}.programs.gui-apps.vscode;
 in {
   options.${namespace}.programs.gui-apps.vscode = {
     enable = lib.mkEnableOption "visual studio code";

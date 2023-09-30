@@ -1,8 +1,4 @@
-args @ {
-  user,
-  pkgs,
-  ...
-}: {
+args@{ user, pkgs, ... }: {
   home = {
     stateVersion = "23.05";
     username = "${user}";
@@ -18,10 +14,10 @@ args @ {
 
   nixpkgs = {
     overlays = import ../../overlays args;
-    config = {allowUnfree = true;};
+    config = { allowUnfree = true; };
   };
 
-  xdg.configFile."nixpkgs/config.nix".text = ''{allowUnfree=true;}'';
+  xdg.configFile."nixpkgs/config.nix".text = "{allowUnfree=true;}";
 
-  imports = [../../home.nix];
+  imports = [ ../../home.nix ];
 }

@@ -1,11 +1,4 @@
-{
-  config,
-  namespace,
-  lib,
-  pkgs,
-  packages,
-  ...
-}: {
+{ config, namespace, lib, pkgs, packages, ... }: {
   home.packages = with pkgs;
     [
       alejandra
@@ -51,6 +44,5 @@
       wireshark
       wormhole-rs
       zellij
-    ]
-    ++ [packages.hm-cleanup];
+    ] ++ [ packages.hm-cleanup ];
 }

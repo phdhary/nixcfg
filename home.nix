@@ -1,9 +1,5 @@
-{
-  config,
-  namespace,
-  ...
-}: let
-  inherit (config.${namespace}) enabled disabled;
+{ config, namespace, ... }:
+let inherit (config.${namespace}) enabled disabled;
 in {
   xdg.systemDirs.data = [
     "${config.home.homeDirectory}/.nix-profile/share" # to make .desktop files detected by DE
@@ -31,9 +27,7 @@ in {
         wezterm = enabled;
       };
     };
-    services = {
-      batresudah = enabled;
-    };
+    services = { batresudah = enabled; };
     session-things = {
       enable = true;
       enableDnfAliases = true;

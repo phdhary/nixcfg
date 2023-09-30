@@ -1,10 +1,5 @@
-{
-  config,
-  lib,
-  namespace,
-  pkgs,
-  ...
-}: let
+{ config, lib, namespace, pkgs, ... }:
+let
   inherit (lib) mkEnableOption mkIf;
   cfg = config.${namespace}.fonts;
 in {
@@ -17,7 +12,7 @@ in {
       ibm-plex
       jetbrains-mono
       source-code-pro
-      (unstable.nerdfonts.override {fonts = ["NerdFontsSymbolsOnly"];})
+      (unstable.nerdfonts.override { fonts = [ "NerdFontsSymbolsOnly" ]; })
     ];
     fonts.fontconfig.enable = true;
   };

@@ -1,9 +1,5 @@
-{
-  config,
-  namespace,
-  lib,
-  ...
-}: let
+{ config, namespace, lib, ... }:
+let
   inherit (lib) mkEnableOption mkIf;
   name = "fzf";
   cfg = config.${namespace}.programs.cli-apps.fzf;
@@ -16,7 +12,7 @@ in {
     programs.fzf = {
       enable = true;
       defaultCommand = "rg --files";
-      defaultOptions = ["--color=16"];
+      defaultOptions = [ "--color=16" ];
       colors = {
         fg = "grey";
         hl = "blue";

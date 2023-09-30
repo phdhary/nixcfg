@@ -1,11 +1,5 @@
-{
-  config,
-  lib,
-  namespace,
-  pkgs,
-  ...
-}: let
-  cfg = config.${namespace}.wms-symlink;
+{ config, lib, namespace, pkgs, ... }:
+let cfg = config.${namespace}.wms-symlink;
 in {
   options.${namespace}.wms-symlink = {
     enable = lib.mkEnableOption "window managers symlink";

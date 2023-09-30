@@ -1,18 +1,11 @@
-{
-  config,
-  lib,
-  namespace,
-  pkgs,
-  ...
-}: let
+{ config, lib, namespace, pkgs, ... }:
+let
   inherit (lib) mkEnableOption mkIf mkMerge;
   inherit (pkgs.lib) mkSymlinkFromList mkConfigSymlinkFromList;
   inherit (config.home) homeDirectory;
   cfg = config.${namespace}.shells;
 in {
-  options.${namespace}.shells = {
-    enable = mkEnableOption "shells";
-  };
+  options.${namespace}.shells = { enable = mkEnableOption "shells"; };
 
   config = mkIf cfg.enable {
     programs.bash = {
@@ -62,21 +55,19 @@ in {
       '';
     };
 
-    home.packages = with pkgs.unstable; [zsh-completions];
+    home.packages = with pkgs.unstable; [ zsh-completions ];
 
-    home.file = let
-      relativePath = "/modules/shells/";
-    in
-      mkMerge [
-        (mkSymlinkFromList {
-          inherit relativePath;
-          paths = [".some-function"];
-        })
-        (mkConfigSymlinkFromList {
-          inherit relativePath;
-          paths = ["starship.toml"];
-        })
-      ];
+    home.file = let relativePath = "/modules/shells/";
+    in mkMerge [
+      (mkSymlinkFromList {
+        inherit relativePath;
+        paths = [ ".some-function" ];
+      })
+      (mkConfigSymlinkFromList {
+        inherit relativePath;
+        paths = [ "starship.toml" ];
+      })
+    ];
 
     programs.starship = {
       enable = true;

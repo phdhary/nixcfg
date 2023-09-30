@@ -1,9 +1,5 @@
-{
-  config,
-  namespace,
-  lib,
-  ...
-}: let
+{ config, namespace, lib, ... }:
+let
   inherit (lib) mkEnableOption mkIf;
   cfg = config.${namespace}.programs.cli-apps.bat;
 in {

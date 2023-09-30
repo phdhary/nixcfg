@@ -1,11 +1,5 @@
-{
-  config,
-  lib,
-  namespace,
-  pkgs,
-  ...
-}: let
-  cfg = config.${namespace}.programs.gui-apps.kitty;
+{ config, lib, namespace, pkgs, ... }:
+let cfg = config.${namespace}.programs.gui-apps.kitty;
 in {
   options.${namespace}.programs.gui-apps.kitty = {
     enable = lib.mkEnableOption "kitty terminal emulator";

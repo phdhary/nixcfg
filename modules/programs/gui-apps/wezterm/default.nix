@@ -1,11 +1,5 @@
-{
-  lib,
-  config,
-  pkgs,
-  namespace,
-  ...
-}: let
-  cfg = config.${namespace}.programs.gui-apps.wezterm;
+{ lib, config, pkgs, namespace, ... }:
+let cfg = config.${namespace}.programs.gui-apps.wezterm;
 in {
   options.${namespace}.programs.gui-apps.wezterm = {
     enable = lib.mkEnableOption "wezterm terminal emulator";
@@ -14,10 +8,7 @@ in {
   config = lib.mkIf cfg.enable {
     home.file = pkgs.lib.mkConfigSymlinkFromList {
       relativePath = "/modules/programs/gui-apps/";
-      paths = [
-        "wezterm/colors/"
-        "wezterm/config/"
-      ];
+      paths = [ "wezterm/colors/" "wezterm/config/" ];
     };
 
     programs.wezterm = {
@@ -32,14 +23,10 @@ in {
               ${wezterm} "$@"
           fi
         '';
-      in
-        pkgs.symlinkJoin {
-          name = "wezterm";
-          paths = [
-            wrapped_wezterm
-            pkgs.unstable.wezterm
-          ];
-        };
+      in pkgs.symlinkJoin {
+        name = "wezterm";
+        paths = [ wrapped_wezterm pkgs.unstable.wezterm ];
+      };
       extraConfig = ''return require "config"'';
     };
 
@@ -48,7 +35,7 @@ in {
       comment = "Wez's Terminal Emulator";
       icon = "org.wezfurlong.wezterm";
       exec = "wrapped_wezterm %F";
-      categories = ["System" "TerminalEmulator" "Utility"];
+      categories = [ "System" "TerminalEmulator" "Utility" ];
       terminal = false;
     };
   };

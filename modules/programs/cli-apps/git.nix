@@ -1,9 +1,5 @@
-{
-  config,
-  namespace,
-  lib,
-  ...
-}: let
+{ config, namespace, lib, ... }:
+let
   inherit (lib) mkEnableOption mkIf;
   cfg = config.${namespace}.programs.cli-apps.git;
 in {
@@ -17,8 +13,8 @@ in {
       userName = "phdhary";
       userEmail = "phdhary@gmail.com";
       extraConfig = {
-        init = {defaultBranch = "main";};
-        core = {autocrlf = "input";};
+        init = { defaultBranch = "main"; };
+        core = { autocrlf = "input"; };
       };
       aliases = {
         unpushed = "log --oneline --decorate --graph origin/main^..main";
