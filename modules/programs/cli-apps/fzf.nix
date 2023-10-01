@@ -1,7 +1,6 @@
 { config, namespace, lib, ... }:
 let
   inherit (lib) mkEnableOption mkIf;
-  name = "fzf";
   cfg = config.${namespace}.programs.cli-apps.fzf;
 in {
   options.${namespace}.programs.cli-apps.fzf = {

@@ -1,5 +1,9 @@
 pkgs:
-pkgs.lib.attrsets.mergeAttrsList
-(builtins.map (f: (import (./. + "/${f}") pkgs))
-  (builtins.filter (f: f != "default.nix")
-    (builtins.attrNames (builtins.readDir ./.))))
+let
+  inherit (pkgs.lib) hasSuffix;
+  inherit (pkgs.lib.attrsets) mergeAttrsList;
+  inherit (pkgs.lib.filesystem) listFilesRecursive;
+  inherit (builtins) map filter;
+in mergeAttrsList (map (f: import f pkgs)
+  (filter (f: (hasSuffix ".nix" f) && f != ./default.nix)
+    (listFilesRecursive ./.)))

@@ -40,7 +40,7 @@
       homeConfigurations."${user}" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         extraSpecialArgs = { inherit inputs packages user namespace; };
-        modules = import ./modules;
+        modules = import ./modules pkgs;
       };
       packages.${system} = import ./packages pkgs;
       formatter.${system} = pkgs.nixfmt;

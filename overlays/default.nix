@@ -1,8 +1,8 @@
-args:
+{ lib, ... }@args:
 let
-  overlays = builtins.map (f: (import (./. + "/${f}") args))
-    (builtins.filter (f: f != "default.nix" && f != "lib")
-      (builtins.attrNames (builtins.readDir ./.)));
-  lib-overlays = builtins.map (f: (import (./lib + "/${f}") args))
-    (builtins.attrNames (builtins.readDir ./lib));
-in overlays ++ lib-overlays
+  inherit (lib) hasSuffix;
+  inherit (lib.filesystem) listFilesRecursive;
+  inherit (builtins) map filter;
+in map (f: import f args)
+(filter (f: (hasSuffix ".nix" f) && f != ./default.nix)
+  (listFilesRecursive ./.))

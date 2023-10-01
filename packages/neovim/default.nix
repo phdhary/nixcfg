@@ -1,8 +1,8 @@
 pkgs: {
-  noevim-fhs = pkgs.buildFHSEnv {
-    name = "noevim";
+  neovim-fhs = pkgs.buildFHSEnv {
+    name = "neovim";
     targetPkgs = pkgs:
-      (with pkgs; [ neovim neofetch which bat zsh fish timer ]);
+      (with pkgs; [ neovim macchina which lolcat zsh timer ]);
     runScript = "/usr/bin/nvim";
   };
 }
