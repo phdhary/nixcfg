@@ -45,6 +45,10 @@ in {
         "flutter pub run build_runner watch --delete-conflicting-outputs";
       # _ = "sudo";
       _ = ''sudo -s PATH="$PATH" exec "$@"'';
+      "..." = "cd ../..";
+      "...." = "cd ../../..";
+      "....." = "cd ../../../..";
+      "......" = "cd ../../../../..";
       dlmp3pl = ''
         yt-dlp -f bestaudio -x --audio-format mp3 --audio-quality 320k --embed-thumbnail --add-metadata --postprocessor-args "-id3v2_version 3"'';
       g = "git";
