@@ -6,6 +6,8 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    home.sessionVariables.TERMINAL = "wezterm";
+
     home.file = pkgs.lib.mkConfigSymlinkFromList {
       relativePath = "/modules/programs/gui-apps/";
       paths = [ "wezterm/colors/" "wezterm/config/" ];

@@ -20,5 +20,12 @@ in {
         unpushed = "log --oneline --decorate --graph origin/main^..main";
       };
     };
+
+    home.shellAliases = {
+      g = "git";
+      glo = "git log --oneline --decorate --graph";
+      grl = "git reflog";
+      gst = "git status";
+    };
   };
 }

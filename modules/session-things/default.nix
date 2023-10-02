@@ -15,10 +15,8 @@ in {
       FREETYPE_PROPERTIES = "cff:no-stem-darkening=0";
       FVM_HOME = "$HOME/development/fvm";
       MANPAGER = "nvim -c Man!";
-      PAGER = "bat";
       PNPM_HOME = "${config.xdg.dataHome}/pnpm";
       SYSTEMD_EDITOR = "nvim";
-      TERMINAL = "wezterm";
       NIXOS_OZONE_WL = "1";
     }
     # (optionalAttrs isWayland {NIXOS_OZONE_WL = "1";})
@@ -51,13 +49,8 @@ in {
       "......" = "cd ../../../../..";
       dlmp3pl = ''
         yt-dlp -f bestaudio -x --audio-format mp3 --audio-quality 320k --embed-thumbnail --add-metadata --postprocessor-args "-id3v2_version 3"'';
-      g = "git";
-      glo = "git log --oneline --decorate --graph";
-      grl = "git reflog";
-      gst = "git status";
       hm = "home-manager";
       l = "ls -la";
-      ls = "exa --icons";
       lzd = "lazydocker";
       nimv = "nvim";
       nivm = "nvim";
@@ -68,7 +61,7 @@ in {
       ranger = ". ranger";
       rm = "rm -i";
       svim = "sudo -e";
-      # hm-rollback = "cd $(hm generations | head -2 | tail -1 | awk -F ' ' '{print $7}'); ./activate;cd;";
+      # hm-rollback = "cd $(home-manager generations | head -2 | tail -1 | awk -F ' ' '{print $7}'); ./activate;cd;";
     } // optionalAttrs cfg.enableDnfAliases {
       # dnf
       dnfl = "dnf list";

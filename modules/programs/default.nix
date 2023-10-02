@@ -11,7 +11,6 @@
       eartag
       easyeffects
       espeak
-      exa
       eyedropper
       fd
       fragments

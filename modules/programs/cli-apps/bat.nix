@@ -8,6 +8,7 @@ in {
   };
 
   config = mkIf cfg.enable {
+    home.sessionVariables.PAGER = "bat";
     programs.bat = {
       enable = true;
       config = {
