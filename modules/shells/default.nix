@@ -44,6 +44,7 @@ in {
         bindkey '^f' forward-word
         # bindkey -M vicmd 'V' edit-command-line
         bindkey -s '^z' 'fg^M'
+        [[ -f ~/.config/tabtab/zsh/__tabtab.zsh ]] && . ~/.config/tabtab/zsh/__tabtab.zsh || true
       '';
       envExtra = ''
         . "$HOME/.cargo/env"

@@ -2,45 +2,35 @@
   home.packages = with pkgs;
     [
       alejandra
-      amberol
       asciiquarium
       cmatrix
-      dbeaver
       duf
-      dynamic-wallpaper
-      eartag
-      easyeffects
       espeak
-      eyedropper
       fd
-      fragments
+      git-crypt
       glow
-      gnome-extension-manager
-      gnome-solanum
       gum
       htop
       httpie
       hyperfine
-      insomnia
       lolcat
       lshw
       macchina
-      mousai
       ncdu
       nixd
       nixfmt
       nixgl.nixGLIntel
+      # nvtop
+      # nvtop-nvidia
+      nyancat
       ripgrep
-      screenkey
       sl
       speedtest-cli
-      textpieces
+      timer
       tldr
       tokei
       trash-cli
-      unstable.obsidian
       unstable.yt-dlp
-      wireshark
       wormhole-rs
       zellij
     ] ++ [ packages.hm-cleanup ];
