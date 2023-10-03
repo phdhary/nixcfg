@@ -121,7 +121,7 @@ in {
           command = "delete_stored_playlist";
         }
         {
-          key = "f";
+          key = "F";
           command = "apply_filter";
         }
         {

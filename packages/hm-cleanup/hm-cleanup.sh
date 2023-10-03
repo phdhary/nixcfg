@@ -1,5 +1,3 @@
-#!/bin/sh
-
 totalGenerationCount=$(home-manager generations | awk -F ' ' '{print $5}' | wc -l);
 printf "total generation count: %s\n" "$totalGenerationCount";
 deleteCount=$(("$totalGenerationCount" - 2));

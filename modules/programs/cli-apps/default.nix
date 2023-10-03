@@ -20,8 +20,6 @@
       nixd
       nixfmt
       nixgl.nixGLIntel
-      # nvtop
-      # nvtop-nvidia
       nyancat
       ripgrep
       sl
@@ -30,6 +28,8 @@
       tldr
       tokei
       trash-cli
+      # unstable.nvtop
+      # unstable.nvtop-nvidia
       unstable.yt-dlp
       wormhole-rs
       zellij
