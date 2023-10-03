@@ -61,7 +61,6 @@ in {
       ranger = ". ranger";
       rm = "rm -i";
       svim = "sudo -e";
-      # hm-rollback = "cd $(home-manager generations | head -2 | tail -1 | awk -F ' ' '{print $7}'); ./activate;cd;";
     } // optionalAttrs cfg.enableDnfAliases {
       # dnf
       dnfl = "dnf list";
