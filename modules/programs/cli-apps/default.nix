@@ -13,6 +13,7 @@
       htop
       httpie
       hyperfine
+      jq
       lolcat
       lshw
       macchina
