@@ -1,0 +1,58 @@
+#!/bin/bash
+
+t ()
+{
+  fzf="
+  fzf
+  --color=16
+  --color=fg:grey,hl:blue
+  --color=hl+:blue
+  "
+
+  directories="
+  $HOME/development/
+  $HOME/development/*
+  $HOME/Documents/
+  $HOME/go/src/
+  $HOME/.config/
+  $HOME/.local/
+  $HOME/.local/share/nvim/
+  $HOME/.local/share/nvim/lazy
+  "
+
+  session_format="\
+#{session_name}: #{session_windows} window(s)\
+#{?session_grouped, (group,}#{session_group}#{?session_grouped,),}\
+#{?session_attached, (attached),}"
+
+  # shellcheck disable=2086
+  RESULT=$( (
+  tmux list-sessions -F "$session_format";
+  find $directories -mindepth 1 -maxdepth 1 -type d;
+  ) | $fzf)
+  if [ -z "$RESULT" ]; then
+    exit 0
+  fi
+
+  # Get or create session
+  if [[ $RESULT == *":"* ]]; then
+    # RESULT comes from list-sessions
+    SESSION=$(echo "$RESULT" | awk '{print $1}')
+    SESSION=${SESSION//:/}
+  else
+    # RESULT is a path
+    SESSION=$(basename "$RESULT" | tr . _)
+    if ! tmux has-session -t="$SESSION" 2> /dev/null; then
+      tmux new-session -d -s "$SESSION" -c "$RESULT"
+    fi
+  fi
+
+# Attach to session
+  if [ -z "$TMUX" ]; then
+    tmux attach -t "$SESSION"
+  else
+    tmux switch-client -t "$SESSION"
+  fi  
+}
+
+t

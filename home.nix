@@ -19,6 +19,7 @@ in {
         mpv = enabled;
         ncmpcpp = enabled;
         readline = enabled;
+        tmux = enabled;
         zoxide = enabled;
       };
       gui-apps = {
