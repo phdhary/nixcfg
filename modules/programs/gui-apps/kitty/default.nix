@@ -7,7 +7,7 @@ in {
 
   config = lib.mkIf cfg.enable {
     home.file = pkgs.lib.mkConfigSymlinkFromList {
-      relativePath = "/modules/programs/gui-apps/";
+      relativePath = "modules/programs/gui-apps";
       paths = [
         "kitty/kitty.conf"
         "kitty/scrollback-pager/init.lua"

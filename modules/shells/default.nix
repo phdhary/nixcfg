@@ -68,7 +68,7 @@ in {
 
     home.packages = with pkgs.unstable; [ zsh-completions ];
 
-    home.file = let relativePath = "/modules/shells/";
+    home.file = let relativePath = "modules/shells";
     in mkMerge [
       (mkSymlinkFromList {
         inherit relativePath;

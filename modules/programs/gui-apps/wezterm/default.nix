@@ -9,7 +9,7 @@ in {
     home.sessionVariables.TERMINAL = "wezterm";
 
     home.file = pkgs.lib.mkConfigSymlinkFromList {
-      relativePath = "/modules/programs/gui-apps/";
+      relativePath = "modules/programs/gui-apps";
       paths = [ "wezterm/colors/" "wezterm/config/" ];
     };
 

@@ -10,13 +10,13 @@ in final: prev: {
       listToAttrs (map (filePath:
         (nameValuePair "${filePath}" {
           source =
-            mkOutOfStoreSymlink "${hmConfigPath}${relativePath}${filePath}";
+            mkOutOfStoreSymlink "${hmConfigPath}/${relativePath}/${filePath}";
         })) paths);
     mkConfigSymlinkFromList = { relativePath, paths, }:
       listToAttrs (map (filePath:
         (nameValuePair ".config/${filePath}" {
           source =
-            mkOutOfStoreSymlink "${hmConfigPath}${relativePath}${filePath}";
+            mkOutOfStoreSymlink "${hmConfigPath}/${relativePath}/${filePath}";
         })) paths);
   };
 }

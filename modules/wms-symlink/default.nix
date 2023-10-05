@@ -6,7 +6,7 @@ in {
   };
   config = lib.mkIf cfg.enable {
     home.file = pkgs.lib.mkConfigSymlinkFromList {
-      relativePath = "/modules/wms-symlink/";
+      relativePath = "modules/wms-symlink";
       paths = [
         "avizo/config.ini"
         "i3/common.conf"
