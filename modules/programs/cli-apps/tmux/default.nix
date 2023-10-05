@@ -14,6 +14,15 @@ in {
       paths = [ "tmux/my-config.conf" ];
     };
 
+    home.packages = with pkgs; [ python39 python39Packages.libtmux ];
+
+    programs.tmate = {
+      enable = true;
+      extraConfig = ''
+        source-file ${config.home.homeDirectory}/.config/tmux/tmux.conf
+      '';
+    };
+
     programs.tmux = {
       enable = true;
       mouse = true;
@@ -31,6 +40,19 @@ in {
         source-file ${config.home.homeDirectory}/.config/tmux/my-config.conf
       '';
       plugins = with pkgs.tmuxPlugins; [
+        {
+          plugin = mkTmuxPlugin {
+            name = "tmux-window-name";
+            pluginName = "tmux-window-name";
+            src = pkgs.fetchFromGitHub {
+              owner = "ofirgall";
+              repo = "tmux-window-name";
+              rev = "f89e9c9d71f5a487e7276ff994cc6f7c1079c8ce";
+              sha256 = "sha256-B9l9MX4XjUThzJwL4RZtlMg9yRzWbTIkY70F2/FIDc8=";
+            };
+          };
+          extraConfig = ''set -g @tmux_window_name_use_tilde "True"'';
+        }
         {
           plugin = resurrect;
           extraConfig = "set -g @resurrect-capture-pane-contents 'on'";
