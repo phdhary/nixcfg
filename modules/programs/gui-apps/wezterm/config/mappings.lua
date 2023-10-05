@@ -31,6 +31,16 @@ return {
 			mods = "SHIFT|CTRL",
 			action = wezterm.action.DisableDefaultAssignment,
 		},
+		{
+			key = "Enter",
+			mods = "ALT",
+			action = wezterm.action.DisableDefaultAssignment,
+		},
+		{
+			key = "z",
+			mods = "ALT",
+			action = wezterm.action.DisableDefaultAssignment,
+		},
 	},
 	key_tables = { copy_mode = copy_mode },
 }

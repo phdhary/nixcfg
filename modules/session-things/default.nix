@@ -41,7 +41,7 @@ in {
         "flutter pub run build_runner build --delete-conflicting-outputs";
       "build_runner:watch" =
         "flutter pub run build_runner watch --delete-conflicting-outputs";
-      # _ = "sudo";
+      ":q" = "exit";
       _ = ''sudo -s PATH="$PATH" exec "$@"'';
       "..." = "cd ../..";
       "...." = "cd ../../..";
