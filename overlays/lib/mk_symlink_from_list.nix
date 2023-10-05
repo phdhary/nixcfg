@@ -8,7 +8,7 @@ in final: prev: {
   lib = prev.lib // {
     mkSymlinkFromList = { relativePath, paths, }:
       listToAttrs (map (filePath:
-        (nameValuePair "${filePath}" {
+        (nameValuePair filePath {
           source =
             mkOutOfStoreSymlink "${hmConfigPath}/${relativePath}/${filePath}";
         })) paths);

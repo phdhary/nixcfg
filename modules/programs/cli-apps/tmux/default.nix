@@ -3,23 +3,34 @@ let
   inherit (lib) mkEnableOption mkIf;
   inherit (pkgs.lib) mkConfigSymlinkFromList;
   cfg = config.${namespace}.programs.cli-apps.tmux;
+  tmux-conf = "my-tmux.conf";
+  tmate-conf = "my-tmate.conf";
 in {
   options.${namespace}.programs.cli-apps.tmux = {
     enable = mkEnableOption "tmux";
   };
 
   config = mkIf cfg.enable {
-    home.file = mkConfigSymlinkFromList {
-      relativePath = "modules/programs/cli-apps";
-      paths = [ "tmux/my-config.conf" ];
+    home = {
+      packages = with pkgs; [ python39Packages.libtmux ];
+      file = mkConfigSymlinkFromList {
+        relativePath = "modules/programs/cli-apps";
+        paths = [ "tmux/${tmux-conf}" "tmux/${tmate-conf}" ];
+      };
+      shellAliases = {
+        ta = "tmux attach -t";
+        tad = "tmux attach -d -t";
+        ts = "tmux new-session -s";
+        tl = "tmux list-sessions";
+        tksv = "tmux kill-server";
+        tkss = "tmux kill-session -t";
+      };
     };
-
-    home.packages = with pkgs; [ python39 python39Packages.libtmux ];
 
     programs.tmate = {
       enable = true;
       extraConfig = ''
-        source-file ${config.home.homeDirectory}/.config/tmux/tmux.conf
+        source-file ${config.home.homeDirectory}/.config/tmux/${tmate-conf}
       '';
     };
 
@@ -30,14 +41,13 @@ in {
       newSession = true;
       baseIndex = 1;
       escapeTime = 0;
-      # keyMode = "vi";
       prefix = "C-a";
       terminal = "tmux-256color";
       historyLimit = 50000;
       customPaneNavigationAndResize = true;
       extraConfig = ''
         bind -n M-g display-popup -w 100% -E ${./t}
-        source-file ${config.home.homeDirectory}/.config/tmux/my-config.conf
+        source-file ${config.home.homeDirectory}/.config/tmux/${tmux-conf}
       '';
       plugins = with pkgs.tmuxPlugins; [
         {
@@ -74,13 +84,5 @@ in {
       ];
     };
 
-    home.shellAliases = {
-      ta = "tmux attach -t";
-      tad = "tmux attach -d -t";
-      ts = "tmux new-session -s";
-      tl = "tmux list-sessions";
-      tksv = "tmux kill-server";
-      tkss = "tmux kill-session -t";
-    };
   };
 }

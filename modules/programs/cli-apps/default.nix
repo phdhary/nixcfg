@@ -22,6 +22,7 @@
       nixfmt
       nixgl.nixGLIntel
       nyancat
+      python39
       ripgrep
       sl
       speedtest-cli
@@ -34,5 +35,5 @@
       unstable.yt-dlp
       wormhole-rs
       zellij
-    ] ++ [ packages.hm-cleanup ];
+    ] ++ [ packages.hm-cleanup packages.unimatrix ];
 }
