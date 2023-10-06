@@ -12,7 +12,6 @@ in {
 
   config = mkIf cfg.enable {
     home = {
-      packages = with pkgs; [ python39Packages.libtmux ];
       file = mkConfigSymlinkFromList {
         relativePath = "modules/programs/cli-apps";
         paths = [ "tmux/${tmux-conf}" "tmux/${tmate-conf}" ];
@@ -60,6 +59,16 @@ in {
               rev = "f89e9c9d71f5a487e7276ff994cc6f7c1079c8ce";
               sha256 = "sha256-B9l9MX4XjUThzJwL4RZtlMg9yRzWbTIkY70F2/FIDc8=";
             };
+            nativeBuildInputs = with pkgs; [ makeWrapper ];
+            postInstall = ''
+              sed -i -e 's|python3 |${pkgs.python39}/bin/python3 |g' $target/tmux_window_name.tmux
+              wrapProgram $target/tmux_window_name.tmux \
+                --prefix PATH : ${
+                  with pkgs;
+                  lib.makeBinPath ([ python39Packages.libtmux ])
+                }
+            '';
+
           };
           extraConfig = ''set -g @tmux_window_name_use_tilde "True"'';
         }
@@ -83,6 +92,5 @@ in {
         }
       ];
     };
-
   };
 }
