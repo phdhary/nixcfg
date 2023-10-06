@@ -33,7 +33,11 @@ in {
       enableSyntaxHighlighting = true;
       autocd = true;
       dotDir = ".config/zsh";
-      history = { path = "${config.xdg.configHome}/zsh/.zsh_history"; };
+      history = {
+        expireDuplicatesFirst = true;
+        extended = true;
+        path = "${config.xdg.configHome}/zsh/.zsh_history";
+      };
       initExtraBeforeCompInit = ''
         fpath=(~/.zsh/completion $fpath)
       '';
@@ -49,14 +53,6 @@ in {
         bindkey '^f' forward-word
         # bindkey -M vicmd 'V' edit-command-line
         bindkey -s '^z' 'fg^M'
-        autoload -Uz surround
-        zle -N delete-surround surround
-        zle -N add-surround surround
-        zle -N change-surround surround
-        bindkey -M vicmd cs change-surround
-        bindkey -M vicmd ds delete-surround
-        bindkey -M vicmd ys add-surround
-        bindkey -M visual S add-surround
         [[ -f ~/.config/tabtab/zsh/__tabtab.zsh ]] && . ~/.config/tabtab/zsh/__tabtab.zsh || true
       '';
       envExtra = ''

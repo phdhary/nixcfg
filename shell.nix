@@ -33,6 +33,6 @@ in {
   # inherit pkgs;
   default = pkgs.mkShell {
     name = "playground";
-    packages = with pkgs; [ upterm ];
+    packages = with pkgs; [];
   };
 }
