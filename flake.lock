@@ -325,6 +325,22 @@
         "type": "github"
       }
     },
+    "nixpkgs-unstable-fdd89": {
+      "locked": {
+        "lastModified": 1696193975,
+        "narHash": "sha256-mnQjUcYgp9Guu3RNVAB2Srr1TqKcPpRXmJf4LJk6KRY=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "fdd898f8f79e8d2f99ed2ab6b3751811ef683242",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "fdd898f8f79e8d2f99ed2ab6b3751811ef683242",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "flake-firefox-nightly": "flake-firefox-nightly",
@@ -333,7 +349,8 @@
         "nixd": "nixd",
         "nixgl": "nixgl",
         "nixpkgs": "nixpkgs",
-        "nixpkgs-unstable": "nixpkgs-unstable"
+        "nixpkgs-unstable": "nixpkgs-unstable",
+        "nixpkgs-unstable-fdd89": "nixpkgs-unstable-fdd89"
       }
     },
     "systems": {

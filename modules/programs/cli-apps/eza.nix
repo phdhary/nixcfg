@@ -8,7 +8,7 @@ in {
   };
 
   config = mkIf cfg.enable {
-    home.packages = [ pkgs.unstable.eza ];
-    home.shellAliases = { ls = "eza --icons"; };
+    home.packages = [ pkgs.unstable-fdd89.eza ];
+    home.shellAliases = { ls = "${pkgs.unstable-fdd89.eza}/bin/eza --icons"; };
   };
 }

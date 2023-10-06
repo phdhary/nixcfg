@@ -1,4 +1,10 @@
 set icons true
+set sixel true
+set hidden false
+
+set previewer ~/.config/lf/lf_sixel_preview
+# set previewer ~/.config/lf/lf_kitty_preview
+# set cleaner ~/.config/lf/lf_kitty_clean
 
 map md mkdir
 map x cut
@@ -17,6 +23,12 @@ cmd mkdir ${{
 
 cmd trash %trash-put $fx
 cmd restore_trash %trash-restore
+cmd touch %touch $1
+
+cmd take %{{
+  mkdir -p $@ && cd ${@:$#}
+	lf -remote "send $id cd \"$@\""
+}}
 
 # extract the current file with the right command
 # (xkcd link: https://xkcd.com/1168/)
@@ -58,4 +70,38 @@ cmd z %{{
 cmd zi ${{
 	result="$(zoxide query -i | sed 's/\\/\\\\/g;s/"/\\"/g')"
 	lf -remote "send $id cd \"$result\""
+}}
+
+cmd on-select &{{
+  lf -remote "send $id set statfmt \"$(exa -ld --color=always "$f")\""
+}}
+
+cmd open $set -f; rifle -p 0 "$fx"
+
+cmd follow_link %{{
+  lf -remote "send ${id} select '$(readlink $f)'"
+}}
+
+cmd bulk-rename ${{
+  old="$(mktemp)"
+  new="$(mktemp)"
+  if [ -n "$fs" ]; then
+      fs="$(basename -a $fs)"
+  else
+      fs="$(ls)"
+  fi
+  printf '%s\n' "$fs" >"$old"
+  printf '%s\n' "$fs" >"$new"
+  $EDITOR "$new"
+  [ "$(wc -l < "$new")" -ne "$(wc -l < "$old")" ] && exit
+  paste "$old" "$new" | while IFS= read -r names; do
+      src="$(printf '%s' "$names" | cut -f1)"
+      dst="$(printf '%s' "$names" | cut -f2)"
+      if [ "$src" = "$dst" ] || [ -e "$dst" ]; then
+          continue
+      fi
+      mv -- "$src" "$dst"
+  done
+  rm -- "$old" "$new"
+  lf -remote "send $id unselect"
 }}

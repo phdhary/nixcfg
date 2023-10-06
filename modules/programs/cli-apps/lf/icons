@@ -74,6 +74,7 @@ fi             # FILE
 *.hs            
 *.lhs           
 *.nix           
+*.lock          
 *.lua           
 *.java          
 *.sh            

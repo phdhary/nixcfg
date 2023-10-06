@@ -9,8 +9,8 @@ in {
   config = mkIf cfg.enable {
     programs.lf = {
       enable = true;
+      package = pkgs.unstable-fdd89.lf;
       settings = {
-        hidden = true;
         ignorecase = true;
         smartcase = true;
         incsearch = true;
@@ -28,10 +28,18 @@ in {
         source ${config.home.homeDirectory}/.config/lf/my-extra-lfrc
       '';
     };
+    home.packages = [ pkgs.chafa ];
 
     home.file = mkConfigSymlinkFromList {
       relativePath = "modules/programs/cli-apps/";
-      paths = [ "lf/my-extra-lfrc" "lf/icons" "lf/colors" ];
+      paths = [
+        "lf/icons"
+        "lf/colors"
+        "lf/my-extra-lfrc"
+        "lf/lf_kitty_clean"
+        "lf/lf_kitty_preview"
+        "lf/lf_sixel_preview"
+      ];
     };
   };
 }
