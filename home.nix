@@ -16,6 +16,7 @@ in {
         exa = enabled;
         fzf = enabled;
         git = enabled;
+        lf = enabled;
         mpv = enabled;
         ncmpcpp = enabled;
         readline = enabled;
