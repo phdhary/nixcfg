@@ -3,7 +3,6 @@
     [
       alejandra
       asciiquarium
-      cmatrix
       duf
       espeak
       fd
@@ -35,5 +34,5 @@
       unstable.yt-dlp
       wormhole-rs
       zellij
-    ] ++ [ packages.hm-cleanup packages.unimatrix ];
+    ] ++ [ packages.hm-cleanup packages.unimatrix packages.note-taker ];
 }

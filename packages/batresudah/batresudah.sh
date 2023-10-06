@@ -20,6 +20,6 @@ if [ $batteryLevel -lt $lowerThreshold ] && [ $state == "discharging" ]; then
 fi
 
 # shellcheck disable=2086,3014
-if [ $batteryLevel -gt $upperThreshold ] && [ $state == "charging" ]; then
+if [ $batteryLevel -gt $upperThreshold ] && [ $state == "charging" ] || [ $batteryLevel -gt $upperThreshold ] && [ $state == "fully-charged" ]; then
   notipai "Unplug me" $batteryLevel
 fi
