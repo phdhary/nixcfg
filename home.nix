@@ -13,7 +13,7 @@ in {
       cli-apps = {
         bat = enabled;
         btop = enabled;
-        exa = enabled;
+        eza = enabled;
         fzf = enabled;
         git = enabled;
         lf = enabled;
