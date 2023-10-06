@@ -6,7 +6,7 @@ return {
 		os.getenv("HOME") .. "/.nix-profile/share/fonts/truetype",
 	},
 	font = wezterm.font_with_fallback({
-    -- "JetBrains Mono",
+    "JetBrains Mono",
 		-- "Liga SFMono Nerd Font",
 		-- "Source Code Pro",
 		"IBM Plex Mono",

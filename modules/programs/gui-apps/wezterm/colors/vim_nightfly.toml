@@ -1,0 +1,37 @@
+[colors]
+ansi = [
+  "#1d3b53",
+  "#fc514e",
+  "#a1cd5e",
+  "#e3d18a",
+  "#82aaff",
+  "#c792ea",
+  "#7fdbca",
+  "#a1aab8",
+]
+brights = [
+  "#7c8f8f",
+  "#ff5874",
+  "#21c7a8",
+  "#ecc48d",
+  "#82aaff",
+  "#ae81ff",
+  "#7fdbca",
+  "#d6deeb",
+]
+
+background = "#011627"
+foreground = "#bdc1c6"
+
+cursor_bg = "#9ca1aa"
+cursor_fg = "#9ca1aa"
+cursor_border = "#9ca1aa"
+
+selection_fg = "#080808"
+selection_bg = "#b2ceee"
+
+scrollbar_thumb = "#1d3b53"
+split = "#1d3b53"
+
+[metadata]
+name = 'nightfly'
