@@ -21,6 +21,7 @@ in {
         ncmpcpp = enabled;
         readline = enabled;
         tmux = enabled;
+        yazi = enabled;
         zoxide = enabled;
       };
       gui-apps = {

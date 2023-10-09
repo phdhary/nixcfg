@@ -2,7 +2,6 @@
   home.packages = with pkgs;
     [
       alejandra
-      asciiquarium
       duf
       espeak
       fd
@@ -28,8 +27,6 @@
       tldr
       tokei
       trash-cli
-      # unstable.nvtop
-      # unstable.nvtop-nvidia
       unstable.yt-dlp
       wormhole-rs
       zellij
