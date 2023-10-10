@@ -61,11 +61,10 @@ in {
             };
             nativeBuildInputs = with pkgs; [ makeWrapper ];
             postInstall = ''
-              sed -i -e 's|python3 |${pkgs.python39}/bin/python3 |g' $target/tmux_window_name.tmux
               wrapProgram $target/tmux_window_name.tmux \
                 --prefix PATH : ${
                   with pkgs;
-                  lib.makeBinPath ([ python39Packages.libtmux ])
+                  lib.makeBinPath ([ python39 python39Packages.libtmux ])
                 }
             '';
 
