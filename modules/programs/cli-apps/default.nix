@@ -19,6 +19,8 @@
       nixd
       nixfmt
       nixgl.nixGLIntel
+      nixgl.nixVulkanIntel
+      hddtemp
       nyancat
       ripgrep
       sl
