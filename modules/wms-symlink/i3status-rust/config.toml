@@ -9,24 +9,40 @@ icons = "material-nf"
 [[block]]
 block = "cpu"
 interval = 1
-format = "[$icon CPU $utilization]"
-format_alt = "[$icon CPU $utilization $barchart]"
+format = "[ CPU $utilization ]"
+format_alt = "[ CPU $utilization $barchart ]"
 
 [[block]]
 block = "memory"
 interval = 1
-format = "[$icon RAM $mem_used/$mem_total]"
-format_alt = "[$icon_swap SWAP $swap_used/$swap_total]"
+format = "[ RAM $mem_used/$mem_total ]"
+format_alt = "[ SWAP $swap_used/$swap_total ]"
+
+[[block]] # sudo modprobe drivetemp
+block = "custom"
+cycle = [
+  '''echo "/dev/sdb $(cat /sys/class/hwmon/hwmon7/temp1_input | awk '{ print $1/1000 }')"''',
+  '''echo "/dev/sda $(cat /sys/class/hwmon/hwmon6/temp1_input | awk '{ print $1/1000 }')"''',
+]
+format = "[ $text°C ]"
+interval = 1
+hide_when_empty = true
+[[block.click]]
+button = "left"
+action = "cycle"
 
 [[block]]
 block = "net"
-format = "[$icon {$ssid|Wired connection}]"
-format_alt = "[$icon {$ssid|Wired connection} ↑$speed_up ↓$speed_down]"
-missing_format = "  "
+format = "[ Connected to {$ssid|Wired connection} ]"
+format_alt = "[ Connected to {$ssid|Wired connection} ↑$speed_up ↓$speed_down ]"
+missing_format = " Not Connected "
+[block.theme_overrides]
+idle_fg = "#89B4FA"
 
 [[block]]
 block = "sound"
-format = "[$icon $volume]"
+format = "[ Volume {$volume|muted} ]"
+show_volume_when_muted = false
 [[block.click]]
 button = "left"
 cmd = "pavucontrol"
@@ -34,15 +50,18 @@ cmd = "pavucontrol"
 [[block]]
 block = "backlight"
 invert_icons = false
-format = "[$icon $brightness]"
+format = "[ Brightness $brightness ]"
 
 [[block]]
 block = "battery"
-format = "[$icon $percentage $power $time]"
-full_format = "[$icon $percentage $power $time]"
-not_charging_format = "[$icon $percentage $power $time]"
+format = "[ Battery at $percentage ] [ using $power ] [ $time until drained ]"
+full_format = "[ Battery full at $percentage ]"
+charging_format = "[ Battery charging at $percentage ] [ using $power ] [ $time until drained ]"
+not_charging_format = "[ Battery discharging at $percentage ] [ using $power ] [ $time until drained ]"
+missing_format = "[ No battery found ]"
+empty_format = "[ Battery empty ]"
 
 [[block]]
 block = "time"
 interval = 5
-format = "[ $timestamp.datetime(f:'%a %d') · $icon $timestamp.datetime(f:'%R')]"
+format = "[ $timestamp.datetime(f:'%a %d') · $timestamp.datetime(f:'%R') ]"
