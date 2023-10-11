@@ -38,5 +38,6 @@ in {
     };
     shells = enabled;
     wms-symlink = enabled;
+    hyprland = enabled;
   };
 }

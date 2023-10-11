@@ -26,6 +26,7 @@
       url = "github:nix-community/flake-firefox-nightly";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    hyprland.url = "github:hyprwm/Hyprland";
     # xremap-flake.url = "github:xremap/nix-flake";
   };
 
@@ -43,7 +44,8 @@
       homeConfigurations."${user}" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         extraSpecialArgs = { inherit inputs packages user namespace; };
-        modules = import ./modules pkgs;
+        modules = import ./modules pkgs
+          ++ [ inputs.hyprland.homeManagerModules.default ];
       };
       packages.${system} = import ./packages pkgs;
       formatter.${system} = pkgs.nixfmt;
