@@ -33,5 +33,28 @@
       unstable.yt-dlp
       wormhole-rs
       zellij
+      # lsp
+      nil
+      gopls
+      taplo
+      pyright
+      textlab
+      marksman
+      efm-langserver
+      unstable.emmet-ls
+      lua-language-server
+      ansible-language-server
+      nodePackages.intelephense
+      nodePackages.vim-language-server
+      nodePackages.vue-language-server
+      nodePackages.bash-language-server
+      nodePackages.yaml-language-server
+      nodePackages.svelte-language-server
+      nodePackages."@astrojs/language-server"
+      nodePackages."@tailwindcss/language-server"
+      nodePackages.vscode-css-languageserver-bin
+      nodePackages.vscode-html-languageserver-bin
+      nodePackages.vscode-json-languageserver-bin
+      nodePackages.dockerfile-language-server-nodejs
     ] ++ (with packages; [ hm-cleanup unimatrix note-taker ]);
 }
