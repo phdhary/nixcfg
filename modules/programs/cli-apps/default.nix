@@ -23,6 +23,7 @@
       hddtemp
       nyancat
       ripgrep
+      arandr
       sl
       speedtest-cli
       timer

@@ -11,33 +11,25 @@ block = "cpu"
 interval = 1
 format = "[ CPU $utilization ]"
 format_alt = "[ CPU $utilization $barchart ]"
+[block.theme_overrides]
+idle_fg = "#f5e0dc"
 
 [[block]]
 block = "memory"
 interval = 1
 format = "[ RAM $mem_used/$mem_total ]"
 format_alt = "[ SWAP $swap_used/$swap_total ]"
-
-[[block]] # sudo modprobe drivetemp
-block = "custom"
-cycle = [
-  '''echo "/dev/sdb $(cat /sys/class/hwmon/hwmon7/temp1_input | awk '{ print $1/1000 }')"''',
-  '''echo "/dev/sda $(cat /sys/class/hwmon/hwmon6/temp1_input | awk '{ print $1/1000 }')"''',
-]
-format = "[ $text°C ]"
-interval = 1
-hide_when_empty = true
-[[block.click]]
-button = "left"
-action = "cycle"
+[block.theme_overrides]
+idle_fg = "#f2cdcd"
 
 [[block]]
 block = "net"
 format = "[ Connected to {$ssid|Wired connection} ]"
 format_alt = "[ Connected to {$ssid|Wired connection} ↑$speed_up ↓$speed_down ]"
-missing_format = " Not Connected "
+inactive_format = "[ Internet Disconnected ]"
+missing_format = "[ Missing connection ]"
 [block.theme_overrides]
-idle_fg = "#89B4FA"
+idle_fg = "#f5c2e7"
 
 [[block]]
 block = "sound"
@@ -46,11 +38,15 @@ show_volume_when_muted = false
 [[block.click]]
 button = "left"
 cmd = "pavucontrol"
+[block.theme_overrides]
+idle_fg = "#eba0ac"
 
 [[block]]
 block = "backlight"
 invert_icons = false
 format = "[ Brightness $brightness ]"
+[block.theme_overrides]
+idle_fg = "#fab387"
 
 [[block]]
 block = "battery"
@@ -65,3 +61,5 @@ empty_format = "[ Battery empty ]"
 block = "time"
 interval = 5
 format = "[ $timestamp.datetime(f:'%a %d') · $timestamp.datetime(f:'%R') ]"
+[block.theme_overrides]
+idle_fg = "#b4befe"

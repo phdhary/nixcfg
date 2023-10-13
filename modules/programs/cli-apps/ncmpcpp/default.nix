@@ -183,7 +183,7 @@ in {
       name = "ncmpcpp";
       comment = "ncmpcpp cli app";
       icon = "io.bassi.Amberol";
-      exec = "launch-ncmpcpp";
+      exec = "ncmpcpp";
       categories = [ "AudioVideo" "Music" "Audio" "ConsoleOnly" ];
       terminal = true;
     };

@@ -33,6 +33,6 @@ in {
   # inherit pkgs;
   default = pkgs.mkShell {
     name = "playground";
-    packages = with pkgs; [];
+    packages = with pkgs; [prefetch-npm-deps nodejs];
   };
 }

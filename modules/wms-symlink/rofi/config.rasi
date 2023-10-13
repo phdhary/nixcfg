@@ -3,7 +3,7 @@ configuration{
     font: "JetBrainsMono Nerd Font 14";
     show-icons: true;
     icon-theme: "Oranchelo";
-    terminal: "kitty";
+    terminal: "wrapped_wezterm";
     drun-display-format: "{icon} {name}";
     location: 0;
     disable-history: false;

@@ -9,7 +9,7 @@ local copy_mode_extra = {
 	mods = "NONE",
 	action = act.Multiple({
 		act.ClearSelection,
-		act.CopyMode "ClearSelectionMode" ,
+		act.CopyMode("ClearSelectionMode"),
 	}),
 	-- action = act.DisableDefaultAssignment,
 }
@@ -40,6 +40,13 @@ return {
 			key = "z",
 			mods = "ALT",
 			action = wezterm.action.DisableDefaultAssignment,
+		},
+		{
+			key = "f",
+			mods = "SHIFT|SUPER",
+			action = wezterm.action.SpawnCommandInNewWindow({
+				args = { "yz" },
+			}),
 		},
 	},
 	key_tables = { copy_mode = copy_mode },
