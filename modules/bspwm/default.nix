@@ -3,17 +3,16 @@ let cfg = config.${namespace}.bspwm;
 in {
   options.${namespace}.bspwm = { enable = lib.mkEnableOption "bspwm"; };
   config = lib.mkIf cfg.enable {
-    # home.file = pkgs.lib.mkConfigSymlinkFromList {
-    #   relativePath = "modules/bspwm";
-    #   paths = [ "sxhkd/sxhkdrc" "bspwm/bspwmrc" ];
-    # };
+    home.packages = [ pkgs.polybarFull ];
     xsession.enable = true;
     xsession.windowManager.bspwm = {
       enable = true;
       # alwaysResetDesktops
       # extraConfig
       # extraConfigEarly
-      # monitors
+      monitors = {
+        eDP-1 = [ "I" "II" "III" "IV" "V" "VI" "VII" "VIII" "IX" "X" ];
+      };
       # package
       rules = {
         Gimp = {
@@ -21,7 +20,7 @@ in {
           state = "floating";
           follow = true;
         };
-        Chromium.desktop = "^2";
+        firefox-nightly.state = "tiled";
         ncmpcpp.state = "floating";
         Screenkey.manage = false;
       };
@@ -32,7 +31,18 @@ in {
         borderless_monocle = true;
         gapless_monocle = true;
       };
-      # startupPrograms
+      startupPrograms = [
+        "sxhkd"
+        "picom --config $HOME/.config/i3/picom.conf"
+        "nm-applet --indicator"
+        ''
+          feh --bg-fill $(gsettings get org.gnome.desktop.background picture-uri | sed 's/file:\/\///' | tr -d "'")''
+        "polybar"
+        # "default_wall"
+        # "flameshot"
+        # "dunst"
+        # "sleep 2s;polybar -q main"
+      ];
     };
     services.sxhkd = {
       enable = true;
@@ -41,16 +51,27 @@ in {
       # extraOptions
       # extraPath
       keybindings = {
+        "XF86AudioLowerVolume" = "volumectl -u down";
+        "XF86AudioRaiseVolume" = "volumectl -u up";
+        "XF86AudioMute" = "volumectl toggle-mute";
+        "XF86AudioMicMute" = "volumectl -m toggle-mute";
+        "XF86MonBrightnessUp" =
+          ''lightctl = "$(light -G | awk '{ print int(($1 + .72) * 1.4) }')"'';
+        "XF86MonBrightnessDown" =
+          ''lightctl = "$(light -G | awk '{ print int($1 / 1.4) }')"'';
         "super + Return" = "wrapped_wezterm";
         "super + d" = "rofi -theme dmenu -show";
         "super + Escape" = "pkill -USR1 -x sxhkd";
         "super + b" = "firefox-nightly";
         "super + u" = ''wrapped_wezterm --class="ncmpcpp" ncmpcpp'';
         "super + f" = "wrapped_wezterm yazi";
+        "super + shift + e" =
+          "rofi -show power-menu -modi power-menu:rofi-power-menu";
         # quit/restart bspwm
         "super + alt + {q,r}" = "bspc {quit,wm -r}";
         # close and kill
-        "super + {_,shift + }w" = "bspc node -{c,k}";
+        # "super + {_,shift + }w" = "bspc node -{c,k}";
+        "super + q" = "bspc node -c";
         # alternate between the tiled and monocle layout
         "super + m" = "bspc desktop -l next";
         # send the newest marked node to the newest preselected node

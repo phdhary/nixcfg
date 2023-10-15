@@ -15,7 +15,7 @@ in {
         "i3status-rust/config.toml"
         "i3status-rust/themes/roso.toml"
         "pop-shell/config.json"
-        "rofi/config.rasi"
+        # "rofi/config.rasi"
         "sway/config"
         "swaylock/config"
         "swaynag/config"
