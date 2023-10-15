@@ -54,7 +54,8 @@ deleted = "​"
 stashed = "≡"
 
 [hostname]
-format = "[$ssh_symbol$hostname]($style) in "
+format = "[$hostname]($style) in " # no symbol
+# format = "[$ssh_symbol$hostname]($style) in "
 
 [nix_shell]
 format = 'with [$symbol$state( \($name\))]($style) '

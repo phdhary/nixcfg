@@ -49,7 +49,7 @@ in {
       "......" = "cd ../../../../..";
       dlmp3pl = ''
         yt-dlp -f bestaudio -x --audio-format mp3 --audio-quality 320k --embed-thumbnail --add-metadata --postprocessor-args "-id3v2_version 3"'';
-      hm = "home-manager";
+      hm = "home-manager --flake ${config.${namespace}.additionalUserInfo.hmConfigPath}";
       l = "ls -la";
       lzd = "lazydocker";
       nimv = "nvim";

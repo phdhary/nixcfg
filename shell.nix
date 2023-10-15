@@ -33,6 +33,6 @@ in {
   # inherit pkgs;
   default = pkgs.mkShell {
     name = "playground";
-    packages = with pkgs; [prefetch-npm-deps nodejs];
+    packages = with pkgs; [rofi rofi-power-menu];
   };
 }

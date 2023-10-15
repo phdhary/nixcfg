@@ -7,13 +7,13 @@
     easyeffects
     eyedropper
     fragments
-    gnome-extension-manager
     gnome-solanum
     insomnia
     mousai
     screenkey
     textpieces
     unstable.obsidian
+    unstable-fdd89.gnome-extension-manager
     wireshark
   ];
 }

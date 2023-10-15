@@ -33,28 +33,27 @@
       unstable.yt-dlp
       wormhole-rs
       zellij
-      # lsp
-      nil
-      gopls
-      taplo
-      pyright
-      textlab
-      marksman
-      efm-langserver
-      unstable.emmet-ls
-      lua-language-server
-      ansible-language-server
-      nodePackages.intelephense
-      nodePackages.vim-language-server
-      nodePackages.vue-language-server
-      nodePackages.bash-language-server
-      nodePackages.yaml-language-server
-      nodePackages.svelte-language-server
-      nodePackages."@astrojs/language-server"
-      nodePackages."@tailwindcss/language-server"
-      nodePackages.vscode-css-languageserver-bin
-      nodePackages.vscode-html-languageserver-bin
-      nodePackages.vscode-json-languageserver-bin
-      nodePackages.dockerfile-language-server-nodejs
+      # gnome
+      adw-gtk3
+      gnome-browser-connector
+      gnome44Extensions."advanced-alt-tab@G-dH.github.com"
+      gnome44Extensions."appindicatorsupport@rgcjonas.gmail.com"
+      gnome44Extensions."flypie@schneegans.github.com"
+      gnome44Extensions."blur-my-shell@aunetx"
+      gnome44Extensions."caffeine@patapon.info"
+      gnome44Extensions."forge@jmmaranan.com"
+      gnome44Extensions."runcat@kolesnikov.se"
+      gnome44Extensions."legacyschemeautoswitcher@joshimukul29.gmail.com"
+      gnome44Extensions."mousefollowsfocus@matthes.biz"
+      gnome44Extensions."pano@elhan.io"
+      gnome44Extensions."space-bar@luchrioh"
+      gnome44Extensions."tiling-assistant@leleat-on-github"
+      gnome44Extensions."unite@hardpixel.eu"
+      gnome44Extensions."just-perfection-desktop@just-perfection"
+      gnome44Extensions."arcmenu@arcmenu.com"
+      unstable.gnome44Extensions."sane-airplane-mode@kippi"
+      unstable.gnome44Extensions."search-light@icedman.github.com"
+      # unstable-fdd89.gnome44Extensions."gsconnect@andyholmes.github.io" # doesn't work
     ] ++ (with packages; [ hm-cleanup unimatrix note-taker ]);
+  # dconf.settings."org/gnome/shell".enabledExtensions = { };
 }

@@ -23,12 +23,14 @@ in {
         tmux = enabled;
         yazi = enabled;
         zoxide = enabled;
+        neovim-fhs = enabled;
       };
       gui-apps = {
         firefox = disabled;
         kitty = enabled;
         vscode = enabled;
         wezterm = enabled;
+        rofi = enabled;
       };
     };
     services = { batresudah = enabled; };

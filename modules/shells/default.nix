@@ -39,7 +39,7 @@ in {
         path = "${config.xdg.configHome}/zsh/.zsh_history";
       };
       initExtraBeforeCompInit = ''
-        fpath=(~/.zsh/completion $fpath)
+        fpath=(~/.config/zsh/completion $fpath)
       '';
       initExtra = ''
         zstyle ':completion:*' menu select
