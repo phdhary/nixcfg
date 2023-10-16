@@ -1,4 +1,5 @@
 #===Startup App===
+exec --no-startup-id $HOME/.config/polybar/launch.sh
 exec --no-startup-id avizo-service
 exec --no-startup-id nm-applet --indicator
 exec --no-startup-id swaybg -m fill -i $(gsettings get org.gnome.desktop.background picture-uri | sed 's/file:\/\///' | tr -d "'")

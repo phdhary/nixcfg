@@ -14,14 +14,12 @@ in {
         modi = "drun,run,window";
         drun-display-format = "{icon} {name}";
         show-icons = true;
-
       };
     };
     home.packages = with pkgs; [
       rofi-power-menu
       rofi-bluetooth
       rofi-pulse-select
-      rofi-calc
     ];
   };
 }

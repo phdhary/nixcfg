@@ -50,10 +50,10 @@ idle_fg = "#fab387"
 
 [[block]]
 block = "battery"
-format = "[ Battery at $percentage ] [ using $power ] [ $time until drained ]"
+format = "[ Battery at $percentage ] [ using $power ] [ $time battery time ]"
 full_format = "[ Battery full at $percentage ]"
-charging_format = "[ Battery charging at $percentage ] [ using $power ] [ $time until drained ]"
-not_charging_format = "[ Battery discharging at $percentage ] [ using $power ] [ $time until drained ]"
+charging_format = "[ Battery charging at $percentage ] [ using $power ] [ $time battery time ]"
+not_charging_format = "[ Battery discharging at $percentage ] [ using $power ] [ $time battery time ]"
 missing_format = "[ No battery found ]"
 empty_format = "[ Battery empty ]"
 

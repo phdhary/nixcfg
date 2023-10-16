@@ -15,5 +15,6 @@
     unstable.obsidian
     unstable-fdd89.gnome-extension-manager
     wireshark
+    nitrogen
   ];
 }

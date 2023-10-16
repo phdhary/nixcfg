@@ -3,9 +3,21 @@ let
   cfg = config.${namespace}.programs.cli-apps.neovim-fhs;
   neovim-fhs-package = pkgs.buildFHSUserEnv {
     name = "nvim";
-    targetPkgs = pkgs: (with pkgs; [ neovim zsh ] ++ lsps);
+    targetPkgs = pkgs: (essentials ++ lsps ++ formatter);
     runScript = "/usr/bin/nvim";
   };
+  essentials = with pkgs; [
+    neovim
+    gcc
+    zsh
+    xclip
+    wl-clipboard
+    curl
+    # nodejs
+    # nodePackages.neovim
+    # perl
+    # unstable.perl538Packages.NeovimExt
+  ];
   lsps = with pkgs; [
     ansible-language-server
     efm-langserver
@@ -29,6 +41,16 @@ let
     taplo
     texlab
     unstable.emmet-ls
+  ];
+  formatter = with pkgs; [
+    beautysh
+    black
+    nodePackages.fixjson
+    shellharden
+    unstable.eslint_d
+    unstable.prettierd
+    unstable.stylelint
+    unstable.stylua
   ];
 in {
   options.${namespace}.programs.cli-apps.neovim-fhs = {

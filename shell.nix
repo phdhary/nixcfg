@@ -1,4 +1,3 @@
-{ ... }:
 let
   lock-file = builtins.readFile ./flake.lock;
   flake-lock = builtins.fromJSON lock-file;
@@ -33,6 +32,6 @@ in {
   # inherit pkgs;
   default = pkgs.mkShell {
     name = "playground";
-    packages = with pkgs; [rofi rofi-power-menu];
+    packages = with pkgs; [xorg.xev];
   };
 }

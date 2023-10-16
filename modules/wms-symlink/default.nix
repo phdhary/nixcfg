@@ -5,10 +5,13 @@ in {
     enable = lib.mkEnableOption "window managers symlink";
   };
   config = lib.mkIf cfg.enable {
+    # home.packages = with pkgs; [ betterlockscreen ];
     home.file = pkgs.lib.mkConfigSymlinkFromList {
       relativePath = "modules/wms-symlink";
       paths = [
         "avizo/config.ini"
+        "polybar/config.ini"
+        "polybar/launch.sh"
         "i3/common.conf"
         "i3/config"
         "i3/picom.conf"
