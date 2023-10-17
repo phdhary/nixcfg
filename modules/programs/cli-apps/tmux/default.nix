@@ -67,7 +67,6 @@ in {
                   lib.makeBinPath ([ python39 python39Packages.libtmux ])
                 }
             '';
-
           };
           extraConfig = ''set -g @tmux_window_name_use_tilde "True"'';
         }

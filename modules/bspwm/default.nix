@@ -9,7 +9,7 @@ in {
     home.packages = with pkgs; [ polybarFull bspwm sxhkd ];
     home.file = mkConfigSymlinkFromList {
       relativePath = "modules/bspwm";
-      paths = [ "bspwm/bspwmrc" "sxhkd/sxhkdrc" ];
+      paths = [ "bspwm/" "sxhkd/" ];
     };
   };
 }

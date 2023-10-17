@@ -4,7 +4,7 @@ let
   cfg = config.${namespace}.fonts;
 in {
   options.${namespace}.fonts = {
-    enable = mkEnableOption "kitty terminal emulator";
+    enable = mkEnableOption "fonts";
   };
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
@@ -12,6 +12,8 @@ in {
       ibm-plex
       jetbrains-mono
       source-code-pro
+      inter
+      # noto-fonts-color-emoji
       (unstable.nerdfonts.override { fonts = [ "NerdFontsSymbolsOnly" ]; })
     ];
     fonts.fontconfig.enable = true;
