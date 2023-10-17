@@ -1,63 +1,56 @@
 { config, lib, namespace, pkgs, ... }:
 let
-  cfg = config.${namespace}.programs.cli-apps.neovim-fhs;
-  neovim-fhs-package = pkgs.buildFHSUserEnv {
+  cfg = config.${namespace}.programs.cli-apps.neovim;
+  custom-neovim = pkgs.symlinkJoin {
     name = "nvim";
-    targetPkgs = pkgs: (essentials ++ lsps ++ formatter);
-    runScript = "/usr/bin/nvim";
+    paths = [ pkgs.neovim ];
+    buildInputs = [ pkgs.makeWrapper ];
+    postBuild = ''
+      wrapProgram $out/bin/nvim \
+      --prefix PATH : ${pkgs.lib.makeBinPath (lsps ++ formatter ++ linter)}
+    '';
   };
-  essentials = with pkgs; [
-    neovim
-    gcc
-    zsh
-    xclip
-    wl-clipboard
-    curl
-    # nodejs
-    # nodePackages.neovim
-    # perl
-    # unstable.perl538Packages.NeovimExt
-  ];
-  lsps = with pkgs; [
-    ansible-language-server
-    efm-langserver
-    gopls
-    lua-language-server
-    marksman
-    nil
-    nodePackages."@astrojs/language-server"
-    nodePackages."@tailwindcss/language-server"
-    nodePackages.bash-language-server
-    nodePackages.dockerfile-language-server-nodejs
-    nodePackages.intelephense
-    nodePackages.svelte-language-server
-    nodePackages.vim-language-server
-    nodePackages.vscode-css-languageserver-bin
-    nodePackages.vscode-html-languageserver-bin
-    nodePackages.vscode-json-languageserver-bin
-    nodePackages.vue-language-server
-    nodePackages.yaml-language-server
-    pyright
-    taplo
-    texlab
-    unstable.emmet-ls
-  ];
+  lsps = with pkgs;
+    [
+      ansible-language-server
+      efm-langserver
+      gopls
+      lua-language-server
+      marksman
+      nil
+      pyright
+      taplo
+      texlab
+      unstable.emmet-ls
+      nodePackages."@astrojs/language-server"
+      nodePackages."@tailwindcss/language-server"
+    ] ++ (with pkgs.nodePackages; [
+      bash-language-server
+      dockerfile-language-server-nodejs
+      intelephense
+      svelte-language-server
+      vim-language-server
+      vscode-css-languageserver-bin
+      vscode-html-languageserver-bin
+      vscode-json-languageserver-bin
+      vue-language-server
+      yaml-language-server
+    ]);
   formatter = with pkgs; [
     beautysh
     black
     nodePackages.fixjson
     shellharden
-    unstable.eslint_d
     unstable.prettierd
-    unstable.stylelint
     unstable.stylua
   ];
+  linter = with pkgs; [ unstable.eslint_d unstable.stylelint ];
 in {
-  options.${namespace}.programs.cli-apps.neovim-fhs = {
-    enable = lib.mkEnableOption "neovim-fhs";
+  options.${namespace}.programs.cli-apps.neovim = {
+    enable = lib.mkEnableOption "neovim";
     package = lib.mkOption {
       type = lib.types.package;
-      default = neovim-fhs-package;
+      default = custom-neovim;
     };
   };
 

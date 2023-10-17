@@ -23,7 +23,7 @@ in {
         tmux = enabled;
         yazi = enabled;
         zoxide = enabled;
-        neovim-fhs = enabled;
+        neovim = enabled;
       };
       gui-apps = {
         firefox = disabled;
