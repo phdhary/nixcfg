@@ -24,7 +24,7 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 bspc rule -a sun-awt-X11-XDialogPeer state=floating
 
 kill $(pgrep -x sxhkd); sxhkd &
-kill $(pgrep -x picom); picom --config $HOME/.config/i3/picom.conf &
+kill $(pgrep -x picom); picom &
 # kill $(pgrep -x .avizo-service-); avizo-service &
 pidof nm-applet || nm-applet --indicator &
 nitrogen --restore

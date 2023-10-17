@@ -1,6 +1,6 @@
 #===Startup App===
 # exec --no-startup-id feh --bg-fill $(gsettings get org.gnome.desktop.background picture-uri | sed 's/file:\/\///' | tr -d "'")
-exec --no-startup-id picom --config $HOME/.config/i3/picom.conf
+exec --no-startup-id picom
 exec --no-startup-id dex-autostart --autostart --environment i3
 exec --no-startup-id avizo-service
 exec --no-startup-id nm-applet --indicator
