@@ -136,3 +136,8 @@ hm-rollback() {
     cd;
   fi
 }
+
+which-cd() {
+  cd $(dirname $(which "$1"))
+  ls -la | grep "$1"
+}

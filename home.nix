@@ -19,11 +19,11 @@ in {
         lf = enabled;
         mpv = enabled;
         ncmpcpp = enabled;
+        neovim = enabled;
         readline = enabled;
         tmux = enabled;
         yazi = enabled;
         zoxide = enabled;
-        neovim = enabled;
       };
       gui-apps = {
         firefox = disabled;
@@ -39,7 +39,6 @@ in {
       enableDnfAliases = true;
     };
     shells = enabled;
-    wms-symlink = enabled;
-    bspwm = enabled;
+    wm-things = enabled;
   };
 }

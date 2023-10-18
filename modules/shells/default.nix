@@ -1,7 +1,7 @@
 { config, lib, namespace, pkgs, ... }:
 let
   inherit (lib) mkEnableOption mkIf mkMerge;
-  inherit (pkgs.lib) mkSymlinkFromList mkConfigSymlinkFromList;
+  inherit (pkgs.lib) mkConfigSymlinkFromList;
   inherit (config.home) homeDirectory;
   cfg = config.${namespace}.shells;
 in {
@@ -58,7 +58,7 @@ in {
       envExtra = ''
         . "$HOME/.cargo/env"
         . "$HOME/.profile"
-        . "$HOME/.some-function"
+        . "$HOME/.config/zsh/.some-function"
       '';
     };
 
@@ -66,13 +66,9 @@ in {
 
     home.file = let relativePath = "modules/shells";
     in mkMerge [
-      (mkSymlinkFromList {
-        inherit relativePath;
-        paths = [ ".some-function" ];
-      })
       (mkConfigSymlinkFromList {
         inherit relativePath;
-        paths = [ "starship.toml" ];
+        paths = [ "starship.toml" "zsh/.some-function" ];
       })
     ];
 

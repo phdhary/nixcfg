@@ -16,5 +16,6 @@
     unstable-fdd89.gnome-extension-manager
     wireshark
     nitrogen
+    smplayer
   ];
 }
