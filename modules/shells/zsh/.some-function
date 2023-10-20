@@ -139,5 +139,5 @@ hm-rollback() {
 
 which-cd() {
   cd $(dirname $(which "$1"))
-  ls -la | grep "$1"
+  eza -la --colour=always | grep "$1"
 }

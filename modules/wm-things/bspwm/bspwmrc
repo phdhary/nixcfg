@@ -3,6 +3,22 @@
 # format with easy align: gaip1 gaip2 gaip3 gaip4 gaip5 gaip6 gaip7 gaip8 gaip9 
 
 # bspc monitor 'eDP-1' -d '1' '2' '3' '4' '5' '6' '7' '8' '9' '10'
+# bspc monitor 'HDMI-2' -d '1' '2' '3' '4' '5' '6' '7' '8' '9' '10'
+
+INTERNAL_MONITOR="eDP-1"
+EXTERNAL_MONITOR="HDMI-2"
+
+# on first load setup default workspaces
+if [[ $(xrandr -q | grep "${EXTERNAL_MONITOR} connected") ]]; then
+  bspc monitor "$EXTERNAL_MONITOR" -d 1 2 3 4 5
+  bspc monitor "$INTERNAL_MONITOR" -d 6 7 8 9 10
+  bspc wm -O "$EXTERNAL_MONITOR" "$INTERNAL_MONITOR"
+else
+  bspc monitor "$INTERNAL_MONITOR" -d 1 2 3 4 5 6 7 8 9 10
+fi
+
+~/.config/bspwm/monitor.sh
+~/.config/polybar/launch.sh
 
 bspc config 'border_width'            '2'
 bspc config 'borderless_monocle'      'on'
@@ -36,7 +52,7 @@ _kill_and_run() {
   kill "$(ps ax | grep "$1" | grep -v grep | awk '{print $1}')"; "$@" &
 }
 
-_kill_and_run sxhkd
+_kill_and_run sxhkd -c ~/.config/sxhkd/sxhkdrc.bspwm ~/.config/sxhkd/sxhkdrc.common
 _kill_and_run picom
 _kill_and_run caffeine 
 _kill_and_run dunst
@@ -46,8 +62,4 @@ _run_once nm-applet --indicator
 nitrogen --restore
 xset dpms 600 600 0
 xob_server
-
-"$HOME"/.config/polybar/launch.sh
-"$HOME"/.config/bspwm/monitor.sh
-
-
+rfkill block bluetooth

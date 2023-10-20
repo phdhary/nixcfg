@@ -13,12 +13,12 @@ case "$window_class" in
     echo "state=floating";
     ;;
   firefox-nightly) 
-    echo "desktop=^1";
+    # echo "desktop=^1";
     echo "state=tiled";
     echo "follow=off";
     ;;
   btop) 
-    echo "desktop=^10";
+    # echo "desktop=^10";
     echo "state=tiled";
     echo "follow=on";
     ;; 

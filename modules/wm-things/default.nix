@@ -10,12 +10,13 @@ in {
         # betterlockscreen
         avizo
         bspwm
+        bsp-layout
         eww
         dunst
         picom
         polybarFull
+        # pywal
         sxhkd
-        # xob
         xtitle
       ] ++ (with packages; [ xobVolume xobBrightness xobServer ]);
     home.file = pkgs.lib.mkConfigSymlinkFromList {

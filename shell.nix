@@ -32,6 +32,6 @@ in {
   # inherit pkgs;
   default = pkgs.mkShell {
     name = "playground";
-    packages = with pkgs; [ xorg.xev xob brightnessctl ];
+    packages = with pkgs; [ xorg.xev ];
   };
 }

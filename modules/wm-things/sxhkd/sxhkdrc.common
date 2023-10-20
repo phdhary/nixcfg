@@ -1,0 +1,55 @@
+#!/bin/bash
+
+# make sxhkd reload its configuration files:
+super + Escape
+	pkill -USR1 -x sxhkd
+
+# terminal emulator
+super + Return
+	wrapped_wezterm
+
+# program launcher 
+super + d
+  rofi -theme dmenu -show
+
+# browser
+# super + b
+#   firefox-nightly
+
+# file manager
+super + f
+  wrapped_wezterm yazi
+
+# power menu
+super + shift + e
+  rofi -show power-menu -modi power-menu:rofi-power-menu -theme dmenu
+
+# open something
+super + space;{t,m,b}
+  {wrapped_wezterm --class=btop btop,wrapped_wezterm --class=ncmpcpp ncmpcpp,firefox-nightly}
+
+# function keys {{{
+
+XF86Audio{Lower,Raise}Volume
+  xob_volume {down,up}
+
+XF86Audio{_,Mic}Mute
+  {xob_volume mute,volumectl -m toggle-mute}
+
+XF86MonBrightness{Down,Up}
+  xob_brightness {down,up}
+
+XF86PowerOff   
+  rofi -show power-menu -modi power-menu:rofi-power-menu -theme dmenu
+
+XF86Calculator 
+  gnome-calculator
+
+@XF86RFKill
+  rfkill block bluetooth
+
+# rfkill {block,unblock} bluetooth
+
+# }}}
+
+# vim: foldmethod=marker foldlevel=0

@@ -1,91 +1,26 @@
 #!/bin/bash
 
-# wm independent hotkeys {{{
-
-# make sxhkd reload its configuration files:
-super + Escape
-	pkill -USR1 -x sxhkd
-
-# terminal emulator
-super + Return
-	wrapped_wezterm
-
-# program launcher 
-super + d
-  rofi -theme dmenu -show
-
-# browser
-# super + b
-#   firefox-nightly
-
-# file manager
-super + f
-  wrapped_wezterm yazi
-
-# power menu
-super + shift + e
-  rofi -show power-menu -modi power-menu:rofi-power-menu -theme dmenu
-
-# open something
-super + space;{t,m,b}
-  {wrapped_wezterm --class=btop btop,wrapped_wezterm --class=ncmpcpp ncmpcpp,firefox-nightly}
-# }}}
-
-# function keys {{{
-
-XF86Audio{Lower,Raise}Volume
-  xob_volume {down,up}
-
-XF86Audio{_,Mic}Mute
-  {xob_volume mute,volumectl -m toggle-mute}
-
-XF86MonBrightness{Down,Up}
-  xob_brightness {down,up}
-
-XF86PowerOff   
-  rofi -show power-menu -modi power-menu:rofi-power-menu -theme dmenu
-
-XF86Calculator 
-  gnome-calculator
-
-# }}}
-
-# bspwm hotkeys {{{
-
 # restart bspwm
 super + alt + r
 	bspc wm -r
-	# bspc {quit,wm -r}
 
 # close
 super + q
   bspc node -c
 
-# alternate between the tiled and monocle layout
-super + m
-	bspc desktop -l next
-
-# send the newest marked node to the newest preselected node
-# super + y
-# 	bspc node newest.marked.local -n newest.!automatic.local
-
-# swap the current node and the biggest window
-# super + g
-# 	bspc node -s biggest.window
-
 # toggle-gap
 super + g
 	bspc config window_gap {0,12}
 
-# }}}
-
 # state/flags {{{
 
 # set the window state
-super + s; {t,p,space,f}
-	bspc node -t {tiled,\~pseudo_tiled,\~floating,\~fullscreen}
-# super + {t,shift + t,s,f}
-# 	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+super + {t, p ,shift + space }
+	bspc node -t {tiled, \~pseudo_tiled, \~floating}
+
+# monocle and fullscreen
+super + {_,shift + } m
+  {bspc desktop -l next,bspc node -t \~fullscreen}
 
 # set the node flags
 # super + ctrl + {m,x,y,z}
@@ -110,9 +45,9 @@ super + {_,shift + }{h,j,k,l}
 super + {_,shift + }c
 	bspc node -f {next,prev}.local.!hidden.window
 
-# focus the next/previous desktop in the current monitor
-super + bracket{left,right}
-	bspc desktop -f {prev,next}.local
+# focus or send to the next/previous desktop in the current monitor
+super + {_,shift+}bracket{left,right}
+	bspc {desktop -f,node -d} {prev,next}.local --follow
 
 # focus the last node/desktop
 super + {grave,Tab}
@@ -126,7 +61,10 @@ super + {grave,Tab}
 
 # focus or send to the given desktop
 super + {_,shift + }{1-9,0}
-	bspc {desktop -f,node -d} '^{1-9,10}'
+	bspc {desktop -f,node -d} '^{1-9,10}' --follow
+
+super + w; {1-9,0}
+	bspc node -d '^{1-9,10}' 
 
 # }}}
 
@@ -139,6 +77,11 @@ super + ctrl + {h,j,k,l}
 # preselect the ratio
 super + ctrl + {1-9}
 	bspc node -o 0.{1-9}
+
+super + ctrl + y
+	~/.config/bspwm/bspc-presel.sh increase
+super + ctrl + o
+	~/.config/bspwm/bspc-presel.sh decrease
 
 # cancel the preselection for the focused node
 # super + ctrl + space
@@ -161,17 +104,6 @@ super + alt + {h,j,k,l}
 super + alt + shift + {h,j,k,l}
   bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
 
-# # resize windows w
-# super + alt + {h,j,k,l}
-#     {bspc node @parent/second -z left -20 0; \
-#     bspc node @parent/first -z right -20 0, \
-#     bspc node @parent/second -z top 0 +20; \
-#     bspc node @parent/first -z bottom 0 +20, \
-#     bspc node @parent/first -z bottom 0 -20; \
-#     bspc node @parent/second -z top 0 -20, \
-#     bspc node @parent/first -z right +20 0; \
-#     bspc node @parent/second -z left +20 0}
-
 # move a floating window
 super + {Left,Down,Up,Right}
   bspc node -v {-20 0,0 20,0 -20,20 0}
@@ -191,6 +123,16 @@ super + b
 #
 # super + r
 #   bspc node $(bspc query -N -n focused) -n $(bspc query -N -n .leaf.\!window -d)
+
+# }}}
+
+# bsp-layout {{{
+
+# super + o; {m,w,t}
+#   bsp-layout set {tall,wide,tiled}
+#
+# super + o; r
+#   bsp-layout remove
 
 # }}}
 

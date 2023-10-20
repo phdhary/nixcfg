@@ -6,8 +6,21 @@ polybar-msg cmd quit
 # Otherwise you can use the nuclear option:
 # killall -q polybar
 
-# Launch bar1 and bar2
-echo "---" | tee -a /tmp/polybar_topbar.log
-polybar topbar 2>&1 | tee -a /tmp/polybar_topbar.log & disown
+declare INTERNAL_MONITOR
+declare EXTERNAL_MONITOR
 
-echo "Bars launched..."
+if [ "$(pidof bspwm)" != "" ]; then
+  INTERNAL_MONITOR="eDP-1_top_bspwm"
+  EXTERNAL_MONITOR="HDMI-2_top_bspwm"
+elif [ "$(pidof i3)" != "" ]; then
+  INTERNAL_MONITOR="eDP-1_top_i3"
+  EXTERNAL_MONITOR="HDMI-2_top_i3"
+fi
+
+echo "---" | tee -a /tmp/polybar_"$INTERNAL_MONITOR".log
+polybar "$INTERNAL_MONITOR" 2>&1 | tee -a /tmp/polybar_"$INTERNAL_MONITOR".log & disown
+
+if [[ $(xrandr -q | grep "HDMI-2 connected") ]]; then
+  echo "---" | tee -a /tmp/polybar_"$EXTERNAL_MONITOR".log
+  polybar "$EXTERNAL_MONITOR" 2>&1 | tee -a /tmp/polybar_"$EXTERNAL_MONITOR".log & disown
+fi
