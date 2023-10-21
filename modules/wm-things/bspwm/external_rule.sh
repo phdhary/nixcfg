@@ -17,11 +17,6 @@ case "$window_class" in
     echo "state=tiled";
     echo "follow=off";
     ;;
-  btop) 
-    # echo "desktop=^10";
-    echo "state=tiled";
-    echo "follow=on";
-    ;; 
 esac
 
 case "$window_title" in
