@@ -10,7 +10,9 @@ super + Return
 
 # program launcher 
 super + d
-  rofi -theme dmenu -show
+  rofi -show combi -modes combi -combi-modes "window,drun,run"
+# rofi -theme dmenu -show
+
 
 # browser
 # super + b
@@ -25,8 +27,8 @@ super + shift + e
   rofi -show power-menu -modi power-menu:rofi-power-menu -theme dmenu
 
 # open something
-super + space;{t,m,b}
-  {wrapped_wezterm --class=btop btop,wrapped_wezterm --class=ncmpcpp ncmpcpp,firefox-nightly}
+super + space;{m,b}
+  {wrapped_wezterm --class=ncmpcpp ncmpcpp,firefox-nightly}
 
 # function keys {{{
 
