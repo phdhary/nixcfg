@@ -1,7 +1,7 @@
 { pkgs, config, lib, namespace, ... }:
 let
   inherit (lib) mkEnableOption mkIf mkMerge;
-  inherit (pkgs.lib) optionalAttrs isWayland;
+  inherit (pkgs.lib) optionalAttrs;
   cfg = config.${namespace}.session-things;
 in {
   options.${namespace}.session-things = {
@@ -11,16 +11,12 @@ in {
 
   config = mkIf cfg.enable {
     home.sessionVariables = mkMerge [{
-      EDITOR = "nvim";
       FREETYPE_PROPERTIES = "cff:no-stem-darkening=0";
-      FVM_HOME = "$HOME/development/fvm";
-      MANPAGER = "nvim -c Man!";
+      FVM_HOME = "$HOME/development/fvm"; # deprecated
+      FVM_CACHE_PATH = "$HOME/development/fvm";
       PNPM_HOME = "${config.xdg.dataHome}/pnpm";
-      SYSTEMD_EDITOR = "nvim";
       NIXOS_OZONE_WL = "1";
-    }
-    # (optionalAttrs isWayland {NIXOS_OZONE_WL = "1";})
-      ];
+    }];
 
     home.sessionPath = [
       "$HOME/.cargo/bin"
@@ -30,10 +26,10 @@ in {
       "$HOME/development/flutter"
       "$HOME/go/bin"
       "${config.home.sessionVariables.FVM_HOME}/default/bin"
+      "${config.home.sessionVariables.FVM_CACHE_PATH}/default/bin"
       "${config.home.sessionVariables.PNPM_HOME}"
       "${config.xdg.dataHome}/JetBrains/Toolbox/scripts"
       "${config.xdg.dataHome}/bob/nvim-bin"
-      "${config.xdg.dataHome}/nvim/mason/bin"
     ];
 
     home.shellAliases = {
@@ -49,14 +45,10 @@ in {
       "......" = "cd ../../../../..";
       dlmp3pl = ''
         yt-dlp -f bestaudio -x --audio-format mp3 --audio-quality 320k --embed-thumbnail --add-metadata --postprocessor-args "-id3v2_version 3"'';
-      hm = "home-manager --flake ${config.${namespace}.additionalUserInfo.hmConfigPath}";
+      hm = "home-manager --flake ${
+          config.${namespace}.additionalUserInfo.hmConfigPath
+        }";
       l = "ls -la";
-      lzd = "lazydocker";
-      nimv = "nvim";
-      nivm = "nvim";
-      nmiv = "nvim";
-      nmvi = "nvim";
-      nvmi = "nvim";
       ragner = "ranger";
       ranger = ". ranger";
       rm = "rm -i";

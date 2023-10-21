@@ -56,6 +56,20 @@ in {
 
   config = lib.mkIf cfg.enable {
     home.packages = [ cfg.package ];
+    home.sessionVariables = {
+      MANPAGER = "nvim -c Man!";
+      EDITOR = "nvim";
+      SYSTEMD_EDITOR = "nvim";
+    };
+    home.shellAliases = {
+      nimv = "nvim";
+      nivm = "nvim";
+      nmiv = "nvim";
+      nmvi = "nvim";
+      nvmi = "nvim";
+    };
+    home.sessionPath = [ "${config.xdg.dataHome}/bob/nvim-bin" ]; # fallback
+
     # home.file = pkgs.lib.mkConfigSymlinkFromList {
     #   relativePath = "modules/programs/cli-apps";
     #   paths = [ ];
