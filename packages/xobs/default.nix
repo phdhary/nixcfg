@@ -10,7 +10,7 @@ let
       '';
     };
 in {
-  xobVolume = mkScript "volume" "pamixer" pkgs.pamixer;
-  xobBrightness = mkScript "brightness" "brightnessctl" pkgs.brightnessctl;
-  xobServer = mkScript "server" "xob" pkgs.xob;
+  xob_volume = mkScript "volume" "pamixer" pkgs.pamixer;
+  xob_brightness = mkScript "brightness" "brightnessctl" pkgs.brightnessctl;
+  xob_server = mkScript "server" "xob" pkgs.xob;
 }

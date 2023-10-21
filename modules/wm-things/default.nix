@@ -18,7 +18,7 @@ in {
         # pywal
         sxhkd
         xtitle
-      ] ++ (with packages; [ xobVolume xobBrightness xobServer ]);
+      ] ++ (with packages; [ xob_volume xob_brightness xob_server ]);
     home.file = pkgs.lib.mkConfigSymlinkFromList {
       relativePath = "modules/wm-things";
       paths = [
