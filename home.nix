@@ -28,7 +28,6 @@ in {
       gui-apps = {
         alacritty = enabled;
         firefox = disabled;
-        kitty = enabled;
         vscode = enabled;
         wezterm = enabled;
         rofi = enabled;
