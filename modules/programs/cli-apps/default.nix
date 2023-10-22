@@ -2,12 +2,15 @@
   home.packages = with pkgs;
     [
       alejandra
+      arandr
+      caffeine-ng
       duf
       espeak
       fd
       git-crypt
       glow
       gum
+      hddtemp
       htop
       httpie
       hyperfine
@@ -20,20 +23,18 @@
       nixfmt
       nixgl.nixGLIntel
       nixgl.nixVulkanIntel
-      hddtemp
       nyancat
       ripgrep
-      arandr
       sl
       speedtest-cli
       timer
       tldr
       tokei
       trash-cli
+      ueberzugpp
       unstable.yt-dlp
       wormhole-rs
       zellij
-      ueberzugpp
       # gnome
       adw-gtk3
       gnome-browser-connector

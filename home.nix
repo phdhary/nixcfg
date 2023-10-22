@@ -16,7 +16,7 @@ in {
         eza = enabled;
         fzf = enabled;
         git = enabled;
-        lf = enabled;
+        # lf = enabled;
         mpv = enabled;
         ncmpcpp = enabled;
         neovim = enabled;
