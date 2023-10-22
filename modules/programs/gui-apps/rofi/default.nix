@@ -8,20 +8,8 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    programs.rofi = {
-      enable = true;
-      terminal = "wrapped_wezterm";
-      theme = "${config.xdg.configHome}/rofi/theme.rasi";
-      extraConfig = {
-        modi = "window,drun,run";
-        drun-display-format = "{icon} {name}";
-        show-icons = true;
-        font = "Inter";
-        display-drun = "Applications:";
-        display-window = "Windows:";
-      };
-    };
     home.packages = with pkgs; [
+      rofi
       rofi-power-menu
       rofi-bluetooth
       rofi-pulse-select
@@ -29,7 +17,7 @@ in {
     ];
     home.file = mkConfigSymlinkFromList {
       relativePath = "modules/programs/gui-apps";
-      paths = [ "rofi/theme.rasi" ];
+      paths = [ "rofi/encus.rasi" "rofi/config.rasi" ];
     };
   };
 }

@@ -1,0 +1,18 @@
+configuration {
+display-drun: "";
+display-run: "  ";
+display-window: " ";
+display-combi: "";
+drun-display-format: "{icon} {name}";
+location: 0;
+modi: "window,drun,run";
+show-icons: true;
+terminal: "wrapped_alacritty";
+xoffset: 0;
+yoffset: 0;
+kb-element-next: "Tab,Control+[44]";
+kb-element-prev: "ISO_Left_Tab,Control+[45]";
+// drun-show-actions: true;
+// hover-select: true;
+}
+@theme "encus.rasi"

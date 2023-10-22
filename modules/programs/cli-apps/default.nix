@@ -33,6 +33,7 @@
       unstable.yt-dlp
       wormhole-rs
       zellij
+      ueberzugpp
       # gnome
       adw-gtk3
       gnome-browser-connector

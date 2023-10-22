@@ -26,6 +26,7 @@ in {
         zoxide = enabled;
       };
       gui-apps = {
+        alacritty = enabled;
         firefox = disabled;
         kitty = enabled;
         vscode = enabled;

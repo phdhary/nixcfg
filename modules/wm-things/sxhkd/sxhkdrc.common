@@ -6,7 +6,7 @@ super + Escape
 
 # terminal emulator
 super + Return
-	wrapped_wezterm
+	wrapped_alacritty
 
 # program launcher 
 super + d
@@ -20,15 +20,16 @@ super + d
 
 # file manager
 super + f
-  wrapped_wezterm yazi
+  wrapped_alacritty -e yazi
 
 # power menu
 super + shift + e
-  rofi -show power-menu -modi power-menu:rofi-power-menu -theme dmenu
+  rofi -show power-menu -modi power-menu:rofi-power-menu
+# rofi -show power-menu -modi power-menu:rofi-power-menu -theme dmenu
 
-# open something
+# open {ncmpcpp,firefox-nightly}
 super + space;{m,b}
-  {wrapped_wezterm --class=ncmpcpp ncmpcpp,firefox-nightly}
+  {wrapped_alacritty --class=ncmpcpp -e ncmpcpp,firefox-nightly}
 
 # function keys {{{
 
@@ -42,7 +43,7 @@ XF86MonBrightness{Down,Up}
   xob_brightness {down,up}
 
 XF86PowerOff   
-  rofi -show power-menu -modi power-menu:rofi-power-menu -theme dmenu
+  rofi -show power-menu -modi power-menu:rofi-power-menu
 
 XF86Calculator 
   gnome-calculator

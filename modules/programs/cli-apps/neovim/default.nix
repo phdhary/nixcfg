@@ -12,6 +12,7 @@ let
   };
   lsps = with pkgs;
     [
+      zig # not lsp
       ansible-language-server
       efm-langserver
       gopls

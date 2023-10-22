@@ -13,7 +13,8 @@ info      = { normal = "#7AD9E5", select = "#7AD9E5", unset = "#7AD9E5" }
 success   = { normal = "#97DC8D", select = "#97DC8D", unset = "#97DC8D" }
 warning   = { normal = "#F3D398", select = "#F3D398", unset = "#F3D398" }
 danger    = { normal = "#FA7F94", select = "#FA7F94", unset = "#FA7F94" }
-separator = { opening = "", closing = "" }
+# separator = { opening = "", closing = "" }
+separator = { opening = "", closing = "" }
 
 [progress]
 gauge = { fg = "#FFA577", bg = "#484D66" }
