@@ -16,7 +16,7 @@ case "$mode" in
       down) mode_flag=d;
         ;;
     esac
-    @pamixer@ -$mode_flag $amount;
+    @pamixer@ -$mode_flag $amount -u;
     @pamixer@ --get-volume > /tmp/xobpipevolume
     ;;
   mute)
