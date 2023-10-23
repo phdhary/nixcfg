@@ -14,10 +14,6 @@ super + d
 # rofi -theme dmenu -show
 
 
-# browser
-# super + b
-#   firefox-nightly
-
 # file manager
 super + f
   wrapped_alacritty -e yazi
@@ -27,9 +23,17 @@ super + shift + e
   rofi -show power-menu -modi power-menu:rofi-power-menu
 # rofi -show power-menu -modi power-menu:rofi-power-menu -theme dmenu
 
-# open {ncmpcpp,firefox-nightly}
-super + space;{m,b}
-  {wrapped_alacritty --class=ncmpcpp -e ncmpcpp,firefox-nightly}
+# open ncmpcpp
+super + space; m
+  wrapped_alacritty --class=ncmpcpp -e ncmpcpp
+
+# open btop
+super + space; t
+  wrapped_alacritty --class=btop -e btop
+
+# open firefox-nightly
+super + space; b
+  firefox-nightly
 
 # function keys {{{
 

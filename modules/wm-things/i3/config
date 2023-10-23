@@ -4,7 +4,7 @@ exec --no-startup-id picom
 exec --no-startup-id dex-autostart --autostart --environment i3
 exec --no-startup-id dunst
 exec --no-startup-id nm-applet --indicator
-exec --no-startup-id caffeine
+exec --no-startup-id caffeine start
 exec --no-startup-id nitrogen --restore
 exec --no-startup-id sxhkd -c $HOME/.config/sxhkd/sxhkdrc.i3 $HOME/.config/sxhkd/sxhkdrc.common
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh

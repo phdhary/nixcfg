@@ -54,10 +54,10 @@ _kill_and_run() {
 
 _kill_and_run sxhkd -c ~/.config/sxhkd/sxhkdrc.bspwm ~/.config/sxhkd/sxhkdrc.common
 _kill_and_run picom
-_kill_and_run caffeine 
 _kill_and_run dunst
 
 _run_once nm-applet --indicator
+_run_once caffeine start
 
 nitrogen --restore
 xset dpms 600 600 0

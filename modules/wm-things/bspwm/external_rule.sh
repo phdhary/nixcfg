@@ -1,4 +1,4 @@
-#! /bin/sh
+#!/bin/sh
 
 logfile=/tmp/bspwm_external_rules.log
 window_id="$1"
@@ -17,6 +17,8 @@ case "$window_class" in
     echo "state=tiled";
     echo "follow=off";
     ;;
+  btop)
+    echo "state=floating";
 esac
 
 case "$window_title" in

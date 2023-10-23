@@ -2,7 +2,7 @@
 
 usage() {
     cat <<EOM
-usage: $(basename $0) [help] [increase decrease]
+usage: $(basename $0) [help] [increase] [decrease]
     help        Displays this message
     increase    increase presel ratio
     decrease    decrease presel ratio
