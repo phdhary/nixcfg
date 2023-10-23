@@ -26,6 +26,12 @@ super + {_,shift + } m
 # super + ctrl + {m,x,y,z}
 # 	bspc node -g {marked,locked,sticky,private}
 
+super + s; {h,u}
+  ~/.config/bspwm/scripts/bspad.sh {hide,unmark}
+
+super + {minus,underscore}
+  ~/.config/bspwm/scripts/bspad.sh {toggle,cycle}
+
 super + r
   bspc node -g marked;	bspc node newest.marked.local -n newest.!automatic.local;
 
@@ -80,9 +86,9 @@ super + ctrl + {1-9}
   bspc node -o 0.{1-9}
 
 super + ctrl + y
-	~/.config/bspwm/presel.sh increase
+	~/.config/bspwm/scripts/presel.sh increase
 super + ctrl + o
-	~/.config/bspwm/presel.sh decrease
+	~/.config/bspwm/scripts/presel.sh decrease
 
 # cancel the preselection for the focused node
 # super + ctrl + space
