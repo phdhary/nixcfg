@@ -28,7 +28,11 @@ in {
     home.sessionVariables.TERMINAL = "wrapped_alacritty";
     home.file = mkConfigSymlinkFromList {
       relativePath = "modules/programs/gui-apps/alacritty";
-      paths = [ "alacritty/" ];
+      paths = [
+        "alacritty/alacritty.yml"
+        "alacritty/current_theme.yml"
+        "alacritty/themes/"
+      ];
     };
     xdg.desktopEntries."Alacritty" = {
       name = "Alacritty";

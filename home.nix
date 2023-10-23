@@ -29,7 +29,7 @@ in {
         alacritty = enabled;
         firefox = disabled;
         vscode = enabled;
-        wezterm = enabled;
+        # wezterm = enabled;
         rofi = enabled;
       };
     };

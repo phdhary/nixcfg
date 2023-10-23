@@ -16,6 +16,12 @@ font:
   size: 13.0
   normal:
     family: JetBrains Mono Alacritty
+    # family: JetBrains Mono 
+    # family: Liga SFMono Nerd Font
+    # family: Source Code Pro
+    # family: IBM Plex Mono
+    # family: Symbols Nerd Font
+
 
 colors:
   cursor:

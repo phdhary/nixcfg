@@ -1,6 +1,6 @@
 totalGenerationCount=$(home-manager generations | awk -F ' ' '{print $5}' | wc -l);
 printf "total generation count: %s\n" "$totalGenerationCount";
-deleteCount=$(("$totalGenerationCount" - 2));
+deleteCount=$(("$totalGenerationCount" - 4));
 printf "delete count: %s\n\n" "$deleteCount";
 generations=$(home-manager generations | awk -F ' ' '{print $5}' | tail -"$deleteCount" | paste -sd ' ');
 
