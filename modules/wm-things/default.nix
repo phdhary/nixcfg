@@ -1,5 +1,17 @@
 { config, lib, namespace, pkgs, packages, ... }:
-let cfg = config.${namespace}.wm-things;
+let
+  cfg = config.${namespace}.wm-things;
+  wrapped_picom = pkgs.writeShellScriptBin "wrapped_picom" ''
+    if command -v "nixGLIntel" &> /dev/null; then
+        nixGLIntel picom "$@"
+    else
+        picom "$@"
+    fi
+  '';
+  picom_joined = pkgs.symlinkJoin {
+    name = "joined_picom";
+    paths = [ wrapped_picom pkgs.picom ];
+  };
 in {
   options.${namespace}.wm-things = {
     enable = lib.mkEnableOption "window manager things";
@@ -13,7 +25,8 @@ in {
         bsp-layout
         eww
         dunst
-        picom
+        # picom
+        picom_joined
         polybarFull
         # pywal
         sxhkd

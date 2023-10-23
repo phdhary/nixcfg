@@ -53,7 +53,7 @@ _kill_and_run() {
 }
 
 _kill_and_run sxhkd -c ~/.config/sxhkd/sxhkdrc.bspwm ~/.config/sxhkd/sxhkdrc.common
-_kill_and_run picom
+_kill_and_run wrapped_picom
 _kill_and_run dunst
 
 _run_once nm-applet --indicator
