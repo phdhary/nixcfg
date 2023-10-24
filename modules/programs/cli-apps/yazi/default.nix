@@ -4,13 +4,12 @@ let
   inherit (pkgs.lib) mkConfigSymlinkFromList;
   inherit (pkgs) writeShellScriptBin symlinkJoin;
   inherit (builtins) readFile;
-  yz = writeShellScriptBin "yz" (readFile ./yz.sh);
   cfg = config.${namespace}.programs.cli-apps.yazi;
+  yz_script = writeShellScriptBin "yz" (readFile ./yz.sh);
   yazi = pkgs.unstable-fdd89.yazi;
-  ya = let 
-  in symlinkJoin {
+  joined = symlinkJoin {
     name = "yazi";
-    paths = [ yz yazi ];
+    paths = [ yz_script yazi ];
   };
 
 in {
@@ -18,7 +17,7 @@ in {
     enable = mkEnableOption "yazi";
     package = mkOption {
       type = types.package;
-      default = ya;
+      default = joined;
     };
   };
 
