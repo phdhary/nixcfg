@@ -73,7 +73,7 @@ in {
     };
     home.sessionPath = [ "${config.xdg.dataHome}/bob/nvim-bin" ]; # fallback
     home.file = mkConfigSymlinkFromList {
-      relativePath = "homeModules/programs/cli-apps/neovim";
+      relativePath = "modules/home-manager/programs/cli-apps/neovim";
       paths = [ "nvim/" ];
     };
   };

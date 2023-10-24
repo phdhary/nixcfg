@@ -16,7 +16,7 @@ in {
       # rofi-wayland
     ];
     home.file = mkConfigSymlinkFromList {
-      relativePath = "homeModules/programs/gui-apps";
+      relativePath = "modules/home-manager/programs/gui-apps";
       paths = [ "rofi/encus.rasi" "rofi/config.rasi" ];
     };
   };

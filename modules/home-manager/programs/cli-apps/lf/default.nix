@@ -31,7 +31,7 @@ in {
     home.packages = [ pkgs.chafa ];
 
     home.file = mkConfigSymlinkFromList {
-      relativePath = "homeModules/programs/cli-apps/";
+      relativePath = "modules/home-manager/programs/cli-apps/";
       paths = [
         "lf/icons"
         "lf/colors"

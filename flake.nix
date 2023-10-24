@@ -40,12 +40,21 @@
       };
       packages = self.outputs.packages.${system};
     in {
-      homeConfigurations."${user}" = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        extraSpecialArgs = { inherit inputs packages user namespace; };
-        modules = import ./homeModules pkgs;
-      };
-      packages.${system} = import ./packages pkgs;
       formatter.${system} = pkgs.nixfmt;
+      packages.${system} = import ./packages pkgs;
+      nixosConfigurations = {
+        nixga = nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit pkgs user; };
+          modules = [ ./hosts/nixga ];
+        };
+      };
+      homeConfigurations = {
+        "${user}" = home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          extraSpecialArgs = { inherit inputs packages user namespace; };
+          modules = import ./modules/home-manager pkgs;
+        };
+      };
     };
 }

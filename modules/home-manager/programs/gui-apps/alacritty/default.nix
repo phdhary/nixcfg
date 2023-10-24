@@ -27,7 +27,7 @@ in {
     home.packages = [ cfg.package ];
     home.sessionVariables.TERMINAL = "wrapped_alacritty";
     home.file = mkConfigSymlinkFromList {
-      relativePath = "homeModules/programs/gui-apps/alacritty";
+      relativePath = "modules/home-manager/programs/gui-apps/alacritty";
       paths = [
         "alacritty/alacritty.yml"
         "alacritty/current_theme.yml"
