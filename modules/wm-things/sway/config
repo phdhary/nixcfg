@@ -44,3 +44,5 @@ input 2:14:ETPS/2_Elantech_Touchpad {
 #       # repeat_delay 250
 # }
 include /etc/sway/config.d/*
+
+# vim: ft=swayconfig

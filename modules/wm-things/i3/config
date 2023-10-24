@@ -20,3 +20,4 @@ exec --no-startup-id xset dpms 600 600 0
 # exec --no-startup-id betterlockscreen -w blur
 # exec --no-startup-id betterlockscreen -u $(gsettings get org.gnome.desktop.background picture-uri | sed 's/file:\/\///' | tr -d "'")
 # bindsym XF86ScreenSaver exec --no-startup-id betterlockscreen -l blur
+# vim: ft=i3config
