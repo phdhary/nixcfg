@@ -2,7 +2,7 @@
 let
   cfg = config.${namespace}.programs.cli-apps.neovim;
   inherit (lib) mkEnableOption mkOption types mkIf;
-  inherit (pkgs.lib) mkConfigSymlinkFromList;
+  inherit (config.${namespace}.lib) mkConfigSymlinkFromList;
   custom-neovim = pkgs.symlinkJoin {
     name = "nvim";
     paths = [ pkgs.neovim ];

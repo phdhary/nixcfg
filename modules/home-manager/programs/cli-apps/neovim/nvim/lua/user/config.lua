@@ -1,5 +1,5 @@
 return {
-	colorscheme = "moonfly",
+	colorscheme = "kanagawa",
 	-- border = "single",
 	border = { " ", " ", " ", " ", " ", " ", " ", " " },
 	-- border = { "🭽", "▔", "🭾", "▕", "🭿", "▁", "🭼", "▏" },

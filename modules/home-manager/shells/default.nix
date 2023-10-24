@@ -1,7 +1,7 @@
 { config, lib, namespace, pkgs, ... }:
 let
   inherit (lib) mkEnableOption mkIf mkMerge;
-  inherit (pkgs.lib) mkConfigSymlinkFromList;
+  inherit (config.${namespace}.lib) mkConfigSymlinkFromList;
   inherit (config.home) homeDirectory;
   cfg = config.${namespace}.shells;
 in {

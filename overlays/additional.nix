@@ -1,11 +1,6 @@
-{ config, inputs, ... }:
+{ settings, inputs }:
 let
-  inherit (config.nixpkgs) system;
-  inherit (config.nixpkgs.config) allowUnfree;
-  settings = {
-    inherit system;
-    config = { inherit allowUnfree; };
-  };
+inherit (settings) system;
   inherit (inputs) nixd nix-vscode-extensions flake-firefox-nightly;
   inherit (inputs) nixpkgs-unstable nixpkgs-unstable-fdd89;
 in (final: prev: {

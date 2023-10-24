@@ -1,7 +1,7 @@
 { config, lib, namespace, pkgs, ... }:
 let
   cfg = config.${namespace}.programs.gui-apps.rofi;
-  inherit (pkgs.lib) mkConfigSymlinkFromList;
+  inherit (config.${namespace}.lib) mkConfigSymlinkFromList;
 in {
   options.${namespace}.programs.gui-apps.rofi = {
     enable = lib.mkEnableOption "rofi";

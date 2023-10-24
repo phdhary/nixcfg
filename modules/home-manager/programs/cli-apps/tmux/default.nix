@@ -1,7 +1,7 @@
 { config, lib, namespace, pkgs, ... }:
 let
   inherit (lib) mkEnableOption mkIf;
-  inherit (pkgs.lib) mkConfigSymlinkFromList;
+  inherit (config.${namespace}.lib) mkConfigSymlinkFromList;
   cfg = config.${namespace}.programs.cli-apps.tmux;
   tmux-conf = "my-tmux.conf";
   tmate-conf = "my-tmate.conf";

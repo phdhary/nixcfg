@@ -1,5 +1,5 @@
 { config, namespace, ... }:
-let inherit (config.${namespace}) enabled disabled;
+let inherit (config.${namespace}.lib) enabled disabled;
 in {
   xdg.systemDirs.data = [
     "${config.home.homeDirectory}/.nix-profile/share" # to make .desktop files detected by DE

@@ -1,7 +1,7 @@
 { config, lib, pkgs, namespace, ... }:
 let
   inherit (lib) mkEnableOption mkIf mkOption;
-  inherit (pkgs.lib) mkConfigSymlinkFromList;
+  inherit (config.${namespace}.lib) mkConfigSymlinkFromList;
   cfg = config.${namespace}.programs.gui-apps.alacritty;
   wrapped_alacritty = pkgs.writeShellScriptBin "wrapped_alacritty" ''
     if command -v "nixGLIntel" &> /dev/null; then

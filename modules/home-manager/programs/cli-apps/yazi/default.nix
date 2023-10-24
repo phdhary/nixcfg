@@ -1,7 +1,7 @@
 { config, namespace, lib, pkgs, ... }:
 let
   inherit (lib) mkEnableOption mkOption mkIf types;
-  inherit (pkgs.lib) mkConfigSymlinkFromList;
+  inherit (config.${namespace}.lib) mkConfigSymlinkFromList;
   inherit (pkgs) writeShellScriptBin symlinkJoin;
   inherit (builtins) readFile;
   cfg = config.${namespace}.programs.cli-apps.yazi;

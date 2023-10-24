@@ -1,7 +1,7 @@
 { config, namespace, lib, pkgs, ... }:
 let
   inherit (lib) mkEnableOption mkIf;
-  inherit (pkgs.lib) mkConfigSymlinkFromList;
+  inherit (config.${namespace}.lib) mkConfigSymlinkFromList;
   cfg = config.${namespace}.programs.cli-apps.lf;
 in {
   options.${namespace}.programs.cli-apps.lf = { enable = mkEnableOption "lf"; };

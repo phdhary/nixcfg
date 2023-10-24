@@ -34,18 +34,21 @@
       system = "x86_64-linux";
       user = "laken";
       namespace = "laken";
-      pkgs = import nixpkgs {
+      settings = {
         inherit system;
-        config.allowUnfree = true;
+        config = { allowUnfree = true; };
       };
+      pkgs = import nixpkgs (settings // {
+        overlays = import ./overlays { inherit settings inputs; };
+      });
       packages = self.outputs.packages.${system};
     in {
       formatter.${system} = pkgs.nixfmt;
       packages.${system} = import ./packages pkgs;
       nixosConfigurations = {
         nixga = nixpkgs.lib.nixosSystem {
-          inherit system;
-          specialArgs = { inherit pkgs user; };
+          inherit system pkgs;
+          specialArgs = { inherit inputs user; };
           modules = [ ./hosts/nixga ];
         };
       };
@@ -53,7 +56,8 @@
         "${user}" = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           extraSpecialArgs = { inherit inputs packages user namespace; };
-          modules = import ./modules/home-manager pkgs;
+          modules = (import ./modules/home-manager pkgs)
+            ++ [ (import ./home/laken/nixga.nix) ];
         };
       };
     };

@@ -41,6 +41,14 @@ key_bindings:
   - { key: Q,                       mode: Vi|~Search, action: ToggleViMode            }
   - { key: V,  mods: SUPER,         mode: ~Vi,        action: Paste                   }
   - { key: N,  mods: SUPER,                           action: SpawnNewInstance        }
+  - { 
+      key: F,
+      mods: Shift|Control,
+      command: {
+        program: "alacritty",
+        args:  ["-e","yazi"]
+      }
+    }
 
 hints:
   enabled:
@@ -55,11 +63,13 @@ hints:
       binding:
         key: I
         mods: Control|Shift
-    # - regex: "(/[/ ]*)+/?"
-    #   action: Copy
-    #   binding:
-    #     key: I
-    #     mods: Control|Shift
+
+    # quick copy wormhole code. example: (3-kebab-case)
+    - regex: "([a-z0-9])+(-[a-z]+)+(-[a-z]+)"
+      action: Copy
+      binding:
+        key: K
+        mods: Control|Shift
 
 
 # Import additional configuration files

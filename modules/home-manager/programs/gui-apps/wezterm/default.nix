@@ -1,5 +1,6 @@
 { lib, config, pkgs, namespace, ... }:
 let cfg = config.${namespace}.programs.gui-apps.wezterm;
+inherit (config.${namespace}.lib) mkConfigSymlinkFromList;
 in {
   options.${namespace}.programs.gui-apps.wezterm = {
     enable = lib.mkEnableOption "wezterm terminal emulator";
@@ -8,7 +9,7 @@ in {
   config = lib.mkIf cfg.enable {
     # home.sessionVariables.TERMINAL = "wezterm";
 
-    home.file = pkgs.lib.mkConfigSymlinkFromList {
+    home.file = mkConfigSymlinkFromList {
       relativePath = "modules/home-manager/programs/gui-apps";
       paths = [ "wezterm/colors/" "wezterm/config/" ];
     };

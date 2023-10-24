@@ -1,6 +1,7 @@
 { config, lib, namespace, pkgs, packages, ... }:
 let
   cfg = config.${namespace}.wm-things;
+  inherit (config.${namespace}.lib) mkConfigSymlinkFromList;
   wrapped_picom = pkgs.writeShellScriptBin "wrapped_picom" ''
     if command -v "nixGLIntel" &> /dev/null; then
         nixGLIntel picom "$@"
@@ -32,7 +33,7 @@ in {
         sxhkd
         xtitle
       ] ++ (with packages; [ xob_volume xob_brightness xob_server ]);
-    home.file = pkgs.lib.mkConfigSymlinkFromList {
+    home.file = mkConfigSymlinkFromList {
       relativePath = "modules/home-manager/wm-things";
       paths = [
         "avizo/config.ini"
