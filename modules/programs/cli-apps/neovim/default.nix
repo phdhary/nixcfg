@@ -1,6 +1,8 @@
 { config, lib, namespace, pkgs, ... }:
 let
   cfg = config.${namespace}.programs.cli-apps.neovim;
+  inherit (lib) mkEnableOption mkOption types mkIf;
+  inherit (pkgs.lib) mkConfigSymlinkFromList;
   custom-neovim = pkgs.symlinkJoin {
     name = "nvim";
     paths = [ pkgs.neovim ];
@@ -48,14 +50,14 @@ let
   linter = with pkgs; [ unstable.eslint_d unstable.stylelint ];
 in {
   options.${namespace}.programs.cli-apps.neovim = {
-    enable = lib.mkEnableOption "neovim";
-    package = lib.mkOption {
-      type = lib.types.package;
+    enable = mkEnableOption "neovim";
+    package = mkOption {
+      type = types.package;
       default = custom-neovim;
     };
   };
 
-  config = lib.mkIf cfg.enable {
+  config = mkIf cfg.enable {
     home.packages = [ cfg.package ];
     home.sessionVariables = {
       MANPAGER = "nvim -c Man!";
@@ -70,10 +72,9 @@ in {
       nvmi = "nvim";
     };
     home.sessionPath = [ "${config.xdg.dataHome}/bob/nvim-bin" ]; # fallback
-
-    # home.file = pkgs.lib.mkConfigSymlinkFromList {
-    #   relativePath = "modules/programs/cli-apps";
-    #   paths = [ ];
-    # };
+    home.file = mkConfigSymlinkFromList {
+      relativePath = "modules/programs/cli-apps/neovim";
+      paths = [ "nvim/" ];
+    };
   };
 }
