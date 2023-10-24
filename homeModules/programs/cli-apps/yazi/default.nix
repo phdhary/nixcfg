@@ -24,7 +24,7 @@ in {
   config = mkIf cfg.enable {
     home.packages = [ cfg.package ];
     home.file = mkConfigSymlinkFromList {
-      relativePath = "modules/programs/cli-apps";
+      relativePath = "homeModules/programs/cli-apps";
       paths = [ "yazi/keymap.toml" "yazi/yazi.toml" "yazi/theme.toml" ];
     };
     xdg.desktopEntries."yazi" = {

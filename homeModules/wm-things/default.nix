@@ -33,7 +33,7 @@ in {
         xtitle
       ] ++ (with packages; [ xob_volume xob_brightness xob_server ]);
     home.file = pkgs.lib.mkConfigSymlinkFromList {
-      relativePath = "modules/wm-things";
+      relativePath = "homeModules/wm-things";
       paths = [
         "avizo/config.ini"
         "bspwm/"

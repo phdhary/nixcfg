@@ -13,7 +13,7 @@ in {
   config = mkIf cfg.enable {
     home = {
       file = mkConfigSymlinkFromList {
-        relativePath = "modules/programs/cli-apps";
+        relativePath = "homeModules/programs/cli-apps";
         paths = [ "tmux/${tmux-conf}" "tmux/${tmate-conf}" ];
       };
       shellAliases = {
