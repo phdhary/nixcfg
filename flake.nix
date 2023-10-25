@@ -63,7 +63,7 @@
           inherit pkgs;
           extraSpecialArgs = { inherit inputs packages namespace; };
           modules = (import ./modules/home-manager pkgs)
-            ++ [ (import ./home/laken/nixga.nix) ];
+            ++ [ (import ./home/dude/nixga.nix) ];
         };
       };
     };
