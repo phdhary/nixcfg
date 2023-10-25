@@ -13,14 +13,14 @@ in {
     fonts = enabled;
     programs = {
       cli-apps = {
-        bat = enabled;
-        btop = enabled;
-        eza = enabled;
+        # bat = enabled;
+        # btop = enabled;
+        # eza = enabled;
         fzf = enabled;
-        git = enabled;
+        # git = enabled;
         # lf = enabled;
-        mpv = enabled;
-        ncmpcpp = enabled;
+        # mpv = enabled;
+        # ncmpcpp = enabled;
         neovim = enabled;
         readline = enabled;
         # tmux = enabled;
@@ -32,7 +32,7 @@ in {
         firefox = disabled;
         # vscode = enabled;
         # wezterm = enabled;
-        rofi = enabled;
+        # rofi = enabled;
       };
     };
     # services = { batresudah = enabled; };
