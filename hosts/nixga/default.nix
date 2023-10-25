@@ -1,7 +1,7 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running `nixos-help`).
-{ pkgs, user, ... }: {
+{ pkgs, ... }: {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -111,7 +111,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users = {
     defaultUserShell = pkgs.zsh;
-    users.${user} = {
+    users.laken = {
       isNormalUser = true;
       extraGroups = [ "wheel" "networkmanager" ];
       hashedPassword =
@@ -136,6 +136,7 @@
     nixfmt
     wormhole-rs
     unstable.vim
+    home-manager
   ];
 
   environment.variables = {

@@ -7,7 +7,7 @@ in {
 
   programs.home-manager.enable = true;
   home.shellAliases.hm =
-    "home-manager --flake ${config.${namespace}.lib.hmConfigPath}#dude-nixga";
+    "home-manager --flake ${config.${namespace}.lib.hmConfigPath}#laken-dev";
 
   ${namespace} = {
     fonts = enabled;
@@ -23,20 +23,23 @@ in {
         ncmpcpp = enabled;
         neovim = enabled;
         readline = enabled;
-        # tmux = enabled;
+        tmux = enabled;
         yazi = enabled;
         zoxide = enabled;
       };
       gui-apps = {
         alacritty = enabled;
         firefox = disabled;
-        # vscode = enabled;
+        vscode = enabled;
         # wezterm = enabled;
         rofi = enabled;
       };
     };
-    # services = { batresudah = enabled; };
-    session-things = { enable = true; };
+    services = { batresudah = enabled; };
+    session-things = {
+      enable = true;
+      enableDnfAliases = true;
+    };
     shells = enabled;
     wm-things = enabled;
   };

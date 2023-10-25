@@ -10,11 +10,11 @@ declare INTERNAL_MONITOR
 declare EXTERNAL_MONITOR
 
 if [ "$(pidof bspwm)" != "" ]; then
-  INTERNAL_MONITOR="eDP-1_top_bspwm"
-  EXTERNAL_MONITOR="HDMI-2_top_bspwm"
+  INTERNAL_MONITOR="main_top_bspwm"
+  EXTERNAL_MONITOR="external_top_bspwm"
 elif [ "$(pidof i3)" != "" ]; then
-  INTERNAL_MONITOR="eDP-1_top_i3"
-  EXTERNAL_MONITOR="HDMI-2_top_i3"
+  INTERNAL_MONITOR="main_top_i3"
+  EXTERNAL_MONITOR="external_top_i3"
 fi
 
 echo "---" | tee -a /tmp/polybar_"$INTERNAL_MONITOR".log

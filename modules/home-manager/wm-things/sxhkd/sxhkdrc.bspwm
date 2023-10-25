@@ -12,6 +12,9 @@ super + shift + q
 super + g
 	bspc config window_gap {0,12}
 
+super + u
+  polybar-msg cmd toggle;bspc config top_padding {0,30};
+
 # state/flags {{{
 
 # set the window state

@@ -1,8 +1,10 @@
-{ user, pkgs, ... }: {
+{ pkgs, inputs, ... }:
+let inherit (inputs.nixpkgs.lib) mkDefault;
+in {
   home = {
-    stateVersion = "23.05";
-    username = "${user}";
-    homeDirectory = "/home/${user}";
+    stateVersion = mkDefault "23.05";
+    username = mkDefault "laken";
+    homeDirectory = mkDefault "/home/laken";
   };
 
   nix = {

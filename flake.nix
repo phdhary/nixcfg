@@ -32,7 +32,6 @@
   outputs = inputs@{ self, nixpkgs, home-manager, ... }:
     let
       system = "x86_64-linux";
-      user = "laken";
       namespace = "laken";
       settings = {
         inherit system;
@@ -42,20 +41,27 @@
         overlays = import ./overlays { inherit settings inputs; };
       });
       packages = self.outputs.packages.${system};
+      lib = nixpkgs.lib // home-manager.lib;
     in {
       formatter.${system} = pkgs.nixfmt;
       packages.${system} = import ./packages pkgs;
       nixosConfigurations = {
-        nixga = nixpkgs.lib.nixosSystem {
+        nixga = lib.nixosSystem {
           inherit system pkgs;
-          specialArgs = { inherit inputs user; };
+          specialArgs = { inherit inputs; };
           modules = [ ./hosts/nixga ];
         };
       };
       homeConfigurations = {
-        "${user}" = home-manager.lib.homeManagerConfiguration {
+        "laken-dev" = lib.homeManagerConfiguration {
           inherit pkgs;
-          extraSpecialArgs = { inherit inputs packages user namespace; };
+          extraSpecialArgs = { inherit inputs packages namespace; };
+          modules = (import ./modules/home-manager pkgs)
+            ++ [ (import ./home/laken/dev.nix) ];
+        };
+        "dude-nixga" = lib.homeManagerConfiguration {
+          inherit pkgs;
+          extraSpecialArgs = { inherit inputs packages namespace; };
           modules = (import ./modules/home-manager pkgs)
             ++ [ (import ./home/laken/nixga.nix) ];
         };

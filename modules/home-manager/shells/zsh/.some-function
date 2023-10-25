@@ -141,3 +141,12 @@ which-cd() {
   cd $(dirname $(which "$1"))
   eza -la --colour=always | grep "$1"
 }
+
+yz() {
+    tmp="$(mktemp -t "yazi-cwd.XXXXX")"
+    yazi --cwd-file="$tmp"
+    if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+        cd -- "$cwd"
+    fi
+    rm -f -- "$tmp"
+}
