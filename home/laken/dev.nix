@@ -25,13 +25,13 @@ in {
       mpv = enabled;
       ncmpcpp = enabled;
       neovim = enabled;
+      pop-shell = enabled;
       readline = enabled;
       rofi = enabled;
       tmux = enabled;
       vscode = enabled;
       yazi = enabled;
       zoxide = enabled;
-      pop-shell = enabled;
     };
     services = { batresudah = enabled; };
     session-things = {
