@@ -24,5 +24,14 @@ in {
               mkOutOfStoreSymlink "${hmConfigPath}/${relativePath}/${filePath}";
           })) paths);
     };
+    mkXdgConfigLink = mkOption {
+      type = types.anything;
+      default = { relativePath, directory, paths, }:
+        listToAttrs (map (filePath:
+          (nameValuePair "${directory}/${filePath}" {
+            source = mkOutOfStoreSymlink
+              "${hmConfigPath}/${relativePath}/${directory}/${filePath}";
+          })) paths);
+    };
   };
 }

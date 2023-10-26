@@ -12,28 +12,26 @@ in {
   ${namespace} = {
     fonts = enabled;
     programs = {
-      cli-apps = {
-        bat = enabled;
-        btop = enabled;
-        eza = enabled;
-        fzf = enabled;
-        git = enabled;
-        # lf = enabled;
-        mpv = enabled;
-        ncmpcpp = enabled;
-        neovim = enabled;
-        readline = enabled;
-        tmux = enabled;
-        yazi = enabled;
-        zoxide = enabled;
-      };
-      gui-apps = {
-        alacritty = enabled;
-        firefox = disabled;
-        vscode = enabled;
-        # wezterm = enabled;
-        rofi = enabled;
-      };
+      enable-basic-cli = true;
+      enable-basic-gui = true;
+      alacritty = enabled;
+      bat = enabled;
+      btop = enabled;
+      eza = enabled;
+      firefox = disabled;
+      fzf = enabled;
+      git = enabled;
+      gnome-packs = enabled;
+      mpv = enabled;
+      ncmpcpp = enabled;
+      neovim = enabled;
+      readline = enabled;
+      rofi = enabled;
+      tmux = enabled;
+      vscode = enabled;
+      yazi = enabled;
+      zoxide = enabled;
+      pop-shell = enabled;
     };
     services = { batresudah = enabled; };
     session-things = {
@@ -41,6 +39,6 @@ in {
       enableDnfAliases = true;
     };
     shells = enabled;
-    wm-things = enabled;
+    wm.bspwm = enabled;
   };
 }
