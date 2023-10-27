@@ -1,5 +1,5 @@
 return {
-	colorscheme = "carbonfox",
+	colorscheme = "rose-pine",
 	-- border = "single",
 	border = { " ", " ", " ", " ", " ", " ", " ", " " },
 	-- border = { "🭽", "▔", "🭾", "▕", "🭿", "▁", "🭼", "▏" },

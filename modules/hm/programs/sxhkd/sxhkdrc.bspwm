@@ -126,6 +126,10 @@ super + {Left,Down,Up,Right}
 super + b
   bspc node @/ -B
 
+# equalize node
+super + e
+  bspc node @/ --equalize
+
 # }}}
 
 # receptacle {{{

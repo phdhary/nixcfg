@@ -1,6 +1,6 @@
-{ settings, inputs }:
+{ settings, inputs, ... }:
 let
-inherit (settings) system;
+  inherit (settings) system;
   inherit (inputs) nixd nix-vscode-extensions flake-firefox-nightly;
   inherit (inputs) nixpkgs-unstable nixpkgs-unstable-fdd89;
 in (final: prev: {

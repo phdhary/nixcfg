@@ -1,7 +1,7 @@
 local M = {}
 
 local function change_alacritty_theme(theme_name)
-	local alacritty_dir = "~/.config/nixcfg/modules/hm/programs/gui-apps/alacritty/alacritty/"
+	local alacritty_dir = "~/.config/nixcfg/modules/hm/programs/alacritty/"
 	local alacritty_colorscheme_file = alacritty_dir .. "current_theme.yml"
 	local update = [[  - ~\/.config\/alacritty\/themes\/]] .. theme_name .. ".yml"
 	require("user.utils").update_one_line_in_a_file("config", update, alacritty_colorscheme_file)

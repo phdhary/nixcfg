@@ -55,13 +55,13 @@
       homeConfigurations = {
         "laken-dev" = lib.homeManagerConfiguration {
           inherit pkgs;
-          extraSpecialArgs = { inherit inputs packages namespace; };
+          extraSpecialArgs = { inherit inputs packages namespace self; };
           modules = (import ./modules/hm pkgs)
             ++ [ (import ./home/laken/dev.nix) ];
         };
         "dude-nixga" = lib.homeManagerConfiguration {
           inherit pkgs;
-          extraSpecialArgs = { inherit inputs packages namespace; };
+          extraSpecialArgs = { inherit inputs packages namespace self; };
           modules = (import ./modules/hm pkgs)
             ++ [ (import ./home/dude/nixga.nix) ];
         };

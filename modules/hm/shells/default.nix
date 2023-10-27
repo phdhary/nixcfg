@@ -51,6 +51,8 @@ in {
         bindkey -v # vi mode
         bindkey '^ ' autosuggest-accept
         bindkey '^f' forward-word
+        bindkey "^n" down-line-or-search
+        bindkey "^p" up-line-or-search
         # bindkey -M vicmd 'V' edit-command-line
         bindkey -s '^z' 'fg^M'
         [[ -f ~/.config/tabtab/zsh/__tabtab.zsh ]] && . ~/.config/tabtab/zsh/__tabtab.zsh || true

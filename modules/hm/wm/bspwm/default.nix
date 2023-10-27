@@ -1,26 +1,15 @@
 { config, lib, namespace, pkgs, ... }:
 let
   cfg = config.${namespace}.wm.bspwm;
-  inherit (config.${namespace}.lib) mkXdgConfigLink;
+  inherit (config.${namespace}.lib) recursiveSymlink;
 in {
   options.${namespace}.wm.bspwm.enable = lib.mkEnableOption "bspwm";
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [ bspwm bsp-layout xtitle ];
-    xdg.configFile = mkXdgConfigLink {
-      relativePath = "modules/hm/wm";
+    xdg.configFile = recursiveSymlink {
       directory = "bspwm";
-      paths = [
-        "noswallow"
-        "bspwmrc"
-        "terminals"
-        "scripts/bspad.sh"
-        "scripts/bspswallow.sh"
-        "scripts/external_rule.sh"
-        "scripts/monitor.sh"
-        "scripts/monitor_options.sh"
-        "scripts/presel.sh"
-        "scripts/swap_desktop.sh"
-      ];
+      path = ./.;
+      filter = list: lib.filter (f: (!lib.hasSuffix ".nix" f)) list;
     };
     ${namespace}.programs = {
       dunst.enable = true;

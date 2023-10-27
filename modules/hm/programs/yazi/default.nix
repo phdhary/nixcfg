@@ -1,7 +1,7 @@
 { config, namespace, lib, pkgs, ... }:
 let
   inherit (lib) mkEnableOption mkOption mkIf types;
-  inherit (config.${namespace}.lib) mkConfigSymlinkFromList;
+  inherit (config.${namespace}.lib) recursiveSymlink;
   cfg = config.${namespace}.programs.yazi;
 in {
   options.${namespace}.programs.yazi = {
@@ -14,9 +14,10 @@ in {
 
   config = mkIf cfg.enable {
     home.packages = [ cfg.package ];
-    home.file = mkConfigSymlinkFromList {
-      relativePath = "modules/hm/programs";
-      paths = [ "yazi/keymap.toml" "yazi/yazi.toml" "yazi/theme.toml" ];
+    xdg.configFile = recursiveSymlink {
+      directory = "yazi";
+      path = ./.;
+      filter = list: lib.filter (f: (!lib.hasSuffix ".nix" f)) list;
     };
     xdg.desktopEntries."yazi" = {
       name = "Yazi";
