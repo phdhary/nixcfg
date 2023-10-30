@@ -1,10 +1,8 @@
-{ config, lib, namespace, pkgs, self, ... }:
+{ config, lib, namespace, self, pkgs, ... }:
 let
-  inherit (lib) nameValuePair;
-  inherit (config.lib.file) mkOutOfStoreSymlink;
-  inherit (config.${namespace}.lib) hmConfigPath runtimePath;
   inherit (builtins) listToAttrs map;
-  inherit (pkgs.lib.filesystem) listFilesRecursive;
+  inherit (config.${namespace}.lib) runtimePath;
+  inherit (config.lib.file) mkOutOfStoreSymlink;
   mkCustomLib = fn:
     (lib.mkOption {
       type = lib.types.anything;
@@ -13,33 +11,12 @@ let
 in {
   options.${namespace}.lib = {
 
-    mkSymlinkFromList = mkCustomLib ({ relativePath, paths, }:
-      listToAttrs (map (filePath:
-        (nameValuePair filePath {
-          source =
-            mkOutOfStoreSymlink "${hmConfigPath}/${relativePath}/${filePath}";
-        })) paths));
-
-    mkConfigSymlinkFromList = mkCustomLib ({ relativePath, paths, }:
-      listToAttrs (map (filePath:
-        (nameValuePair ".config/${filePath}" {
-          source =
-            mkOutOfStoreSymlink "${hmConfigPath}/${relativePath}/${filePath}";
-        })) paths));
-
-    mkXdgConfigLink = mkCustomLib ({ relativePath, directory, paths, }:
-      listToAttrs (map (filePath:
-        (nameValuePair "${directory}/${filePath}" {
-          source = mkOutOfStoreSymlink
-            "${hmConfigPath}/${relativePath}/${directory}/${filePath}";
-        })) paths));
-
     recursiveSymlink = mkCustomLib ({ path, directory, filter }:
       let
-        list = listFilesRecursive path;
+        list = lib.filesystem.listFilesRecursive path;
         filtered = filter list;
         results = (map (f:
-          (nameValuePair
+          (lib.nameValuePair
             "${directory}${lib.removePrefix (toString path) (toString f)}" {
               source = mkOutOfStoreSymlink (runtimePath f);
             })) filtered);
@@ -47,11 +24,20 @@ in {
 
     runtimePath = mkCustomLib (path:
       let
-        runtimeRoot = hmConfigPath;
+        runtimeRoot = "${config.home.homeDirectory}/.config/nixcfg";
         rootStr = toString self;
         pathStr = toString path;
       in assert lib.assertMsg (lib.hasPrefix rootStr pathStr)
         "${pathStr} does not start with ${rootStr}";
       runtimeRoot + lib.removePrefix rootStr pathStr);
+
+    wrapWithNixGLIntel = mkCustomLib (name: command:
+      pkgs.writeShellScriptBin name ''
+        if command -v "nixGLIntel" &> /dev/null; then
+            nixGLIntel ${command} "$@"
+        else
+            ${command} "$@"
+        fi
+      '');
   };
 }

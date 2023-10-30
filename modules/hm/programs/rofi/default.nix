@@ -1,11 +1,10 @@
 { config, lib, namespace, pkgs, ... }:
 let
   cfg = config.${namespace}.programs.rofi;
-  inherit (config.${namespace}.lib) mkConfigSymlinkFromList;
+  inherit (config.${namespace}.lib) runtimePath;
+  inherit (config.lib.file) mkOutOfStoreSymlink;
 in {
-  options.${namespace}.programs.rofi = {
-    enable = lib.mkEnableOption "rofi";
-  };
+  options.${namespace}.programs.rofi = { enable = lib.mkEnableOption "rofi"; };
 
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
@@ -15,9 +14,10 @@ in {
       rofi-pulse-select
       # rofi-wayland
     ];
-    home.file = mkConfigSymlinkFromList {
-      relativePath = "modules/hm/programs";
-      paths = [ "rofi/encus.rasi" "rofi/config.rasi" ];
+    xdg.configFile = {
+      "rofi/encus.rasi".source = mkOutOfStoreSymlink (runtimePath ./encus.rasi);
+      "rofi/config.rasi".source =
+        mkOutOfStoreSymlink (runtimePath ./config.rasi);
     };
   };
 }

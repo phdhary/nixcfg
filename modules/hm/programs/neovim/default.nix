@@ -1,8 +1,9 @@
 { config, lib, namespace, pkgs, ... }:
 let
   cfg = config.${namespace}.programs.neovim;
-  inherit (lib) mkEnableOption mkOption types mkIf;
-  inherit (config.${namespace}.lib) mkConfigSymlinkFromList;
+  inherit (config.${namespace}.lib) runtimePath;
+  inherit (config.lib.file) mkOutOfStoreSymlink;
+
   custom-neovim = pkgs.symlinkJoin {
     name = "nvim";
     paths = [ pkgs.neovim ];
@@ -51,14 +52,14 @@ let
   linter = with pkgs; [ unstable.eslint_d unstable.stylelint ];
 in {
   options.${namespace}.programs.neovim = {
-    enable = mkEnableOption "neovim";
-    package = mkOption {
-      type = types.package;
+    enable = lib.mkEnableOption "neovim";
+    package = lib.mkOption {
+      type = lib.types.package;
       default = custom-neovim;
     };
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     home.packages = [ cfg.package ];
     home.sessionVariables = {
       MANPAGER = "nvim -c Man!";
@@ -73,9 +74,9 @@ in {
       nvmi = "nvim";
     };
     home.sessionPath = [ "${config.xdg.dataHome}/bob/nvim-bin" ]; # fallback
-    home.file = mkConfigSymlinkFromList {
-      relativePath = "modules/hm/programs/neovim";
-      paths = [ "nvim/" ];
+    xdg.configFile."nvim/" = {
+      recursive = true;
+      source = mkOutOfStoreSymlink (runtimePath ./nvim);
     };
   };
 }

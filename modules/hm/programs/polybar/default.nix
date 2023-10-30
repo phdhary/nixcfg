@@ -1,15 +1,24 @@
 { config, lib, namespace, pkgs, ... }:
 let
   cfg = config.${namespace}.programs.polybar;
-  inherit (config.${namespace}.lib) mkXdgConfigLink;
+  inherit (config.${namespace}.lib) recursiveSymlink;
+  inherit (lib) hasSuffix;
+
 in {
-  options.${namespace}.programs.polybar.enable = lib.mkEnableOption "polybar";
+  options.${namespace}.programs.polybar = {
+    enable = lib.mkEnableOption "polybar";
+    package = lib.mkOption {
+      type = lib.types.package;
+      default = pkgs.polybarFull;
+    };
+  };
   config = lib.mkIf cfg.enable {
-    home.packages = with pkgs; [ polybarFull ];
-    xdg.configFile = mkXdgConfigLink {
-      relativePath = "modules/hm/programs";
+    home.packages = [ cfg.package ];
+    xdg.configFile = recursiveSymlink {
       directory = "polybar";
-      paths = [ "config.ini" "launch.sh" ];
+      path = ./.;
+      filter = list:
+        builtins.filter (f: (!hasSuffix ".nix" f)) list;
     };
   };
 }

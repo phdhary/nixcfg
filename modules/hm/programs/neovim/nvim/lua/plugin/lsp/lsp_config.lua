@@ -60,7 +60,7 @@ function spec.config()
 					completion = { callSnippet = "Replace" },
 					format = { enable = false },
 					workspace = { checkThirdParty = false },
-					hint = { enable = true },
+					hint = { enable = false },
 				},
 			}
 		elseif lsp == "jsonls" then

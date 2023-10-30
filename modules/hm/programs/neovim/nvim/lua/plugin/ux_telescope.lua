@@ -25,6 +25,49 @@ local spec = {
 	},
 }
 
+local colorscheme = function()
+	local action_state = require "telescope.actions.state"
+	local actions = require "telescope.actions"
+	local conf = require("telescope.config").values
+	local finders = require "telescope.finders"
+	local pickers = require "telescope.pickers"
+	local themes = require "telescope.themes"
+	local utils = require "telescope.utils"
+	local before_color = vim.api.nvim_exec2("colorscheme", { output = true })
+	local colors = { before_color.output }
+	colors = vim.list_extend(
+		colors,
+		vim.tbl_filter(function(color)
+			return color ~= before_color
+		end, vim.fn.getcompletion("", "color"))
+	)
+
+	local picker = pickers.new(themes.get_dropdown(), {
+		prompt_title = "Change Colorscheme",
+		finder = finders.new_table {
+			results = colors,
+		},
+		sorter = conf.generic_sorter(),
+		attach_mappings = function(prompt_bufnr)
+			actions.select_default:replace(function()
+				local selection = action_state.get_selected_entry()
+				if selection == nil then
+					utils.__warn_no_selection "builtin.colorscheme"
+					return
+				end
+
+				actions.close(prompt_bufnr)
+				require("user.config").colorscheme = selection.value
+				vim.cmd("colorscheme " .. selection.value)
+			end)
+
+			return true
+		end,
+	})
+
+	picker:find()
+end
+
 local function fd_or_git()
 	local is_git_dir = vim.fn.system("git rev-parse --is-inside-work-tree"):match "true"
 	if is_git_dir == nil then
@@ -41,7 +84,8 @@ spec.keys = {
 	{ "<leader>fr", "<CMD>Telescope registers<CR>" },
 	{ "<leader>/", "<CMD>Telescope live_grep<CR>" },
 	{ "<leader>:", "<CMD>Telescope command_history<CR>" },
-	{ "<leader>sc", "<CMD>Telescope colorscheme<CR>" },
+	{ "<leader>sc", colorscheme },
+	-- { "<leader>sc", "<CMD>Telescope colorscheme<CR>" },
 	{ "<leader>sh", "<CMD>Telescope help_tags<CR>" },
 	{ "<leader>sb", "<CMD>Telescope buffers<CR>" },
 	{ "<leader>sk", "<CMD>Telescope keymaps<CR>" },

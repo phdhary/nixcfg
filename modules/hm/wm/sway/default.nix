@@ -1,16 +1,15 @@
 { config, lib, namespace, pkgs, ... }:
 let
   cfg = config.${namespace}.wm.sway;
-  inherit (config.${namespace}.lib) mkXdgConfigLink;
+  inherit (config.${namespace}.lib) runtimePath;
+  inherit (config.lib.file) mkOutOfStoreSymlink;
 in {
   options.${namespace}.wm.sway.enable = lib.mkEnableOption "sway";
   config = lib.mkIf cfg.enable {
     # wayland.windowManager.sway.enable=true;
-    xdg.configFile = mkXdgConfigLink {
-      relativePath = "modules/hm/wm";
-      directory = "sway";
-      paths = [ "config" ];
-    };
+    xdg.configFile."sway/config".source =
+      mkOutOfStoreSymlink (runtimePath ./config);
+
     ${namespace}.programs = {
       dunst.enable = true;
       picom.enable = true;

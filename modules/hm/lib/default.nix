@@ -12,10 +12,6 @@ in {
       type = types.attrs;
       default = { enable = false; };
     };
-    hmConfigPath = mkOption {
-      type = types.str;
-      default = "${config.home.homeDirectory}/.config/nixcfg";
-    };
     isWayland = mkOption {
       type = types.anything;
       default = getEnv "XDG_SESSION_TYPE" == "wayland";

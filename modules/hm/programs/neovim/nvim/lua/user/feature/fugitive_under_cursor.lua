@@ -1,7 +1,8 @@
 local function get_sid(file)
 	file = file or "autoload/fugitive.vim"
-	file = vim.api.nvim_exec("filter #vim-fugitive/" .. file .. "# scriptnames", true)
-	file = string.gsub(file, "^%s*(.-)%s*$", "%1")
+	-- file = vim.api.nvim_exec("filter #vim-fugitive/" .. file .. "# scriptnames", true)
+	file = vim.api.nvim_exec2("filter #vim-fugitive/" .. file .. "# scriptnames", { output = true })
+	file = string.gsub(file.output, "^%s*(.-)%s*$", "%1")
 	return tonumber(file:match "^(%d+)")
 end
 

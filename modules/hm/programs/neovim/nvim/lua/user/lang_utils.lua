@@ -16,6 +16,7 @@ function M.on_attach(client, bufnr)
 	if vim.version().api_prerelease and client.server_capabilities.inlayHintProvider then
 		vim.lsp.inlay_hint(0, true)
 	end
+  client.server_capabilities.semanticTokensProvider = nil
 end
 
 M.ensure_installed = {
@@ -51,7 +52,7 @@ M.ensure_installed = {
 		"astro",
 		"bash",
 		"bibtex",
-		"comment",
+		-- "comment", -- forbidden one
 		"css",
 		"dart",
 		"dockerfile",

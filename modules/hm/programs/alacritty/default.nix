@@ -1,17 +1,10 @@
 { config, lib, pkgs, namespace, ... }:
 let
   cfg = config.${namespace}.programs.alacritty;
-  inherit (builtins) filter;
-  inherit (config.${namespace}.lib) recursiveSymlink;
+  inherit (config.${namespace}.lib) recursiveSymlink wrapWithNixGLIntel;
   inherit (lib) mkEnableOption mkIf mkOption;
   inherit (pkgs.lib) hasSuffix;
-  wrapped_alacritty = pkgs.writeShellScriptBin "wrapped_alacritty" ''
-    if command -v "nixGLIntel" &> /dev/null; then
-        nixGLIntel alacritty "$@"
-    else
-        alacritty "$@"
-    fi
-  '';
+  wrapped_alacritty = wrapWithNixGLIntel "wrapped_alacritty" "alacritty";
   joined_alacritty = pkgs.symlinkJoin {
     name = "joined_alacritty";
     paths = [ wrapped_alacritty pkgs.alacritty ];
@@ -32,7 +25,7 @@ in {
       directory = "alacritty";
       path = ./.;
       filter = list:
-        filter (f: (!hasSuffix ".nix" f) && (hasSuffix ".yml" f)) list;
+        builtins.filter (f: (!hasSuffix ".nix" f) && (hasSuffix ".yml" f)) list;
     };
     xdg.desktopEntries."Alacritty" = {
       name = "Alacritty";

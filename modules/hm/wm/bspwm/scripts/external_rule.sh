@@ -9,7 +9,7 @@ window_type="$(xprop -id "$window_id" _NET_WM_WINDOW_TYPE | sed '/^_NET_WM_WINDO
 window_title="$(xtitle "$window_id")"
 
 case "$window_class" in
-  ncmpcpp)
+  ncmpcpp|btop|tswitch)
     echo "state=floating";
     ;;
   firefox-nightly) 
@@ -17,8 +17,6 @@ case "$window_class" in
     echo "state=tiled";
     echo "follow=off";
     ;;
-  btop)
-    echo "state=floating";
 esac
 
 case "$window_title" in

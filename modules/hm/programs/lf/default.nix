@@ -1,7 +1,7 @@
 { config, namespace, lib, pkgs, ... }:
 let
   inherit (lib) mkEnableOption mkIf;
-  inherit (config.${namespace}.lib) mkConfigSymlinkFromList;
+  inherit (config.${namespace}.lib) runtimePath recursiveSymlink;
   cfg = config.${namespace}.programs.lf;
 in {
   options.${namespace}.programs.lf = { enable = mkEnableOption "lf"; };
@@ -25,21 +25,14 @@ in {
         d = "";
       };
       extraConfig = ''
-        source ${config.home.homeDirectory}/.config/lf/my-extra-lfrc
+        source ${runtimePath ./my-extra-lfrc}/.config/lf/my-extra-lfrc
       '';
     };
     home.packages = [ pkgs.chafa ];
-
-    home.file = mkConfigSymlinkFromList {
-      relativePath = "modules/hm/programs";
-      paths = [
-        "lf/icons"
-        "lf/colors"
-        "lf/my-extra-lfrc"
-        "lf/lf_kitty_clean"
-        "lf/lf_kitty_preview"
-        "lf/lf_sixel_preview"
-      ];
+    xdg.configFile = recursiveSymlink {
+      directory = "lf";
+      path = ./.;
+      filter = list: lib.filter (f: !lib.hasSuffix ".nix" f) list;
     };
   };
 }

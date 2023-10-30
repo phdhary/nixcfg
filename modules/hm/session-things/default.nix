@@ -1,22 +1,19 @@
-{ pkgs, config, lib, namespace, ... }:
-let
-  inherit (lib) mkEnableOption mkIf mkMerge;
-  inherit (pkgs.lib) optionalAttrs;
-  cfg = config.${namespace}.session-things;
+{ config, lib, namespace, ... }:
+let cfg = config.${namespace}.session-things;
 in {
   options.${namespace}.session-things = {
-    enable = mkEnableOption "session things";
-    enableDnfAliases = mkEnableOption "dnf alias";
+    enable = lib.mkEnableOption "session things";
+    enableDnfAliases = lib.mkEnableOption "dnf alias";
   };
 
-  config = mkIf cfg.enable {
-    home.sessionVariables = mkMerge [{
+  config = lib.mkIf cfg.enable {
+    home.sessionVariables = {
       FREETYPE_PROPERTIES = "cff:no-stem-darkening=0";
       FVM_HOME = "$HOME/development/fvm"; # deprecated
       FVM_CACHE_PATH = "$HOME/development/fvm";
       PNPM_HOME = "${config.xdg.dataHome}/pnpm";
       NIXOS_OZONE_WL = "1";
-    }];
+    };
 
     home.sessionPath = [
       "$HOME/.cargo/bin"
@@ -50,7 +47,7 @@ in {
       ranger = ". ranger";
       rm = "rm -i";
       svim = "sudo -e";
-    } // optionalAttrs cfg.enableDnfAliases {
+    } // lib.optionalAttrs cfg.enableDnfAliases {
       # dnf
       dnfl = "dnf list";
       dnfli = "dnf list installed";

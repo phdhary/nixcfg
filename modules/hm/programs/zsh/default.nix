@@ -1,31 +1,11 @@
 { config, lib, namespace, pkgs, ... }:
 let
-  inherit (lib) mkEnableOption mkIf mkMerge;
-  inherit (config.${namespace}.lib) mkConfigSymlinkFromList;
-  inherit (config.home) homeDirectory;
-  cfg = config.${namespace}.shells;
+  cfg = config.${namespace}.programs.zsh;
+  inherit (config.${namespace}.lib) runtimePath;
+  inherit (config.lib.file) mkOutOfStoreSymlink;
 in {
-  options.${namespace}.shells = { enable = mkEnableOption "shells"; };
-
-  config = mkIf cfg.enable {
-    programs.bash = {
-      enable = true;
-      enableCompletion = true;
-      profileExtra = ''
-        if [ -d "/var/lib/flatpak/exports/bin" ] ; then
-          PATH=$PATH:/var/lib/flatpak/exports/bin
-        fi
-        # added by Nix installer
-        if [ -e ${homeDirectory}/.nix-profile/etc/profile.d/nix.sh ]; then
-          . ${homeDirectory}/.nix-profile/etc/profile.d/nix.sh;
-        fi
-      '';
-      bashrcExtra = ''
-        export SDKMAN_DIR="$HOME/.sdkman"
-        [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
-      '';
-    };
-
+  options.${namespace}.programs.zsh = { enable = lib.mkEnableOption "zsh"; };
+  config = lib.mkIf cfg.enable {
     programs.zsh = {
       enable = true;
       enableCompletion = true;
@@ -63,22 +43,8 @@ in {
         . "$HOME/.config/zsh/.some-function"
       '';
     };
-
-    home.packages = with pkgs.unstable; [ zsh-completions ];
-
-    home.file = let relativePath = "modules/hm/shells";
-    in mkMerge [
-      (mkConfigSymlinkFromList {
-        inherit relativePath;
-        paths = [ "starship.toml" "zsh/.some-function" ];
-      })
-    ];
-
-    programs.starship = {
-      enable = true;
-      enableZshIntegration = true;
-      enableBashIntegration = true;
-      package = pkgs.unstable.starship;
-    };
+    home.packages = [ pkgs.unstable.zsh-completions ];
+    xdg.configFile."zsh/.some-function".source =
+      mkOutOfStoreSymlink (runtimePath ./.some-function);
   };
 }

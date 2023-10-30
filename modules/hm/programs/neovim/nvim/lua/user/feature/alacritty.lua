@@ -25,4 +25,33 @@ function M.auto()
 	end
 end
 
+local thame = {
+	["ayu-light"] = { "ayu", "ayu-dark", "ayu-mirage" },
+	["kanagawa-lotus"] = { "kanagawa", "kanagawa-wave", "kanagawa-dragon" },
+	["rose-pine-dawn"] = { "rose-pine", "rose-pine-main", "rose-pine-moon" },
+	["tokyonight-day"] = { "tokyonight", "tokyonight-night", "tokyonight-moon", "tokyonight-storm" },
+}
+
+-- stylua: ignore
+local function apply_by_bg2(light,dark)
+  if vim.o.bg == "dark" then change_alacritty_theme(dark)
+  elseif vim.o.bg == "light" then change_alacritty_theme(light)
+  end
+end
+
+function M.auto2()
+	local current_colorscheme_name = require("user.config").colorscheme
+	for light_name, theme_names in pairs(thame) do
+		for _, value in pairs(theme_names) do
+			if current_colorscheme_name == value then
+				-- vim.print("light_name = " .. light_name)
+				-- vim.print("value = " .. value)
+				pcall(apply_by_bg2, light_name, current_colorscheme_name)
+				return
+			end
+			pcall(change_alacritty_theme, current_colorscheme_name)
+		end
+	end
+end
+
 return M

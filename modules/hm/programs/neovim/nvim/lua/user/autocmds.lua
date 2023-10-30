@@ -131,20 +131,40 @@ autocmd("FileType", {
 	desc = "options",
 })
 
+-- autocmd("OptionSet", {
+-- 	group = group,
+-- 	pattern = "background",
+-- 	callback = function()
+-- 		local current = require("user.config").colorscheme
+-- 		local a = { "rose-pine", "rose-pine-main", "rose-pine-moon" }
+-- 		for _, value in pairs(a) do
+-- 			if vim.o.background == "light" and current == value then
+-- 				vim.cmd.colorscheme "rose-pine-dawn"
+-- 			end
+-- 			if vim.o.background == "dark" and current == value then
+-- 				vim.cmd.colorscheme(value)
+-- 			end
+-- 		end
+-- 	end,
+-- 	desc = "rose-pine bg",
+-- })
+
 autocmd("ColorScheme", {
 	group = group,
 	callback = function()
 		local config_file_path = vim.fn.stdpath "config" .. "/lua/user/config.lua"
+		local current_colorscheme = require("user.config").colorscheme
 		local utils = require "user.utils"
 		utils.update_one_line_in_a_file(
 			"colorscheme",
-			string.format([[\tcolorscheme = "%s",]], vim.g.colors_name),
+			string.format([[\tcolorscheme = "%s",]], current_colorscheme),
 			config_file_path
 		)
-		require("user.feature.alacritty").auto()
-		vim.cmd "silent !killall -USR1 nvim" -- send signal to all nvim
+		-- require("user.feature.alacritty").auto()
+		-- require("user.feature.alacritty").auto2()
+		-- vim.cmd "silent !killall -USR1 nvim" -- send signal to all nvim
 	end,
-	desc = "auto kitty theme",
+	desc = "auto alacritty theme",
 })
 
 autocmd("ColorScheme", {

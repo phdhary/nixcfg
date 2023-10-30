@@ -1,5 +1,5 @@
 { config, namespace, ... }:
-let inherit (config.${namespace}.lib) enabled disabled;
+let inherit (config.${namespace}.lib) enabled disabled runtimePath;
 in {
   xdg.systemDirs.data = [
     "${config.home.homeDirectory}/.nix-profile/share" # to make .desktop files detected by DE
@@ -7,7 +7,7 @@ in {
 
   programs.home-manager.enable = true;
   home.shellAliases.hm =
-    "home-manager --flake ${config.${namespace}.lib.hmConfigPath}#dude-nixga";
+    "home-manager --flake ${runtimePath ../../.}#dude-nixga";
 
   ${namespace} = {
     fonts = enabled;
@@ -33,7 +33,6 @@ in {
       enable = true;
       enableDnfAliases = true;
     };
-    shells = enabled;
     # wm.bspwm = enabled;
   };
 }

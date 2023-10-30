@@ -1,7 +1,8 @@
 { config, namespace, lib, pkgs, ... }:
 let
   inherit (lib) mkEnableOption mkIf;
-  inherit (config.${namespace}.lib) mkXdgConfigLink;
+  inherit (config.${namespace}.lib) runtimePath;
+  inherit (config.lib.file) mkOutOfStoreSymlink;
   cfg = config.${namespace}.programs.pop-shell;
 in {
   options.${namespace}.programs.pop-shell = {
@@ -10,10 +11,7 @@ in {
 
   config = mkIf cfg.enable {
     # home.packages= [pkgs.gnomeExtensions.pop-shell];
-    xdg.configFile = mkXdgConfigLink {
-      relativePath = "modules/hm/programs";
-      directory = "pop-shell";
-      paths = [ "config.json" ];
-    };
+    xdg.configFile."pop-shell/config.json".source =
+      mkOutOfStoreSymlink (runtimePath ./config.json);
   };
 }

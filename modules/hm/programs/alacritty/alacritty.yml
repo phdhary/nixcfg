@@ -11,6 +11,10 @@ window:
   dimensions:
     columns: 104
     lines: 24
+  padding:
+   x: 0
+   y: 0
+  dynamic_padding: true
 
 font: 
   size: 13.0

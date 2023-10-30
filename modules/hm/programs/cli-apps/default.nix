@@ -43,6 +43,6 @@ in {
         unstable.yt-dlp
         wormhole-rs
         zellij
-      ] ++ (with packages; [ hm-cleanup unimatrix note-taker ]);
+      ] ++ (with packages; [ tswitch hm-cleanup unimatrix note-taker ]);
   };
 }

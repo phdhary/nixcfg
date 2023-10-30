@@ -1,36 +1,40 @@
 { lib, config, pkgs, namespace, ... }:
-let cfg = config.${namespace}.programs.wezterm;
-inherit (config.${namespace}.lib) mkConfigSymlinkFromList;
+let
+  cfg = config.${namespace}.programs.wezterm;
+  inherit (config.${namespace}.lib) runtimePath wrapWithNixGLIntel;
+  inherit (config.lib.file) mkOutOfStoreSymlink;
 in {
   options.${namespace}.programs.wezterm = {
     enable = lib.mkEnableOption "wezterm terminal emulator";
+    package = lib.mkOption {
+      type = lib.types.package;
+      default = pkgs.unstable.wezterm;
+    };
   };
 
   config = lib.mkIf cfg.enable {
     # home.sessionVariables.TERMINAL = "wezterm";
-
-    home.file = mkConfigSymlinkFromList {
-      relativePath = "modules/hm/programs";
-      paths = [ "wezterm/colors/" "wezterm/config/" ];
-    };
-
     programs.wezterm = {
       enable = true;
-      # package = pkgs.unstable.wezterm;
       package = let
-        wezterm = "${pkgs.unstable.wezterm}/bin/wezterm start --cwd .";
-        wrapped_wezterm = pkgs.writeShellScriptBin "wrapped_wezterm" ''
-          if command -v "nixGLIntel" &> /dev/null; then
-              nixGLIntel ${wezterm} "$@"
-          else
-              ${wezterm} "$@"
-          fi
-        '';
+        wezterm = "${cfg.package}/bin/wezterm start --cwd .";
+        wrapped_wezterm = wrapWithNixGLIntel "wrapped_wezterm" wezterm;
       in pkgs.symlinkJoin {
         name = "wezterm";
-        paths = [ wrapped_wezterm pkgs.unstable.wezterm ];
+        paths = [ wrapped_wezterm cfg.package ];
       };
       extraConfig = ''return require "config"'';
+    };
+
+    xdg.configFile = {
+      "wezterm/colors/" = {
+        source = mkOutOfStoreSymlink (runtimePath ./colors);
+        recursive = true;
+      };
+      "wezterm/config/" = {
+        source = mkOutOfStoreSymlink (runtimePath ./config);
+        recursive = true;
+      };
     };
 
     xdg.desktopEntries."org.wezfurlong.wezterm" = {

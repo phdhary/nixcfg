@@ -3,7 +3,7 @@ return {
 		"Shatur/neovim-ayu",
 		event = "VimEnter",
 		config = function()
-			local colors, is_mirage = require "ayu.colors", true
+			local colors, is_mirage = require "ayu.colors", false
 			colors.generate(is_mirage)
 			require("ayu").setup {
 				mirage = is_mirage,
@@ -33,15 +33,15 @@ return {
 	{
 		"rebelot/kanagawa.nvim",
 		event = "VimEnter",
-		build = [[
-    cp extras/*.conf ~/.config/kitty/themes/
-    cd extras/;
-    for THEME in alacritty*; do 
-      DASHED=$(echo "$THEME" | sed 's/alacritty_//' | awk '{ sub("_","-"); print $1 }'); 
-      cp "$THEME" ~/.config/alacritty/themes/"$DASHED";
-    done
-    cd ../;
-    ]],
+		-- build = [[
+		--   cp extras/*.conf ~/.config/kitty/themes/
+		--   cd extras/;
+		--   for THEME in alacritty*; do
+		--     DASHED=$(echo "$THEME" | sed 's/alacritty_//' | awk '{ sub("_","-"); print $1 }');
+		--     cp "$THEME" ~/.config/alacritty/themes/"$DASHED";
+		--   done
+		--   cd ../;
+		--   ]],
 		opts = {
 			compile = true,
 			functionStyle = { bold = true },
@@ -83,7 +83,7 @@ return {
 		name = "rose-pine",
 		event = "VimEnter",
 		opts = {
-			dark_variant = "moon", --- @usage 'main' | 'moon'
+			dark_variant = "main", --- @usage 'main' | 'moon'
 			dim_nc_background = false,
 			disable_background = require("user.config").transparent,
 			disable_float_background = false,
@@ -178,17 +178,17 @@ return {
 	{
 		"folke/tokyonight.nvim",
 		event = "VimEnter",
-    build = [[
-    cd extras/alacritty/;
-    for THEME in tokyonight*; do 
-      DASHED=$(echo "$THEME" | awk '{ sub("_","-",$1); print $1 }');
-      cp "$THEME" ~/.config/alacritty/themes/"$DASHED";
-    done
-    cd ../;
-
-    ]],
+		-- build = [[
+		--   cd extras/alacritty/;
+		--   for THEME in tokyonight*; do
+		--     DASHED=$(echo "$THEME" | awk '{ sub("_","-",$1); print $1 }');
+		--     cp "$THEME" ~/.config/alacritty/themes/"$DASHED";
+		--   done
+		--   cd ../;
+		--
+		--   ]],
 		opts = {
-			style = "moon", --  `storm`, `moon`, `night` and `day`
+			style = "night", --  `storm`, `moon`, `night` and `day`
 			transparent = require("user.config").transparent,
 			day_brightness = 0.0,
 			styles = {
@@ -266,17 +266,17 @@ return {
 	{
 		"bluz71/vim-nightfly-colors",
 		event = "VimEnter",
-		build = [[
-    cp extras/kitty-theme.conf ~/.config/kitty/themes/nightfly.conf
-    cp extras/alacritty.yml ~/.config/alacritty/themes/nightfly.yml
-    ]],
+		-- build = [[
+		--   cp extras/kitty-theme.conf ~/.config/kitty/themes/nightfly.conf
+		--   cp extras/alacritty.yml ~/.config/alacritty/themes/nightfly.yml
+		--   ]],
 		dependencies = {
 			{
 				"bluz71/vim-moonfly-colors",
-				build = [[
-        cp extras/kitty-theme.conf ~/.config/kitty/themes/moonfly.conf
-        cp extras/alacritty.yml ~/.config/alacritty/themes/moonfly.yml
-        ]],
+				-- build = [[
+				--     cp extras/kitty-theme.conf ~/.config/kitty/themes/moonfly.conf
+				--     cp extras/alacritty.yml ~/.config/alacritty/themes/moonfly.yml
+				--     ]],
 			},
 		},
 		config = function()
@@ -351,15 +351,15 @@ return {
 	},
 	{
 		"EdenEast/nightfox.nvim",
-		build = [[
-	     cd extra/;
-	     for DIR in *fox; do
-	         cd "$DIR";
-	         cp *.conf ~/.config/kitty/themes/"$DIR".conf;
-	         cp *.yml ~/.config/alacritty/themes/"$DIR".yml;
-	         cd ../;
-	     done
-	   ]],
+		-- build = [[
+		--     cd extra/;
+		--     for DIR in *fox; do
+		--         cd "$DIR";
+		--         cp *.conf ~/.config/kitty/themes/"$DIR".conf;
+		--         cp *.yml ~/.config/alacritty/themes/"$DIR".yml;
+		--         cd ../;
+		--     done
+		--   ]],
 		event = "VimEnter",
 		opts = {
 			groups = {

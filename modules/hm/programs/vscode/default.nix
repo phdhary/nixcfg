@@ -3,12 +3,16 @@ let cfg = config.${namespace}.programs.vscode;
 in {
   options.${namespace}.programs.vscode = {
     enable = lib.mkEnableOption "visual studio code";
+    package = lib.mkOption {
+      type = lib.types.package;
+      default = pkgs.unstable.vscode;
+    };
   };
 
   config = lib.mkIf cfg.enable {
     programs.vscode = {
       enable = true;
-      package = pkgs.unstable.vscode;
+      package = cfg.package;
       extensions = with pkgs.nix-vscode-extensions.vscode-marketplace; [
         aaron-bond.better-comments
         albert.tabout
