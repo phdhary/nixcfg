@@ -18,8 +18,8 @@ fi
 
 kill "$(ps ax | grep "tail -f "$light_fifo_file"" | grep -v grep | awk '{print $1}')"
 kill "$(ps ax | grep "@xob@ -s brightness" | grep -v grep | awk '{print $1}')"
-tail -f "$light_fifo_file" | @xob@ -s brightness &
+tail -f "$light_fifo_file" | @xob@ -s brightness >/dev/null 2>&1 &
 
 kill "$(ps ax | grep "tail -f "$volume_fifo_file"" | grep -v grep | awk '{print $1}')"
 kill "$(ps ax | grep "@xob@ -s volume" | grep -v grep | awk '{print $1}')"
-tail -f "$volume_fifo_file" | @xob@ -s volume &
+tail -f "$volume_fifo_file" | @xob@ -s volume >/dev/null 2>&1 &

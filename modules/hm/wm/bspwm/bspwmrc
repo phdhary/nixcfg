@@ -20,7 +20,7 @@ fi
 ~/.config/bspwm/scripts/monitor.sh
 ~/.config/polybar/launch.sh
 
-bspc config 'border_width'            '2'
+bspc config 'border_width'            '3'
 bspc config 'borderless_monocle'      'on'
 bspc config 'gapless_monocle'         'on'
 bspc config 'split_ratio'             '0.52'

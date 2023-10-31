@@ -27,7 +27,10 @@ list=(
 "tokyonight-storm"
 )
 
-selected=$(printf "%s\n" "${list[@]}" | fzf)
+current=$(cat ~/.config/alacritty/current_theme.yml | tail -1 | awk '{print $2}' | cut -c28- | sed 's/.yml//')
+
+# selected=$(printf "%s\n" "${list[@]}" | fzf --layout=reverse)
+selected=$(printf "%s\n" "${list[@]}" | rofi -dmenu -p "($current)" -matching fuzzy -theme-str '#window { width: 25%; }')
 
 if [ -z "$selected" ]; then
   exit
@@ -45,7 +48,6 @@ sadd_first_only() {
 
 sadd_line() {
   sed -i "$1s/.*$2.*/$3/" $4
-  # sed -i "$1,/$2/ s/.*$2.*/$3/" $4
 }
 
 get_first_match() {
@@ -62,7 +64,8 @@ foreground=$(get_first_match "foreground")
 primary=$(get_first_match "blue")
 secondary=$(get_first_match "green")
 alert=$(get_first_match "red")
-disabled=$(get_first_match "white")
+disabled=$(get_second_match "black")
+yellow=$(get_first_match "yellow")
 
 apply_alacritty() {
   local file=~/.config/nixcfg/modules/hm/programs/alacritty/current_theme.yml
@@ -80,7 +83,7 @@ apply_polybar() {
   sadd_first_only "background" "background = $background" $file
   sadd_first_only "background\-alt" "background\-alt = $background_alt" $file
   sadd_first_only "foreground" "foreground = $foreground" $file
-  sadd_first_only "primary" "primary = $primary" $file
+  sadd_first_only "primary" "primary = $foreground" $file
   sadd_first_only "secondary" "secondary = $secondary" $file
   sadd_first_only "alert" "alert = $alert" $file
   sadd_first_only "disabled" "disabled = $disabled" $file
@@ -98,15 +101,63 @@ apply_bspwm() {
 
 apply_dunst() {
   local file=~/.config/nixcfg/modules/hm/programs/dunst/dunstrc
-  sadd_line 316 "background" "    background = \"$background_alt\"" $file
-  sadd_line 317 "foreground" "    foreground = \"$disabled\"" $file
-  sadd_line 323 "background" "    background = \"$primary\"" $file
-  sadd_line 325 "foreground" "    foreground = \"$background\"" $file
-  sadd_line 331 "background" "    background = \"$alert\"" $file
-  sadd_line 332 "foreground" "    foreground = \"$background\"" $file
+  _replace_dunst() {
+    sed -i -r "$1s/=.*/= \"$2\"/" $file
+  }
+  _replace_dunst 316 $background_alt
+  _replace_dunst 317 $foreground
+  _replace_dunst 323 $primary
+  _replace_dunst 325 $background
+  _replace_dunst 331 $alert
+  _replace_dunst 332 $background
   pid=$(pidof dunst); kill $pid && dunst &
   # sleep 1
   # notify-send -u critical "critical"; notify-send -u normal "normal"; notify-send -u low "low"
+}
+
+apply_xob() {
+  local file=~/.config/nixcfg/modules/hm/programs/xob/styles.cfg
+  _replace_xob() {
+    sed -i -r "$1s/=.*/= \"$2\";/" $file
+  }
+  # volume
+  _replace_xob 25 $foreground
+  _replace_xob 26 $background
+  _replace_xob 27 $foreground
+  _replace_xob 30 $background_alt
+  _replace_xob 31 $background
+  _replace_xob 32 $background_alt
+  # brightness
+  _replace_xob 59 $yellow
+  _replace_xob 60 $background
+  _replace_xob 61 $yellow
+  _replace_xob 64 $background_alt
+  _replace_xob 65 $background
+  _replace_xob 66 $background_alt
+  nohup xob_server >/dev/null 2>&1
+}
+
+apply_rofi() {
+  local file=~/.config/nixcfg/modules/hm/programs/rofi/encus.rasi
+  _replace_rofi() {
+    sed -i -r "$1s/\:.*/: $2;/" $file
+  }
+  _replace_rofi 2 $background;
+  _replace_rofi 4 $background_alt;
+  _replace_rofi 5 $foreground;
+  _replace_rofi 7 $foreground;
+  _replace_rofi 8 $background;
+}
+
+toggle_gnome() {
+  case "$selected" in
+    *"light"*|*"lotus"*|*"day"*|*"latte"*|*"dawn"*)
+      gsettings set org.gnome.desktop.interface color-scheme "default"
+    ;;
+    *)
+      gsettings set org.gnome.desktop.interface color-scheme "prefer-dark"
+    ;;
+  esac
 }
 
 apply_alacritty
@@ -114,3 +165,7 @@ apply_nvim
 apply_polybar
 apply_bspwm
 apply_dunst
+apply_xob
+apply_rofi
+toggle_gnome
+exit

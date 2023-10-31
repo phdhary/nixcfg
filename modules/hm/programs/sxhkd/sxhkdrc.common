@@ -37,7 +37,9 @@ super + space; b
  
 # open color switcher
 super + space; c
-  wrapped_alacritty --class=tswitch -t="Switch Theme" -o="window.dimensions.columns=40" -e tswitch
+  ~/.config/nixcfg/packages/tswitch/tswitch.sh
+  # wrapped_alacritty --class=tswitch -t="Switch Theme" -o="window.dimensions.columns=40" -e ~/.config/nixcfg/packages/tswitch/tswitch.sh
+  # wrapped_alacritty --class=tswitch -t="Switch Theme" -o="window.dimensions.columns=40" -e tswitch
 
 # function keys {{{
 

@@ -1,11 +1,9 @@
 # Colors (Ayu Light)
 colors:
-  # Default colors - taken from ayu-colors
   primary:
     background: '#fafafa'
     foreground: '#575f66'
 
-  # Normal colors - taken from ayu-iTerm
   normal:
     black:   '#575f66'
     red:     '#f51818'
@@ -16,7 +14,6 @@ colors:
     cyan:    '#4cbf99'
     white:   '#fafafa'
 
-  # Bright colors - pastel lighten 0.1 <normal> except black lighten with 0.2
   bright:
     black:   '#8a9199'
     red:     '#f51818'
