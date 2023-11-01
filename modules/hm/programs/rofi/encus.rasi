@@ -1,11 +1,11 @@
 * {
-    bg-col: #191724;
+    bg-col: #1a1b26;
     bg-col-light: #1e1e2e;
-    border-col: #6e6a86;
-    selected-col: #e0def4;
+    border-col: #414868;
+    selected-col: #c0caf5;
     blue: #89b4fa;
-    fg-col: #e0def4;
-    fg-col2: #191724;
+    fg-col: #c0caf5;
+    fg-col2: #1a1b26;
     grey: #6c7086;
     width: 70%;
     font: "Inter 14,Symbols Nerd Font Mono 14";
