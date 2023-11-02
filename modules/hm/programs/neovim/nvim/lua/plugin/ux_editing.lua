@@ -6,7 +6,7 @@ return {
 	{ "junegunn/vim-easy-align", keys = { { "ga", "<Plug>(EasyAlign)", mode = { "n", "v" } } } },
 	{
 		"numToStr/Comment.nvim",
-		version = "v0.7.*",
+		version = "v0.8.*",
 		keys = { { "gc", mode = { "n", "v" } }, { "gb", mode = { "n", "v" } } },
 		opts = { pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook() },
 		dependencies = "nvim-ts-context-commentstring", -- correcting tsx & jsx comment

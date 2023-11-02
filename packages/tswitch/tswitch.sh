@@ -13,7 +13,7 @@ current=$(cat "$programs"/alacritty/current_theme.yml | tail -1 | awk '{print $2
 
 # prompt
 # selected=$(printf "%s\n" "${list[@]}" | fzf --layout=reverse)
-selected=$(printf "%s\n" "${list[@]}" | rofi -dmenu -p "($current)" -matching fuzzy -theme-str '#window { width: 25%; }')
+selected=$(printf "%s\n" "${list[@]}" | rofi -dmenu -no-custom -p "($current)" -matching fuzzy -theme-str '#window { width: 25%; }')
 
 [ -z "$selected" ] && exit
 
@@ -138,6 +138,16 @@ toggle_gnome() {
     ;;
   esac
   gsettings set org.gnome.desktop.interface color-scheme "$mode"
+
+  case "$mode" in
+    default) mode=0
+    ;;
+    prefer-dark) mode=1
+    ;;
+  esac
+  sed -i "0,/gtk-application-prefer-dark-theme/ s/=.*/=$mode/" ~/.config/gtk-3.0/settings.ini
+
+  caffeine kill && nohup caffeine start >/dev/null 2>&1
 }
 
 apply_alacritty

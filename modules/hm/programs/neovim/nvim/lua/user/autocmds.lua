@@ -252,9 +252,9 @@ autocmd("Signal", {
 	callback = function()
 		require("user.utils").reload_package_with_name "user.config"
 		local current_colorscheme = require("user.config").colorscheme
-		if vim.g.colors_name == current_colorscheme then
-			return
-		end
+		-- if vim.g.colors_name == current_colorscheme then
+		-- 	return
+		-- end
 		vim.cmd.colorscheme(current_colorscheme)
 		vim.cmd.redraw()
 		-- vim.print("got this: " .. require("user.config").colorscheme)

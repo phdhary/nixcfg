@@ -29,7 +29,7 @@ super + space; m
 
 # open btop
 super + space; t
-  wrapped_alacritty --class=btop -e btop
+  wrapped_alacritty --class=btop --title=btop -e btop
 
 # open firefox-nightly
 super + space; b

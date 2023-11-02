@@ -44,27 +44,27 @@ in {
         source-file ${runtimePath ./my-tmux.conf}
       '';
       plugins = with pkgs.tmuxPlugins; [
-        {
-          plugin = mkTmuxPlugin {
-            name = "tmux-window-name";
-            pluginName = "tmux-window-name";
-            src = pkgs.fetchFromGitHub {
-              owner = "ofirgall";
-              repo = "tmux-window-name";
-              rev = "f89e9c9d71f5a487e7276ff994cc6f7c1079c8ce";
-              sha256 = "sha256-B9l9MX4XjUThzJwL4RZtlMg9yRzWbTIkY70F2/FIDc8=";
-            };
-            nativeBuildInputs = with pkgs; [ makeWrapper ];
-            postInstall = ''
-              wrapProgram $target/tmux_window_name.tmux \
-                --prefix PATH : ${
-                  with pkgs;
-                  lib.makeBinPath ([ python39 python39Packages.libtmux ])
-                }
-            '';
-          };
-          extraConfig = ''set -g @tmux_window_name_use_tilde "True"'';
-        }
+        # {
+        #   plugin = mkTmuxPlugin {
+        #     name = "tmux-window-name";
+        #     pluginName = "tmux-window-name";
+        #     src = pkgs.fetchFromGitHub {
+        #       owner = "ofirgall";
+        #       repo = "tmux-window-name";
+        #       rev = "f89e9c9d71f5a487e7276ff994cc6f7c1079c8ce";
+        #       sha256 = "sha256-B9l9MX4XjUThzJwL4RZtlMg9yRzWbTIkY70F2/FIDc8=";
+        #     };
+        #     nativeBuildInputs = with pkgs; [ makeWrapper ];
+        #     postInstall = ''
+        #       wrapProgram $target/tmux_window_name.tmux \
+        #         --prefix PATH : ${
+        #           with pkgs;
+        #           lib.makeBinPath ([ python39 python39Packages.libtmux ])
+        #         }
+        #     '';
+        #   };
+        #   extraConfig = ''set -g @tmux_window_name_use_tilde "True"'';
+        # }
         {
           plugin = resurrect;
           extraConfig = ''

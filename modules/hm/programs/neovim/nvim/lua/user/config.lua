@@ -1,5 +1,5 @@
 return {
-	colorscheme = "tokyonight-night",
+	colorscheme = "nordfox",
 	-- border = "single",
 	border = { " ", " ", " ", " ", " ", " ", " ", " " },
 	-- border = { "🭽", "▔", "🭾", "▕", "🭿", "▁", "🭼", "▏" },

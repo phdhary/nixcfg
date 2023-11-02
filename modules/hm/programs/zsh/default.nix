@@ -21,22 +21,7 @@ in {
       initExtraBeforeCompInit = ''
         fpath=(~/.config/zsh/completion $fpath)
       '';
-      initExtra = ''
-        zstyle ':completion:*' menu select
-        # zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
-        zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'r:|=*' 'l:|=* r:|=*'
-        # MAPPINGS
-        KEYTIMEOUT=1 # 10ms for key sequences
-        bindkey '^[[Z' reverse-menu-complete
-        bindkey -v # vi mode
-        bindkey '^ ' autosuggest-accept
-        bindkey '^f' forward-word
-        bindkey "^n" down-line-or-search
-        bindkey "^p" up-line-or-search
-        # bindkey -M vicmd 'V' edit-command-line
-        bindkey -s '^z' 'fg^M'
-        [[ -f ~/.config/tabtab/zsh/__tabtab.zsh ]] && . ~/.config/tabtab/zsh/__tabtab.zsh || true
-      '';
+      initExtra = builtins.readFile ./zsh-init-extra;
       envExtra = ''
         . "$HOME/.cargo/env"
         . "$HOME/.profile"
