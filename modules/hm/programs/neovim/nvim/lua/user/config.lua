@@ -1,5 +1,5 @@
 return {
-	colorscheme = "nordfox",
+	colorscheme = "catppuccin-frappe",
 	-- border = "single",
 	border = { " ", " ", " ", " ", " ", " ", " ", " " },
 	-- border = { "🭽", "▔", "🭾", "▕", "🭿", "▁", "🭼", "▏" },

@@ -1,4 +1,3 @@
----@diagnostic disable: param-type-mismatch
 vim.api.nvim_create_user_command("ReloadConfig", function()
 	require("user.utils").reload_package_with_name "user"
 	if vim.g.colors_name ~= require("user.config").colorscheme then

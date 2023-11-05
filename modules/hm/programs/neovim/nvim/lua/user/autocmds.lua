@@ -131,24 +131,6 @@ autocmd("FileType", {
 	desc = "options",
 })
 
--- autocmd("OptionSet", {
--- 	group = group,
--- 	pattern = "background",
--- 	callback = function()
--- 		local current = require("user.config").colorscheme
--- 		local a = { "rose-pine", "rose-pine-main", "rose-pine-moon" }
--- 		for _, value in pairs(a) do
--- 			if vim.o.background == "light" and current == value then
--- 				vim.cmd.colorscheme "rose-pine-dawn"
--- 			end
--- 			if vim.o.background == "dark" and current == value then
--- 				vim.cmd.colorscheme(value)
--- 			end
--- 		end
--- 	end,
--- 	desc = "rose-pine bg",
--- })
-
 autocmd("ColorScheme", {
 	group = group,
 	callback = function()
@@ -160,9 +142,6 @@ autocmd("ColorScheme", {
 			string.format([[\tcolorscheme = "%s",]], current_colorscheme),
 			config_file_path
 		)
-		-- require("user.feature.alacritty").auto()
-		-- require("user.feature.alacritty").auto2()
-		-- vim.cmd "silent !killall -USR1 nvim" -- send signal to all nvim
 	end,
 	desc = "auto alacritty theme",
 })
@@ -250,14 +229,16 @@ autocmd("Signal", {
 	group = group,
 	pattern = "SIGUSR1",
 	callback = function()
-		require("user.utils").reload_package_with_name "user.config"
-		local current_colorscheme = require("user.config").colorscheme
-		-- if vim.g.colors_name == current_colorscheme then
-		-- 	return
-		-- end
-		vim.cmd.colorscheme(current_colorscheme)
-		vim.cmd.redraw()
-		-- vim.print("got this: " .. require("user.config").colorscheme)
+		vim.defer_fn(function()
+			require("user.utils").reload_package_with_name "user.config"
+			local current_colorscheme = require("user.config").colorscheme
+			if vim.g.colors_name == current_colorscheme then
+				return
+			end
+			vim.cmd.colorscheme(current_colorscheme)
+			vim.cmd.redraw()
+			-- vim.print("got this: " .. require("user.config").colorscheme)
+		end, 5)
 	end,
 	desc = "change colorscheme of all nvim instance",
 })

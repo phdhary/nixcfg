@@ -2,11 +2,9 @@
 # Style: carbonfox
 # Upstream: https://github.com/edeneast/nightfox.nvim/raw/main/extra/carbonfox/nightfox_alacritty.yml
 colors:
-  # Default colors
   primary:
     background: '#161616'
     foreground: '#f2f4f8'
-  # Normal colors
   normal:
     black:   '#282828'
     red:     '#ee5396'
@@ -16,7 +14,6 @@ colors:
     magenta: '#be95ff'
     cyan:    '#33b1ff'
     white:   '#dfdfe0'
-  # Bright colors
   bright:
     black:   '#484848'
     red:     '#f16da6'

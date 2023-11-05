@@ -62,7 +62,7 @@ cycle() {
 
 unmark() {
     marked="$(getid .marked.focused)" || exit
-    bspc node "${marked}" --flag marked=off --flag hidden=off
+    bspc node "${marked}" --flag marked=off --flag hidden=off -t tiled
     new="$(nextid "${marked}")"
     [ "${new}" != "${marked}" ] && bspc node "${new}" --flag marked=on
 }

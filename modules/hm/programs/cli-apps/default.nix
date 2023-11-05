@@ -23,6 +23,8 @@ in {
         httpie
         hyperfine
         jq
+        jqp
+        yq
         lolcat
         lshw
         macchina

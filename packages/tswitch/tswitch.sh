@@ -1,152 +1,170 @@
-#!/bin/sh
+#!/bin/bash
 
-nixcfg_root=~/.config/nixcfg
-hm="$nixcfg_root"/modules/hm
-programs="$hm"/programs
-wm="$hm"/wm
+NIXCFG_ROOT=~/.config/nixcfg
+HM="$NIXCFG_ROOT"/modules/hm
+PROGRAMS="$HM"/programs
+WM="$HM"/wm
 
-# get theme list
-list=$(\ls -1 "$programs"/alacritty/themes/ | sed 's/.yml//')
-
-# get current theme
-current=$(cat "$programs"/alacritty/current_theme.yml | tail -1 | awk '{print $2}' | cut -c28- | sed 's/.yml//')
-
-# prompt
+list=$(\ls -1 "$PROGRAMS"/alacritty/themes/ | sed 's/.yml//')
+current=$(cat "$PROGRAMS"/alacritty/current_theme.yml | tail -1 | awk '{print $2}' | cut -c28- | sed 's/.yml//')
 # selected=$(printf "%s\n" "${list[@]}" | fzf --layout=reverse)
 selected=$(printf "%s\n" "${list[@]}" | rofi -dmenu -no-custom -p "($current)" -matching fuzzy -theme-str '#window { width: 25%; }')
+[ -z "$selected" -o "$selected" = "$current" ] && exit
 
-[ -z "$selected" ] && exit
-
-[ "$selected" = "$current" ] && exit
-
-sadd_first_only() {
-  sed -i "0,/$1/ s/.*$1.*/$2/" $3
-}
+declare theme_mode
+case "$selected" in
+  *"light"*|*"lotus"*|*"day"*|*"latte"*|*"dawn"*) theme_mode="light" ;;
+  *) theme_mode="dark" ;;
+esac
 
 query_color() {
   local mode=$1
   local file=~/.config/alacritty/themes/"$selected".yml
   case $mode in
-    1) 
-      grep -i "$2" $file | head -1 | awk '{print $2}' | sed 's/\"//g' | sed "s/'//g"
-    ;;
-    2)
-      grep -i "$2" $file | head -2 | tail -1 | awk '{print $2}' | sed 's/\"//g' | sed "s/'//g"
-    ;;
+    1) # first match
+      grep -i "$2" $file | head -1 | awk '{print $2}' | sed 's/\"//g' | sed "s/'//g" ;;
+    2) # second match
+      grep -i "$2" $file | head -2 | tail -1 | awk '{print $2}' | sed 's/\"//g' | sed "s/'//g" ;;
   esac
 }
 
 # query alacritty's theme
 colors_background=$(query_color 1 "background")
 colors_foreground=$(query_color 1 "foreground")
-colors_blue=$(query_color 1 "blue")
-colors_green=$(query_color 1 "green")
+# normal
+colors_black=$(query_color 1 "black")
 colors_red=$(query_color 1 "red")
+colors_green=$(query_color 1 "green")
 colors_yellow=$(query_color 1 "yellow")
+colors_blue=$(query_color 1 "blue")
+colors_magenta=$(query_color 1 "magenta")
+colors_cyan=$(query_color 1 "cyan")
+colors_white=$(query_color 1 "white")
+# bright
 colors_bright_black=$(query_color 2 "black")
+colors_bright_red=$(query_color 2 "red")
+colors_bright_green=$(query_color 2 "green")
+colors_bright_yellow=$(query_color 2 "yellow")
+colors_bright_blue=$(query_color 2 "blue")
+colors_bright_magenta=$(query_color 2 "magenta")
+colors_bright_cyan=$(query_color 2 "cyan")
+colors_bright_white=$(query_color 2 "white")
 
 apply_alacritty() {
-  local file="$programs"/alacritty/current_theme.yml
-  sed -i -r "2s/$current/$selected/" $file;
+  sed -i -r "2s/$current/$selected/" "$PROGRAMS"/alacritty/current_theme.yml
 }
 
 apply_nvim() {
-  local file="$programs"/neovim/nvim/lua/user/config.lua
-  sed -i -r "/colorscheme/ s/\=.*/\= \"$selected\",/" $file
+  sed -i -r "/colorscheme/ s/\=.*/\= \"$selected\",/" "$PROGRAMS"/neovim/nvim/lua/user/config.lua
   killall -USR1 nvim
 }
 
 apply_polybar() {
-  local file="$programs"/polybar/config.ini
-  sadd_first_only "background" "background = $colors_background" $file
-  sadd_first_only "background\-alt" "background\-alt = $colors_bright_black" $file
-  sadd_first_only "foreground" "foreground = $colors_foreground" $file
-  sadd_first_only "primary" "primary = $colors_foreground" $file
-  sadd_first_only "secondary" "secondary = $colors_green" $file
-  sadd_first_only "alert" "alert = $colors_red" $file
-  sadd_first_only "disabled" "disabled = $colors_bright_black" $file
+  declare sed_str
+  declare -A arr
+  arr["background"]=$colors_background
+  arr["foreground"]=$colors_foreground
+  arr["primary"]=$colors_foreground
+  arr["secondary"]=$colors_green
+  arr["alert"]=$colors_red
+  arr["disabled"]=$colors_bright_black
+  arr["background\-alt"]=$colors_bright_black
+  for key in ${!arr[@]}; do
+    sed_str+="0,/${key}/ s/${key}.*/${key} = ${arr[$key]}/ ; "
+  done
+  sed -i -e "$sed_str" "$PROGRAMS"/polybar/config.ini
   # polybar-msg cmd restart
 }
 
 apply_bspwm() {
-  local file="$wm"/bspwm/bspwmrc
-  sadd_first_only "normal_border_color" "bspc config 'normal_border_color'     '$colors_bright_black'" $file
-  sadd_first_only "focused_border_color" "bspc config 'focused_border_color'    '$colors_blue'" $file
-
-  bspc config 'normal_border_color' "$colors_bright_black"
-  bspc config 'focused_border_color' "$colors_blue"
+  local normal_border_color=$colors_bright_black
+  declare focused_border_color
+  declare sed_str
+  declare -A arr
+  case "$theme_mode" in
+    light) focused_border_color=$colors_magenta ;;
+    dark) focused_border_color=$colors_blue ;;
+  esac
+  bspc config 'normal_border_color' "$normal_border_color"
+  bspc config 'focused_border_color' "$focused_border_color"
+  arr["normal_border_color"]=$normal_border_color
+  arr["focused_border_color"]=$focused_border_color
+  for key in ${!arr[@]}; do
+    sed_str+="/${key}/s/'#.*'/'${arr[$key]}'/ ; "
+  done
+  sed -i -e "$sed_str" "$WM"/bspwm/bspwmrc
 }
 
 apply_dunst() {
-  local file="$programs"/dunst/dunstrc
-  _replace_dunst() {
-    sed -i -r "$1s/=.*/= \"$2\"/" $file
-  }
-  _replace_dunst 316 $colors_bright_black
-  _replace_dunst 317 $colors_foreground
-  _replace_dunst 323 $colors_blue
-  _replace_dunst 325 $colors_background
-  _replace_dunst 331 $colors_red
-  _replace_dunst 332 $colors_background
+  declare sed_str
+  declare -A arr
+  arr[316]=$colors_bright_black
+  arr[317]=$colors_foreground
+  arr[323]=$colors_blue
+  arr[325]=$colors_background
+  arr[331]=$colors_red
+  arr[332]=$colors_background
+  for key in ${!arr[@]}; do
+    sed_str+="${key}s/=.*/= \"${arr[$key]}\"/ ; "
+  done
+  sed -i -e "$sed_str" "$PROGRAMS"/dunst/dunstrc
   pid=$(pidof dunst); kill $pid && dunst &
   # sleep 1
   # notify-send -u critical "critical"; notify-send -u normal "normal"; notify-send -u low "low"
 }
 
 apply_xob() {
-  local file="$programs"/xob/styles.cfg
-  _replace_xob() {
-    sed -i -r "$1s/=.*/= \"$2\";/" $file
-  }
+  declare sed_str
+  declare -A arr
   # volume
-  _replace_xob 25 $colors_foreground
-  _replace_xob 26 $colors_background
-  _replace_xob 27 $colors_foreground
-  _replace_xob 30 $colors_bright_black
-  _replace_xob 31 $colors_background
-  _replace_xob 32 $colors_bright_black
+  arr[25]=$colors_foreground
+  arr[26]=$colors_background
+  arr[27]=$colors_foreground
+  arr[30]=$colors_bright_black
+  arr[31]=$colors_background
+  arr[32]=$colors_bright_black
   # brightness
-  _replace_xob 59 $colors_yellow
-  _replace_xob 60 $colors_background
-  _replace_xob 61 $colors_yellow
-  _replace_xob 64 $colors_bright_black
-  _replace_xob 65 $colors_background
-  _replace_xob 66 $colors_bright_black
+  arr[59]=$colors_foreground
+  arr[60]=$colors_background
+  arr[61]=$colors_foreground
+  arr[64]=$colors_bright_black
+  arr[65]=$colors_background
+  arr[66]=$colors_bright_black
+  for key in ${!arr[@]}; do
+    sed_str+="${key}s/=.*/= \"${arr[$key]}\";/ ; "
+  done
+  sed -i -e "$sed_str" "$PROGRAMS"/xob/styles.cfg
   nohup xob_server >/dev/null 2>&1
 }
 
 apply_rofi() {
-  local file="$programs"/rofi/encus.rasi
-  _replace_rofi() {
-    sed -i -r "$1s/\:.*/: $2;/" $file
-  }
-  _replace_rofi 2 $colors_background;
-  _replace_rofi 4 $colors_bright_black;
-  _replace_rofi 5 $colors_foreground;
-  _replace_rofi 7 $colors_foreground;
-  _replace_rofi 8 $colors_background;
+  declare sed_str
+  declare -A arr
+  arr[2]=$colors_background;
+  arr[3]=$colors_black;
+  arr[4]=$colors_foreground;
+  arr[5]=$colors_foreground;
+  arr[6]=$colors_background;
+  arr[7]=$colors_red;
+  arr[8]=$colors_magenta;
+  for key in ${!arr[@]}; do
+    sed_str+="${key}s/\:.*/: ${arr[$key]};/ ; "
+  done
+  sed -i -e "$sed_str" "$PROGRAMS"/rofi/encus.rasi
 }
 
 toggle_gnome() {
   declare mode
-  case "$selected" in
-    *"light"*|*"lotus"*|*"day"*|*"latte"*|*"dawn"*)
-      mode="default"
-    ;;
-    *)
-      mode="prefer-dark"
-    ;;
+  case "$theme_mode" in
+    light) mode="default" ;;
+    dark) mode="prefer-dark" ;;
   esac
   gsettings set org.gnome.desktop.interface color-scheme "$mode"
-
   case "$mode" in
-    default) mode=0
-    ;;
-    prefer-dark) mode=1
-    ;;
+    default) mode=0 ;;
+    prefer-dark) mode=1 ;;
   esac
   sed -i "0,/gtk-application-prefer-dark-theme/ s/=.*/=$mode/" ~/.config/gtk-3.0/settings.ini
-
   caffeine kill && nohup caffeine start >/dev/null 2>&1
 }
 
@@ -158,4 +176,3 @@ apply_dunst
 apply_xob
 apply_rofi
 toggle_gnome
-exit

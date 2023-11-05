@@ -20,7 +20,7 @@ super + f
 
 # power menu
 super + shift + e
-  rofi -show power-menu -modi power-menu:rofi-power-menu
+  rofi -show power-menu -modi power-menu:rofi-power-menu -theme-str '#window \{ width: 20ch; \}'
 # rofi -show power-menu -modi power-menu:rofi-power-menu -theme dmenu
 
 # open ncmpcpp
