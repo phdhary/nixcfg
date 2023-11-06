@@ -24,8 +24,8 @@ vim.keymap.set("n", "<leader>ll", vim.cmd.LoclistToggle)
 vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
 vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
 vim.keymap.set("n", "<leader>cd", "<CMD>cd %:p:h<CR>")
--- vim.keymap.set("n", ",e", ":e <C-R>=expand(\"%:p:h\") . \"/\" <CR>")
--- vim.keymap.set("n", ",f", ":e **/*<C-z><S-Tab>")
+vim.keymap.set("n", "\\e", ":e <C-R>=expand(\"%:p:h\") . \"/\" <CR>")
+vim.keymap.set("n", "\\f", ":e **/*<C-z><S-Tab>")
 
 
 -- vim.keymap.set("n", "<A-h>", "<C-w>h")

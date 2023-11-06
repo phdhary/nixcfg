@@ -73,3 +73,18 @@ vim.opt.grepprg = "rg"
 	.. " --vimgrep"
 
 vim.diagnostic.config { float = { border = require("user.config").border }, virtual_text = true }
+
+vim.filetype.add {
+	extension = {
+		arb = "json",
+		yuck = function()
+			vim.opt_local.commentstring = ";; %s"
+			return "yuck"
+		end,
+		rasi = function()
+			vim.opt_local.commentstring = "// %s"
+			return "rasi"
+		end,
+	},
+}
+

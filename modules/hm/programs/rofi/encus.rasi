@@ -1,13 +1,13 @@
 * {
-	bg: #303446;
-	bg-border: #51576D;
-	bg-selected: #C6D0F5;
-	fg: #C6D0F5;
-	fg-selected: #303446;
-  urgent: #E78284;
-  prompt: #F4B8E4;
+	bg: #181616;
+	bg-border: #0d0c0c;
+	bg-selected: #c5c9c5;
+	fg: #c5c9c5;
+	fg-selected: #181616;
+  urgent: #c4746e;
+  prompt: #a292a3;
 	font: "Symbols Nerd Font 14,SF Pro Display 16";
-  width: 100ch;
+  width: 50ch;
   // width: 70%;
 	margin: 0;
 	padding: 0;

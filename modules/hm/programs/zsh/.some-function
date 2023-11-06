@@ -129,7 +129,7 @@ function take() {
 }
 
 hm-rollback() {
-  directory=$(home-manager generations | fzf --height 40% --layout=reverse | awk -F ' ' '{print $7}')
+  directory=$(home-manager generations | tail -n +2 | fzf --height 40% --layout=reverse | awk -F ' ' '{print $7}')
   if [ -n "$directory" ]; then
     cd $directory;
     ./activate;

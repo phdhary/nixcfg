@@ -5,10 +5,16 @@ HM="$NIXCFG_ROOT"/modules/hm
 PROGRAMS="$HM"/programs
 WM="$HM"/wm
 
-list=$(\ls -1 "$PROGRAMS"/alacritty/themes/ | sed 's/.yml//')
+list=()
+themes=$(\ls -1 "$PROGRAMS"/alacritty/themes/ | sed 's/.yml//')
 current=$(cat "$PROGRAMS"/alacritty/current_theme.yml | tail -1 | awk '{print $2}' | cut -c28- | sed 's/.yml//')
+# exclude current theme
+for item in ${themes[@]}; do
+  [ "$item" != "$current" ] && list+=("$item")
+done
+
 # selected=$(printf "%s\n" "${list[@]}" | fzf --layout=reverse)
-selected=$(printf "%s\n" "${list[@]}" | rofi -dmenu -no-custom -p "($current)" -matching fuzzy -theme-str '#window { width: 25%; }')
+selected=$(printf "%s\n" "${list[@]}" | rofi -dmenu -no-custom -p " " -matching fuzzy -theme-str '#window { width: 25%; }')
 [ -z "$selected" -o "$selected" = "$current" ] && exit
 
 declare theme_mode
@@ -116,20 +122,12 @@ apply_dunst() {
 apply_xob() {
   declare sed_str
   declare -A arr
-  # volume
-  arr[25]=$colors_foreground
-  arr[26]=$colors_background
-  arr[27]=$colors_foreground
-  arr[30]=$colors_bright_black
-  arr[31]=$colors_background
-  arr[32]=$colors_bright_black
-  # brightness
-  arr[59]=$colors_foreground
-  arr[60]=$colors_background
-  arr[61]=$colors_foreground
-  arr[64]=$colors_bright_black
-  arr[65]=$colors_background
-  arr[66]=$colors_bright_black
+  arr[13]=$colors_foreground
+  arr[14]=$colors_background
+  arr[15]=$colors_foreground
+  arr[18]=$colors_bright_black
+  arr[19]=$colors_background
+  arr[20]=$colors_bright_black
   for key in ${!arr[@]}; do
     sed_str+="${key}s/=.*/= \"${arr[$key]}\";/ ; "
   done

@@ -28,24 +28,6 @@ autocmd("FileType", {
 
 autocmd("FileType", {
 	group = group,
-	pattern = "rasi",
-	callback = function()
-		vim.opt_local.commentstring = "// %s"
-	end,
-	desc = "rasi things",
-})
-
-autocmd("FileType", {
-	group = group,
-	pattern = "yuck",
-	callback = function()
-		vim.opt_local.commentstring = ";; %s"
-	end,
-	desc = "yuck things",
-})
-
-autocmd("FileType", {
-	group = group,
 	pattern = "help,man",
 	callback = function()
 		vim.keymap.set({ "n", "v" }, "u", "<C-u>zz", { buffer = true })
@@ -128,7 +110,7 @@ autocmd("FileType", {
 	callback = function()
 		vim.keymap.set("n", "o", "<Nop>", { buffer = true })
 	end,
-	desc = "options",
+	desc = "dressing",
 })
 
 autocmd("ColorScheme", {
@@ -143,7 +125,7 @@ autocmd("ColorScheme", {
 			config_file_path
 		)
 	end,
-	desc = "auto alacritty theme",
+	desc = "update colorscheme in config file",
 })
 
 autocmd("ColorScheme", {
@@ -175,24 +157,11 @@ autocmd("ColorScheme", {
 	desc = "adjust highlight",
 })
 
-local function set_ft(pattern, ft)
-	autocmd("BufEnter", {
-		group = group,
-		pattern = pattern,
-		callback = function()
-			vim.bo.filetype = vim.bo.filetype ~= ft and ft or vim.bo.filetype
-		end,
-		desc = string.format("set ft of %1s file to %2s", pattern, ft),
-	})
-end
-
-set_ft("*.arb", "json")
-set_ft("*.yuck", "yuck")
-set_ft("*.rasi", "rasi")
-
+local nvim_path = os.getenv "HOME" .. "/.config/nixcfg/modules/hm/programs/neovim/nvim"
 autocmd("BufWritePost", {
 	group = group,
-	pattern = vim.fn.stdpath "config" .. "/lua/user/*.lua",
+	-- pattern = vim.fn.stdpath "config" .. "/lua/user/*.lua",
+	pattern = nvim_path .. "/lua/user/*.lua",
 	callback = function()
 		local package_name = vim.fn.fnamemodify(vim.fn.expand "%", ":.:r"):gsub("lua", ""):gsub("/", "."):sub(2)
 		if package_name == "user.config" then

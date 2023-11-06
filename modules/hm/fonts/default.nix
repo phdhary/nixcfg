@@ -10,9 +10,11 @@ in {
         jetbrains-mono
         source-code-pro
         inter
+        helvetica-neue-lt-std
+        # noto-fonts-lgc-plus
         # noto-fonts-color-emoji
         (unstable.nerdfonts.override { fonts = [ "NerdFontsSymbolsOnly" ]; })
-      ] ++ (with packages.fonts; [ sf-pro-fonts ]);
+      ] ++ (with packages; [ sf-pro-fonts ]);
     fonts.fontconfig.enable = true;
   };
 }

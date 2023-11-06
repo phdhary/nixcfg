@@ -1,5 +1,5 @@
 return {
-	colorscheme = "catppuccin-frappe",
+	colorscheme = "kanagawa-dragon",
 	-- border = "single",
 	border = { " ", " ", " ", " ", " ", " ", " ", " " },
 	-- border = { "🭽", "▔", "🭾", "▕", "🭿", "▁", "🭼", "▏" },

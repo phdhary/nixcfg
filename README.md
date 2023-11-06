@@ -13,8 +13,6 @@ programs to migrate
 - [ ] distrobox
 - [ ] gh
 - [ ] gparted
-- [ ] lf
-- [ ] ranger
 - [ ] mendeley
 - [ ] nvtop/nvtop-nvidia
 - [ ] rawtherapee

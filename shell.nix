@@ -32,6 +32,6 @@ in {
   # inherit pkgs;
   default = pkgs.mkShell {
     name = "playground";
-    packages = with pkgs; [ xorg.xev dolphin];
+    packages = with pkgs; [ xorg.xev gucharmap ];
   };
 }
