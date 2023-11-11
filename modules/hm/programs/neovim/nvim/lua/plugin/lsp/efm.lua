@@ -1,8 +1,7 @@
 local spec = {
 	"creativenull/efmls-configs-nvim",
-	branch = "main",
 	lazy = true,
-	-- version = "v1.x.x", -- version is optional, but recommended
+	version = "v1.x.x", -- version is optional, but recommended
 }
 
 spec.config = function()

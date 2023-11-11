@@ -32,6 +32,7 @@ in {
       vscode = enabled;
       yazi = enabled;
       zoxide = enabled;
+      zathura = enabled;
       # shell
       bash = enabled;
       zsh = enabled;

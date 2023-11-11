@@ -1,7 +1,6 @@
-{ pkgs, ... }:
-let name = "unimatrix";
-in {
-  ${name} = pkgs.stdenv.mkDerivation {
+{ pkgs, ... }: {
+  unimatrix = let name = "unimatrix";
+  in pkgs.stdenv.mkDerivation {
     inherit name;
     src = pkgs.fetchFromGitHub {
       owner = "will8211";

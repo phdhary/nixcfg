@@ -36,6 +36,9 @@ audio = [
 	{ exec = 'mpv "$@"' },
 	{ exec = '''mediainfo "$1"; echo "Press enter to exit"; read''', block = true, display_name = "Show media info" },
 ]
+pdf = [
+	{ exec = 'zathura "$@"' },
+]
 fallback = [
 	{ exec = 'open "$@"', display_name = "Open" },
 	{ exec = 'open -R "$@"', display_name = "Reveal in Finder" },
@@ -61,6 +64,7 @@ rules = [
 	{ mime = "application/x-bzip2", use = "archive" },
 	{ mime = "application/x-7z-compressed", use = "archive" },
 	{ mime = "application/x-rar", use = "archive" },
+	{ mime = "application/pdf", use = "pdf" },
 
 	{ mime = "*", use = "fallback" },
 ]

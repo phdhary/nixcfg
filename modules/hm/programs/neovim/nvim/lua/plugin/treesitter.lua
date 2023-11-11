@@ -11,7 +11,7 @@ local spec = {
 			"nvim-treesitter/nvim-treesitter-context", -- provide context for nested code
 			opts = {
 				enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
-				max_lines = 5, -- How many lines the window should span. Values <= 0 mean no limit.
+				max_lines = 1, -- How many lines the window should span. Values <= 0 mean no limit.
 				trim_scope = "outer",
 				min_window_height = 15, -- Minimum editor window height to enable context. Values <= 0 mean no limit.
 			},

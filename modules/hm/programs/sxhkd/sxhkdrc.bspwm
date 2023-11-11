@@ -12,8 +12,9 @@ super + shift + q
 super + g
 # bspc config window_gap {0,12}
   { bspc config window_gap 0; bspc config border_width 1, \
-    bspc config window_gap 12; bspc config border_width 3 }
+    bspc config window_gap 10; bspc config border_width 3 }
 
+# toggle top bar
 super + u
   polybar-msg cmd toggle;bspc config top_padding {0,30};
 
@@ -27,18 +28,17 @@ super + {t, p ,shift + space }
 super + {_,shift + } m
   {bspc desktop -l next,bspc node -t \~fullscreen}
 
-# set the node flags
-# super + ctrl + {m,x,y,z}
-# 	bspc node -g {marked,locked,sticky,private}
-
+# hide/unmark scratch pad
 super + space; {h,u}
   ~/.config/bspwm/scripts/bspad.sh {hide,unmark}
 
+# toggle/cycle scratch pad
 super + {minus,underscore}
   ~/.config/bspwm/scripts/bspad.sh {toggle,cycle}
 
-super + r
-  bspc node -g marked;	bspc node newest.marked.local -n newest.!automatic.local;
+# rotate nodes in a desktop
+super + {_,shift + } grave
+  bspc node @/ -R {90,270}
 
 # }}}
 
@@ -48,10 +48,6 @@ super + r
 super + {_,shift + }{h,j,k,l}
 	bspc node -{f,s} {west,south,north,east}
 
-# focus the node for the given path jump
-# super + {p,b,comma,period}
-# 	bspc node -f @{parent,brother,first,second}
-
 # focus the next/previous window in the current desktop
 super + {_,shift + }c
 	bspc node -f {next,prev}.local.!hidden.window
@@ -60,23 +56,19 @@ super + {_,shift + }c
 super + {_,shift+}bracket{left,right}
 	bspc {desktop -f,node -d} {prev,next}.local --follow
 
-# focus the last node/desktop
-super + {grave,Tab}
-	bspc {node,desktop} -f last
+# focus the last desktop
+super + Tab
+	bspc desktop -f last
 
-# focus the older or newer node in the focus history
-# super + {o,i}
-# 	bspc wm -h off; \
-# 	bspc node {older,newer} -f; \
-# 	bspc wm -h on
-
-# focus or send to the given desktop
+# focus or send to the given desktop (follow)
 super + {_,shift + }{1-9,0}
 	bspc {desktop -f,node -d} '^{1-9,10}' --follow
 
+# send node to given desktop (not follow)
 super + w; {1-9,0}
 	bspc node -d '^{1-9,10}' 
 
+# swap desktop
 super + s; {1-9,0}
 	~/.config/bspwm/scripts/swap_desktop.sh '{1-9,10}' 
 # for window in $(bspc query -N -d); do bspc node -d '^{1-9,10}' ;done
@@ -94,13 +86,19 @@ super + ctrl + {h,j,k,l}
 super + ctrl + {1-9}
   bspc node -o 0.{1-9}
 
+# send node to the preselect
+super + r
+  bspc node -g marked;	bspc node newest.marked.local -n newest.!automatic.local;
+
+# increase preselect ratio
 super + ctrl + y
 	~/.config/bspwm/scripts/presel.sh increase
+
+# decrease preselect ratio
 super + ctrl + o
 	~/.config/bspwm/scripts/presel.sh decrease
 
 # cancel the preselection for the focused node
-# super + ctrl + space
 super + ctrl + e
 	bspc node -p cancel
 

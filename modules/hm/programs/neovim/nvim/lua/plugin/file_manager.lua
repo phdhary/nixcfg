@@ -97,6 +97,7 @@ return {
 	},
 	{
 		"stevearc/oil.nvim",
+    version = "v2.*.*",
 		lazy = false,
 		keys = {
 			{ "<leader>o", vim.cmd.Oil },

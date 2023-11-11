@@ -11,7 +11,7 @@ configuration {
   location: 0;
   modi: "window,drun,power:rofi-power-menu,run";
   show-icons: true;
-  terminal: "wrapped_alacritty";
+  // terminal: "rofi-sensible-terminal";
   window-format: "{w:2}\t{t}";
   xoffset: 0;
   yoffset: 0;

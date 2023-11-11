@@ -13,7 +13,7 @@ return {
 	},
 	{
 		"kylechui/nvim-surround",
-		version = "*",
+		version = "v2.1.2",
 		config = true,
 		keys = {
 			"ys",

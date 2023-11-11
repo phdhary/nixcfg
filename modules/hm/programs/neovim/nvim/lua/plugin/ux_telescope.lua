@@ -7,7 +7,7 @@ end
 
 local spec = {
 	"nvim-telescope/telescope.nvim",
-	version = "0.1.3",
+	version = "0.1.4",
 	cmd = "Telescope",
 	dependencies = {
 		{

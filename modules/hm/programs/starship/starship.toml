@@ -8,6 +8,7 @@ $git_state\
 $git_status\
 $nix_shell\
 $cmd_duration\
+$shlvl\
 $line_break\
 $character
 """
@@ -68,3 +69,12 @@ style = "bright-black"
 
 [username]
 format = "[$user]($style)@"
+# ~/.config/starship.toml
+
+[shlvl]
+disabled = false
+format = '[$symbol]($style)'
+repeat = true
+symbol = '>'
+repeat_offset = 1
+threshold = 3

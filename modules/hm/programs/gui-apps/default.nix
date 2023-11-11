@@ -10,6 +10,7 @@ in {
     home.packages = with pkgs; [
       amberol
       # bottles
+      cpu-x
       dbeaver
       dynamic-wallpaper
       eartag

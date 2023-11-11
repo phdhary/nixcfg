@@ -1,6 +1,6 @@
 { pkgs, ... }: {
-  sf-pro-fonts = pkgs.stdenvNoCC.mkDerivation {
-    name = "sf-pro-fonts";
+  font-sf-pro = pkgs.stdenvNoCC.mkDerivation {
+    name = "font-sf-pro";
     src = pkgs.fetchFromGitHub {
       owner = "sahibjotsaggu";
       repo = "San-Francisco-Pro-Fonts";
@@ -16,8 +16,8 @@
       runHook postInstall
     '';
   };
-  legacy-computing-font = pkgs.stdenvNoCC.mkDerivation {
-    name = "legacy_computing-font";
+  font-legacy_computing = pkgs.stdenvNoCC.mkDerivation {
+    name = "font-legacy_computing";
     src = pkgs.fetchurl {
       url =
         "https://github.com/dokutan/legacy_computing-font/releases/download/v1.1/LegacyComputing.ttf";

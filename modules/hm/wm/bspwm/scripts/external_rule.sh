@@ -9,10 +9,10 @@ window_type="$(xprop -id "$window_id" _NET_WM_WINDOW_TYPE | sed '/^_NET_WM_WINDO
 window_title="$(xtitle "$window_id")"
 
 case "$window_class" in
-  ncmpcpp|btop|tswitch)
+  ncmpcpp|btop)
     echo "state=floating";
     ;;
-  firefox-nightly) 
+  firefox-nightly|Zathura) 
     # echo "desktop=^1";
     echo "state=tiled";
     echo "follow=off";
@@ -20,14 +20,13 @@ case "$window_class" in
 esac
 
 case "$window_title" in
-  Calculator)
+  Calculator|cava)
     echo "state=floating"
     ;;
 esac
 
-
 case "$window_class" in
-  Nitrogen|Avizo-service)
+  Nitrogen)
     case "$window_type" in
       *DIALOG* )
         echo "state=floating"
@@ -38,7 +37,7 @@ case "$window_class" in
         # echo "state=floating"
         ;;
       *_NET_WM_WINDOW_TYPE_NORMAL* )
-        echo "state=pseudo_tiled"
+        echo "state=floating"
         ;;
     esac
     ;;

@@ -12,6 +12,7 @@ in {
         alejandra
         arandr
         caffeine-ng
+        cava
         duf
         espeak
         fd
@@ -44,6 +45,7 @@ in {
         ueberzugpp
         unstable.yt-dlp
         wormhole-rs
+        xdotool
         zellij
       ] ++ (with packages; [ hm-cleanup unimatrix note-taker ]);
   };

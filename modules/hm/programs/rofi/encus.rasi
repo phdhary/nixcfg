@@ -1,11 +1,11 @@
 * {
-	bg: #181616;
-	bg-border: #0d0c0c;
-	bg-selected: #c5c9c5;
-	fg: #c5c9c5;
-	fg-selected: #181616;
-  urgent: #c4746e;
-  prompt: #a292a3;
+	bg: #011627;
+	bg-border: #1d3b53;
+	bg-selected: #bdc1c6;
+	fg: #bdc1c6;
+	fg-selected: #011627;
+  urgent: #fc514e;
+  prompt: #c792ea;
 	font: "Symbols Nerd Font 14,SF Pro Display 16";
   width: 50ch;
   // width: 70%;
@@ -60,7 +60,7 @@ entry {
 }
 
 listview {
-  padding: 4px 0;
+  // padding: 4px 0;
 	columns: 1;
   lines: 8;
 	background-color: @bg;

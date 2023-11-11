@@ -69,15 +69,24 @@ return {
 				file_panel = { { "n", "q", require("diffview.actions").close, { desc = "close diffview" } } },
 				file_history_panel = { { "n", "q", require("diffview.actions").close, { desc = "close diffview" } } },
 			}
-			-- opts.hooks = {
-			-- 	view_enter = function()
-			-- 		git:activate()
-			-- 	end,
-			-- 	view_leave = function()
-			-- 		git.layer:exit()
-			-- 		git:exit()
-			-- 	end,
-			-- }
+			opts.hooks = {
+				diff_buf_win_enter = function(_, _, ctx)
+					if ctx.layout_name:match "^diff2" then
+						if ctx.symbol == "a" then
+							vim.opt_local.winhl = table.concat({ "DiffText:DiffDelete" }, ",")
+						elseif ctx.symbol == "b" then
+							vim.opt_local.winhl = table.concat({ "DiffText:DiffAdd" }, ",")
+						end
+					end
+				end,
+				-- view_enter = function()
+				-- 	git:activate()
+				-- end,
+				-- view_leave = function()
+				-- 	git.layer:exit()
+				-- 	git:exit()
+				-- end,
+			}
 			require("diffview").setup(opts)
 		end,
 	},

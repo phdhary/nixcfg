@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }:
+{ pkgs, inputs, lib, ... }:
 let inherit (inputs.nixpkgs.lib) mkDefault;
 in {
   home = {
@@ -12,6 +12,8 @@ in {
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
+    settings = { warn-dirty = false; };
+    registry = lib.mapAttrs (_: value: { flake = value; }) inputs;
   };
 
   xdg.configFile."nixpkgs/config.nix".text = "{allowUnfree=true;}";

@@ -8,12 +8,15 @@ WM="$HM"/wm
 list=()
 themes=$(\ls -1 "$PROGRAMS"/alacritty/themes/ | sed 's/.yml//')
 current=$(cat "$PROGRAMS"/alacritty/current_theme.yml | tail -1 | awk '{print $2}' | cut -c28- | sed 's/.yml//')
-# exclude current theme
+# add current first
+list+=("$current")
+# add the rest of themes
 for item in ${themes[@]}; do
   [ "$item" != "$current" ] && list+=("$item")
 done
 
 # selected=$(printf "%s\n" "${list[@]}" | fzf --layout=reverse)
+# selected=$(printf "%s\n" "${list[@]}" | dmenu -fn "SF Pro Display")
 selected=$(printf "%s\n" "${list[@]}" | rofi -dmenu -no-custom -p " " -matching fuzzy -theme-str '#window { width: 25%; }')
 [ -z "$selected" -o "$selected" = "$current" ] && exit
 
@@ -124,7 +127,7 @@ apply_xob() {
   declare -A arr
   arr[13]=$colors_foreground
   arr[14]=$colors_background
-  arr[15]=$colors_foreground
+  arr[15]=$colors_bright_black
   arr[18]=$colors_bright_black
   arr[19]=$colors_background
   arr[20]=$colors_bright_black

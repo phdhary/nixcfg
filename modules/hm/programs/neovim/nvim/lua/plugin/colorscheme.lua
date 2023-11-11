@@ -1,5 +1,18 @@
 return {
 	{
+		"echasnovski/mini.base16",
+		enabled = false,
+		version = "*",
+		config = function()
+			local palette = require("mini.base16").mini_palette("#1a1b26", "#c0caf5", 45)
+			require("mini.base16").setup {
+				palette = palette,
+				use_cterm = true,
+				plugins = { default = true },
+			}
+		end,
+	},
+	{
 		"Shatur/neovim-ayu",
 		event = "VimEnter",
 		config = function()
