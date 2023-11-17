@@ -22,6 +22,7 @@ let
       lua-language-server
       marksman
       nil
+      nixd
       pyright
       taplo
       texlab
@@ -41,6 +42,7 @@ let
       yaml-language-server
     ]);
   formatter = with pkgs; [
+    alejandra
     beautysh
     black
     nodePackages.fixjson

@@ -113,20 +113,20 @@ autocmd("FileType", {
 	desc = "dressing",
 })
 
-autocmd("ColorScheme", {
-	group = group,
-	callback = function()
-		local config_file_path = vim.fn.stdpath "config" .. "/lua/user/config.lua"
-		local current_colorscheme = require("user.config").colorscheme
-		local utils = require "user.utils"
-		utils.update_one_line_in_a_file(
-			"colorscheme",
-			string.format([[\tcolorscheme = "%s",]], current_colorscheme),
-			config_file_path
-		)
-	end,
-	desc = "update colorscheme in config file",
-})
+-- autocmd("ColorScheme", {
+-- 	group = group,
+-- 	callback = function()
+-- 		local config_file_path = vim.fn.stdpath "config" .. "/lua/user/config.lua"
+-- 		local current_colorscheme = require("user.config").colorscheme
+-- 		local utils = require "user.utils"
+-- 		utils.update_one_line_in_a_file(
+-- 			"colorscheme",
+-- 			string.format([[\tcolorscheme = "%s",]], current_colorscheme),
+-- 			config_file_path
+-- 		)
+-- 	end,
+-- 	desc = "update colorscheme in config file",
+-- })
 
 autocmd("ColorScheme", {
 	group = group,

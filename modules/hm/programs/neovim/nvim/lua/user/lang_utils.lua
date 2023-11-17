@@ -35,6 +35,7 @@ M.ensure_installed = {
 		"lua_ls",
 		"marksman",
 		"nil_ls",
+		-- "nixd",
 		"pyright",
 		"svelte",
 		"tailwindcss",

@@ -1,4 +1,9 @@
 return {
+	-- Lua
+	{
+		"folke/twilight.nvim",
+		config = true,
+	},
 	{
 		"echasnovski/mini.bufremove",
 		keys = {

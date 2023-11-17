@@ -45,8 +45,6 @@ function spec.config()
 	}
 
 	local lsps = lang_utils.ensure_installed.lsp
-	-- local non_mason_list = { "nixd" }
-	-- lsps = vim.tbl_extend("force", lsps, non_mason_list)
 
 	for _, lsp in ipairs(lsps) do
 		if lsp:match "@" then
@@ -103,7 +101,7 @@ function spec.config()
 		elseif lsp == "nixd" then
 			opts.settings = {
 				["nixd"] = {
-					formatting = { command = "alejandra" },
+					formatting = { command = "nixfmt" },
 				},
 			}
 		elseif lsp == "efm" then

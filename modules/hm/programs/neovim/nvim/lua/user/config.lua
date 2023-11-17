@@ -1,5 +1,5 @@
 return {
-	colorscheme = "nightfly",
+	colorscheme = "nightfox",
 	-- border = "single",
 	border = { " ", " ", " ", " ", " ", " ", " ", " " },
 	-- border = { "🭽", "▔", "🭾", "▕", "🭿", "▁", "🭼", "▏" },
