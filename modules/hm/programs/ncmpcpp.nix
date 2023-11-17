@@ -20,15 +20,14 @@ in {
     programs.ncmpcpp = {
       enable = true;
       settings = {
-        allow_for_physical_item_deletion = "no";
         autocenter_mode = "yes";
         browser_display_mode = "columns";
         centered_cursor = "yes";
         current_item_prefix = "$(white)$r";
         display_bitrate = "yes";
-        enable_window_title = "yes";
         external_editor = "nvim";
         follow_now_playing_lyrics = "yes";
+        lyrics_directory = config.services.mpd.musicDirectory + "/Lyrics";
         header_window_color = "blue";
         lines_scrolled = 1;
         locked_screen_width_part = 60;
@@ -36,9 +35,8 @@ in {
         message_delay_time = 3;
         mouse_list_scroll_whole_page = "yes";
         mpd_crossfade_time = 3;
-        now_playing_prefix = " ";
+        now_playing_prefix = " 󰎈 ";
         player_state_color = "red:b";
-        playlist_display_mode = "columns";
         playlist_editor_display_mode = "columns";
         playlist_shorten_total_times = "yes";
         progressbar_color = "black";
