@@ -12,6 +12,7 @@ in {
       path = ./.;
       filter = list: lib.filter (f: !lib.hasSuffix ".nix" f) list;
     };
+    home.file.".screenrc".text = "altscreen on";
     home.shellAliases = {
       ta = "tmux attach -t";
       tad = "tmux attach -d -t";
