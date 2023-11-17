@@ -65,7 +65,7 @@ super + {_,shift + }{1-9,0}
 	bspc {desktop -f,node -d} '^{1-9,10}' --follow
 
 # send node to given desktop (not follow)
-super + w; {1-9,0}
+super + alt + {1-9,0}
 	bspc node -d '^{1-9,10}' 
 
 # swap desktop

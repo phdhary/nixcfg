@@ -17,15 +17,6 @@ case "$window_class" in
     echo "state=tiled";
     echo "follow=off";
     ;;
-esac
-
-case "$window_title" in
-  Calculator|cava)
-    echo "state=floating"
-    ;;
-esac
-
-case "$window_class" in
   Nitrogen)
     case "$window_type" in
       *DIALOG* )
@@ -40,6 +31,18 @@ case "$window_class" in
         echo "state=floating"
         ;;
     esac
+    ;;
+esac
+
+# case "$window_instance" in
+#   crx_cinhimbnkkaeohfgghhklpknlkffjgod)
+#     echo "state=floating";
+#     ;;
+# esac
+
+case "$window_title" in
+  Calculator|cava)
+    echo "state=floating"
     ;;
 esac
 
@@ -71,9 +74,9 @@ esac
 # esac
 
 
-echo "Id: $window_id" >> "$logfile"
-echo "Class: $window_class" >> "$logfile"
-echo "Instance: $window_instance" >> "$logfile"
-echo "Title: $window_title" >> "$logfile"
-echo "Type: $window_type" >> "$logfile"
-echo "---" >> "$logfile"
+echo "Id       : $window_id" >> "$logfile"
+echo "Title    : $window_title" >> "$logfile"
+echo "Class    : $window_class" >> "$logfile"
+echo "Instance : $window_instance" >> "$logfile"
+echo "Type     : $window_type" >> "$logfile"
+echo "---"     >> "$logfile"

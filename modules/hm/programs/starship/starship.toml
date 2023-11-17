@@ -8,8 +8,8 @@ $git_state\
 $git_status\
 $nix_shell\
 $cmd_duration\
-$shlvl\
 $line_break\
+$shlvl\
 $character
 """
 
@@ -76,5 +76,5 @@ disabled = false
 format = '[$symbol]($style)'
 repeat = true
 symbol = '>'
-repeat_offset = 1
+repeat_offset = 2
 threshold = 3

@@ -35,7 +35,7 @@ super + space; b
  
 # open color switcher
 super + space; c
-  ~/.config/nixcfg/packages/tswitch/tswitch.sh
+  ~/.config/nixcfg/packages/scripts/tswitch.sh
 
 # function keys {{{
 

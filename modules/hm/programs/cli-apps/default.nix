@@ -9,7 +9,6 @@ in {
   config = mkIf cfg.enable-basic-cli {
     home.packages = with pkgs;
       [
-        alejandra
         arandr
         caffeine-ng
         cava
@@ -30,7 +29,6 @@ in {
         lshw
         macchina
         ncdu
-        nixd
         nixfmt
         nixgl.nixGLIntel
         nixgl.nixVulkanIntel
