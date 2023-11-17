@@ -38,7 +38,10 @@ in {
       zsh = enabled;
       starship = enabled;
     };
-    services = { batresudah = enabled; };
+    services = {
+      batresudah = enabled;
+      syncthing = enabled;
+    };
     session-things = {
       enable = true;
       enableDnfAliases = true;
