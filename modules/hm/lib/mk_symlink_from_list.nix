@@ -4,10 +4,10 @@ let
   inherit (config.${namespace}.lib) runtimePath;
   inherit (config.lib.file) mkOutOfStoreSymlink;
   mkCustomLib = fn:
-    (lib.mkOption {
+    lib.mkOption {
       type = lib.types.anything;
       default = fn;
-    });
+    };
 in {
   options.${namespace}.lib = {
 
@@ -15,11 +15,11 @@ in {
       let
         list = lib.filesystem.listFilesRecursive path;
         filtered = filter list;
-        results = (map (f:
+        results = map (f:
           (lib.nameValuePair
             "${directory}${lib.removePrefix (toString path) (toString f)}" {
               source = mkOutOfStoreSymlink (runtimePath f);
-            })) filtered);
+            })) filtered;
       in listToAttrs results);
 
     runtimePath = mkCustomLib (path:
