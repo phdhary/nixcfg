@@ -45,6 +45,6 @@ in {
         wormhole-rs
         xdotool
         zellij
-      ] ++ (with packages; [ hm-cleanup unimatrix note-taker ]);
+      ] ++ (with packages; [ dmenu hm-cleanup unimatrix note-taker ]);
   };
 }

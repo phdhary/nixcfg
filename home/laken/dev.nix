@@ -46,6 +46,9 @@ in {
       enable = true;
       enableDnfAliases = true;
     };
-    wm.bspwm = enabled;
+    wm = {
+      bspwm = enabled;
+      dwm = enabled;
+    };
   };
 }
