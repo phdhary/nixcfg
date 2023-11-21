@@ -21,7 +21,7 @@ super + u
 # state/flags {{{
 
 # set the window state
-super + {t, p ,shift + space }
+super + {t, d ,shift + space }
 	bspc node -t {tiled, \~pseudo_tiled, \~floating}
 
 # monocle and fullscreen

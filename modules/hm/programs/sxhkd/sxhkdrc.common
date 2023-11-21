@@ -7,19 +7,19 @@ super + Escape
 # terminal emulator
 super + Return
 	wrapped_alacritty
+  # st
 
 # program launcher 
-super + d
+super + p
   rofi -show combi -modes combi -combi-modes "drun,window,run"
-
-
-# file manager
-super + f
-  wrapped_alacritty -e yazi
 
 # power menu
 super + shift + e
   rofi -show power-menu -modi power-menu:rofi-power-menu -theme-str '#window \{ width: 20ch; \}'
+
+# file manager
+super + space; f
+  wrapped_alacritty -e yazi
 
 # open ncmpcpp
 super + space; m
@@ -48,15 +48,15 @@ XF86Audio{_,Mic}Mute
 XF86MonBrightness{Down,Up}
   xob_brightness {down,up}
 
-XF86PowerOff   
+XF86PowerOff
   rofi -show power-menu -modi power-menu:rofi-power-menu -theme-str '#window \{ width: 20ch; \}'
 
 XF86Calculator 
   gnome-calculator
 
-@XF86RFKill
-  rfkill block bluetooth
-
+# @XF86RFKill
+#   rfkill block bluetooth
+#
 # rfkill {block,unblock} bluetooth
 
 # }}}

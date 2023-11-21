@@ -3,9 +3,7 @@ let
   inherit (lib) mkEnableOption mkIf;
   cfg = config.${namespace}.programs.btop;
 in {
-  options.${namespace}.programs.btop = {
-    enable = mkEnableOption "btop";
-  };
+  options.${namespace}.programs.btop = { enable = mkEnableOption "btop"; };
 
   config = mkIf cfg.enable {
     programs.btop = {

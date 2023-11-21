@@ -24,6 +24,7 @@ M.ensure_installed = {
 		"ansiblels",
 		"astro",
 		"bashls",
+		-- "ccls",
 		"cssls",
 		"dockerls",
 		"efm",

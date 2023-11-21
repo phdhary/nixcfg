@@ -166,7 +166,8 @@ toggle_gnome() {
     prefer-dark) mode=1 ;;
   esac
   sed -i "0,/gtk-application-prefer-dark-theme/ s/=.*/=$mode/" ~/.config/gtk-3.0/settings.ini
-  caffeine kill && nohup caffeine start >/dev/null 2>&1
+  # pkill nm-applet && nm-applet --indicator & >/dev/null 2>&1 
+  # caffeine kill && caffeine start & >/dev/null 2>&1 
 }
 
 apply_alacritty

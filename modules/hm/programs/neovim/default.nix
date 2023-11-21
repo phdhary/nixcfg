@@ -17,6 +17,7 @@ let
     [
       zig # not lsp
       ansible-language-server
+      ccls
       efm-langserver
       gopls
       lua-language-server
