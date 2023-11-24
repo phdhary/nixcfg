@@ -14,3 +14,4 @@ case "$mode" in
     ;;
 esac
 @brightnessctl@ -m | awk -F ',' '{print $4}' | sed 's/[^0-9]*//g' > /tmp/xobpipelight;
+# dunstify -r 69 -t 1000 "Backlight" "$(@brightnessctl@ -m | awk -F ',' '{print $4}' | sed 's/[^0-9]*//g')%"

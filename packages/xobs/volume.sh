@@ -18,6 +18,7 @@ case "$mode" in
     esac
     @pamixer@ -$mode_flag $amount -u;
     @pamixer@ --get-volume > /tmp/xobpipevolume
+    # dunstify -r 69 -t 1000 "Volume" "$(@pamixer@ --get-volume)%"
     ;;
   mute)
     mode_flag=t

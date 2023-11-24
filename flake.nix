@@ -27,8 +27,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     st.url = "github:siduck/st";
-    mydwm.url =
-      "git+file:../../development/linux/suckless/dwm-git";
+    mydwm = {
+      # url = "git+file:../../development/linux/suckless/dwm-git";
+      url = "github:phdhary/dwm";
+    };
     # xremap-flake.url = "github:xremap/nix-flake";
   };
 

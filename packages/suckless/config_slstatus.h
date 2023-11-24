@@ -69,7 +69,7 @@ static const struct arg args[] = {
   { netspeed_rx,   "⇣ %s ",            "wlp59s0" },
   { netspeed_tx,   "⇡ %s     ",        "wlp59s0" },
   { ram_used,      "RAM %s     ",      NULL },
-  { swap_used,     "SWAP %s Gi     ",  NULL },
+  // { swap_used,     "SWAP %s Gi     ",  NULL },
   { cpu_perc,      "CPU %s%%     ",    NULL },
   { temp,          " %s󰔄     ",       "/sys/class/thermal/thermal_zone0/temp" },
   { battery_state, "%s ",              "BAT0" },

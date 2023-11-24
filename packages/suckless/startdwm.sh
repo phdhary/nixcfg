@@ -13,4 +13,5 @@ while true; do
   _run caffeine start
   _run nm-applet --indicator
   dwm >/dev/null 2>&1
+  # /home/laken/.config/nixcfg/result/bin/dwm >/dev/null 2>&1
 done

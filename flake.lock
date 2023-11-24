@@ -218,15 +218,15 @@
       "locked": {
         "lastModified": 1700793039,
         "narHash": "sha256-KBPuO7LylMR2UvI/yJOj9i0HDn8tFDoXYJPTN9y7LiQ=",
-        "ref": "refs/heads/main",
+        "owner": "phdhary",
+        "repo": "dwm",
         "rev": "b30b3276ddbea16a98b2ecaf6651563f7d120aa9",
-        "revCount": 1738,
-        "type": "git",
-        "url": "file:../../development/linux/suckless/dwm-git"
+        "type": "github"
       },
       "original": {
-        "type": "git",
-        "url": "file:../../development/linux/suckless/dwm-git"
+        "owner": "phdhary",
+        "repo": "dwm",
+        "type": "github"
       }
     },
     "nix-vscode-extensions": {
