@@ -33,6 +33,7 @@ in {
         nixgl.nixGLIntel
         nixgl.nixVulkanIntel
         nyancat
+        powertop
         ripgrep
         sl
         speedtest-cli

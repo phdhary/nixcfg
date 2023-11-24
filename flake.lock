@@ -140,6 +140,21 @@
         "type": "github"
       }
     },
+    "flake-utils_4": {
+      "locked": {
+        "lastModified": 1656928814,
+        "narHash": "sha256-RIFfgBuKz6Hp89yRr7+NR5tzIAbn52h8vT6vXkYjZoM=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "7e2a3b3dfd9af950a856d66b0a7d01e3c18aa249",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -194,6 +209,24 @@
         "owner": "mozilla",
         "repo": "nixpkgs-mozilla",
         "type": "github"
+      }
+    },
+    "mydwm": {
+      "inputs": {
+        "nixpkgs": "nixpkgs"
+      },
+      "locked": {
+        "lastModified": 1700793039,
+        "narHash": "sha256-KBPuO7LylMR2UvI/yJOj9i0HDn8tFDoXYJPTN9y7LiQ=",
+        "ref": "refs/heads/main",
+        "rev": "b30b3276ddbea16a98b2ecaf6651563f7d120aa9",
+        "revCount": 1738,
+        "type": "git",
+        "url": "file:../../development/linux/suckless/dwm-git"
+      },
+      "original": {
+        "type": "git",
+        "url": "file:../../development/linux/suckless/dwm-git"
       }
     },
     "nix-vscode-extensions": {
@@ -264,16 +297,13 @@
       "locked": {
         "lastModified": 1694304580,
         "narHash": "sha256-5tIpNodDpEKT8mM/F5zCzWEAnidOg8eb1/x3SRaaBLs=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
+        "path": "/nix/store/fajvaymffd9d9qlbzzd9ah3cpiqcm8zi-source",
         "rev": "4c8cf44c5b9481a4f093f1df3b8b7ba997a7c760",
-        "type": "github"
+        "type": "path"
       },
       "original": {
-        "owner": "nixos",
-        "ref": "nixos-23.05",
-        "repo": "nixpkgs",
-        "type": "github"
+        "id": "nixpkgs",
+        "type": "indirect"
       }
     },
     "nixpkgs-lib": {
@@ -341,16 +371,69 @@
         "type": "github"
       }
     },
+    "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1694304580,
+        "narHash": "sha256-5tIpNodDpEKT8mM/F5zCzWEAnidOg8eb1/x3SRaaBLs=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "4c8cf44c5b9481a4f093f1df3b8b7ba997a7c760",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-23.05",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_3": {
+      "locked": {
+        "lastModified": 1658161305,
+        "narHash": "sha256-X/nhnMCa1Wx4YapsspyAs6QYz6T/85FofrI6NpdPDHg=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "e4d49de45a3b5dbcb881656b4e3986e666141ea9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "flake-firefox-nightly": "flake-firefox-nightly",
         "home-manager": "home-manager",
+        "mydwm": "mydwm",
         "nix-vscode-extensions": "nix-vscode-extensions",
         "nixd": "nixd",
         "nixgl": "nixgl",
-        "nixpkgs": "nixpkgs",
+        "nixpkgs": "nixpkgs_2",
         "nixpkgs-unstable": "nixpkgs-unstable",
-        "nixpkgs-unstable-fdd89": "nixpkgs-unstable-fdd89"
+        "nixpkgs-unstable-fdd89": "nixpkgs-unstable-fdd89",
+        "st": "st"
+      }
+    },
+    "st": {
+      "inputs": {
+        "flake-utils": "flake-utils_4",
+        "nixpkgs": "nixpkgs_3"
+      },
+      "locked": {
+        "lastModified": 1697761926,
+        "narHash": "sha256-rFox/LG593vA/yZKKs8VcoERVl+GnZj+4AhrINtVEWU=",
+        "owner": "siduck",
+        "repo": "st",
+        "rev": "5c4df963070573db7cee2eafb320d84e477c3507",
+        "type": "github"
+      },
+      "original": {
+        "owner": "siduck",
+        "repo": "st",
+        "type": "github"
       }
     },
     "systems": {

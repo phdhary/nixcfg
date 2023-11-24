@@ -1,5 +1,4 @@
 return {
-	-- Lua
 	{
 		"folke/twilight.nvim",
 		config = true,

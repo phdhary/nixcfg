@@ -170,6 +170,18 @@ toggle_gnome() {
   # caffeine kill && caffeine start & >/dev/null 2>&1 
 }
 
+apply_cava() {
+  declare sed_str
+  declare -A arr
+  arr[163]=$colors_bright_green;
+  arr[164]=$colors_bright_yellow;
+  arr[165]=$colors_bright_red;
+  for key in ${!arr[@]}; do
+    sed_str+="${key}s/\=.*/= '${arr[$key]}'/ ; "
+  done
+  sed -i -e "$sed_str" ~/.config/cava/config
+}
+
 apply_alacritty
 apply_nvim
 apply_polybar
@@ -177,4 +189,5 @@ apply_bspwm
 apply_dunst
 apply_xob
 apply_rofi
+apply_cava
 toggle_gnome

@@ -4,7 +4,11 @@ in {
   options.${namespace}.wm.dwm.enable = lib.mkEnableOption "dwm";
   config = lib.mkIf cfg.enable {
     home.packages = with packages;
-      [ dwm slstatus ] ++ (with pkgs; [
+      [
+        dwm
+        slstatus
+        # st 
+      ] ++ (with pkgs; [
         caffeine-ng
         nitrogen
         # networkmanagerapplet

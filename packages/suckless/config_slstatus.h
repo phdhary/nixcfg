@@ -64,15 +64,16 @@ static const char unknown_str[] = "n/a";
  * wifi_perc           WiFi signal in percent          interface name (wlan0)
  */
 static const struct arg args[] = {
-	/* function      format                  argument */
-  { wifi_essid,    "[  %s ",               "wlp59s0" },
-  { netspeed_rx,   " ⇣ %s ",               "wlp59s0" },
-  { netspeed_tx,   " ⇡ %s ] ",             "wlp59s0" },
-  { ram_used,      "   RAM %s   ",         NULL },
-  // { swap_used,     "   SWAP %s Gi   ",     NULL },
-  { cpu_perc,      "   CPU %s%%   ",       NULL },
-  { battery_state, "   [ %s ",           "BAT0" },
-  { battery_perc,  "%s%% ",                "BAT0" },
-  { run_command,   "%s W ]  ",              "printf \"%.1f\" $(upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep energy-rate | awk -F ' ' '{print $2}')" },
-	{ datetime,      "   %s      ",          "%A, %d %B %Y      %R" },
+	/* function      format              argument */
+  { wifi_essid,    "%s ",              "wlp59s0" },
+  { netspeed_rx,   "⇣ %s ",            "wlp59s0" },
+  { netspeed_tx,   "⇡ %s     ",        "wlp59s0" },
+  { ram_used,      "RAM %s     ",      NULL },
+  { swap_used,     "SWAP %s Gi     ",  NULL },
+  { cpu_perc,      "CPU %s%%     ",    NULL },
+  { temp,          " %s󰔄     ",       "/sys/class/thermal/thermal_zone0/temp" },
+  { battery_state, "%s ",              "BAT0" },
+  { battery_perc,  "%s%% ",            "BAT0" },
+  { run_command,   "%s W     ",        "printf \"%.1f\" $(upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep energy-rate | awk -F ' ' '{print $2}')" },
+	{ datetime,      "%s     ",          "%A, %d %B %Y      %R" },
 };

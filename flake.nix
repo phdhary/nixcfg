@@ -26,6 +26,9 @@
       url = "github:nix-community/flake-firefox-nightly";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    st.url = "github:siduck/st";
+    mydwm.url =
+      "git+file:../../development/linux/suckless/dwm-git";
     # xremap-flake.url = "github:xremap/nix-flake";
   };
 

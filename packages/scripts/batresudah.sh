@@ -17,9 +17,11 @@ state=$(@upower@ -i /org/freedesktop/UPower/devices/battery_BAT0 | grep state | 
 # shellcheck disable=2086,3014
 if [ $batteryLevel -lt $lowerThreshold ] && [ $state == "discharging" ]; then
   notipai "I need more power" $batteryLevel
+  notify-send "Battery low" "currently at $batteryLevel%\nyou should charge now"
 fi
 
 # shellcheck disable=2086,3014
 if [ $batteryLevel -gt $upperThreshold ] && [ $state == "charging" ] || [ $batteryLevel -gt $upperThreshold ] && [ $state == "fully-charged" ]; then
   notipai "Unplug me" $batteryLevel
+  notify-send "Battery full" "you can unplug the charger"
 fi

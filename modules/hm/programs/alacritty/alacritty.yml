@@ -67,7 +67,7 @@ key_bindings:
   - key: F
     mods: Shift|Control
     command: 
-      program: alacritty
+      program: wrapped_alacritty
       args:
         - -e
         - yazi
