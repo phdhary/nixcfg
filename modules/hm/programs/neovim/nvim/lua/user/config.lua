@@ -1,5 +1,5 @@
 return {
-	colorscheme = "catppuccin-macchiato",
+	colorscheme = "moonfly",
 	-- border = "single",
 	border = { " ", " ", " ", " ", " ", " ", " ", " " },
 	-- border = { "🭽", "▔", "🭾", "▕", "🭿", "▁", "🭼", "▏" },

@@ -1,4 +1,4 @@
-{ config, namespace, lib, ... }:
+{ config, namespace, lib, pkgs, ... }:
 let
   inherit (lib) mkEnableOption mkIf;
   inherit (config.home) homeDirectory;
@@ -9,6 +9,7 @@ in {
   };
 
   config = mkIf cfg.enable {
+    home.packages = [ pkgs.mpc-cli ];
     services.mpd = {
       enable = true;
       musicDirectory = "${homeDirectory}/Music";

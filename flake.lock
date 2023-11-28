@@ -216,11 +216,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1700793039,
-        "narHash": "sha256-KBPuO7LylMR2UvI/yJOj9i0HDn8tFDoXYJPTN9y7LiQ=",
+        "lastModified": 1701187193,
+        "narHash": "sha256-C+5dYcoazwtggnQuAxeRgH97N7QSqEV2CjDr2o3ABHc=",
         "owner": "phdhary",
         "repo": "dwm",
-        "rev": "b30b3276ddbea16a98b2ecaf6651563f7d120aa9",
+        "rev": "9fcc253513094e041a9b6914334e25eb2b21d3f2",
         "type": "github"
       },
       "original": {

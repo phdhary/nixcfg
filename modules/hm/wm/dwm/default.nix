@@ -11,9 +11,11 @@ in {
       ] ++ (with pkgs; [
         caffeine-ng
         nitrogen
+        xdotool
         # networkmanagerapplet
         # some polkit
       ]);
+    xsession.enable = true;
     ${namespace}.programs = {
       dunst.enable = true;
       picom.enable = true;

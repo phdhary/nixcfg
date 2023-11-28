@@ -5,7 +5,7 @@ super + Escape
 	pkill -USR1 -x sxhkd
 
 # terminal emulator
-super + Return
+super + {Return,KP_Enter}
 	wrapped_alacritty
   # st
 
@@ -47,6 +47,12 @@ XF86Audio{_,Mic}Mute
 
 XF86MonBrightness{Down,Up}
   xob_brightness {down,up}
+
+XF86AudioPlay
+  mpc {play,pause}
+
+XF86Audio{Next,Prev}
+  mpc {next,prev}
 
 XF86PowerOff
   rofi -show power-menu -modi power-menu:rofi-power-menu -theme-str '#window \{ width: 20ch; \}'

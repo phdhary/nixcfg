@@ -28,6 +28,7 @@ in {
         lolcat
         lshw
         macchina
+        # fastfetch
         ncdu
         nixfmt
         nixgl.nixGLIntel
@@ -44,7 +45,6 @@ in {
         ueberzugpp
         unstable.yt-dlp
         wormhole-rs
-        xdotool
         zellij
       ] ++ (with packages; [ dmenu hm-cleanup unimatrix note-taker ]);
   };

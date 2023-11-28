@@ -10,10 +10,10 @@ let
     buildInputs = [ pkgs.makeWrapper ];
     postBuild = ''
       wrapProgram $out/bin/nvim \
-      --prefix PATH : ${pkgs.lib.makeBinPath (lsps ++ formatter ++ linter)}
+      --prefix PATH : ${pkgs.lib.makeBinPath (lsp ++ formatter ++ linter)}
     '';
   };
-  lsps = with pkgs;
+  lsp = with pkgs;
     [
       zig # not lsp
       ansible-language-server

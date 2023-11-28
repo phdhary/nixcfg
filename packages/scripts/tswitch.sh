@@ -107,7 +107,7 @@ apply_bspwm() {
 apply_dunst() {
   declare sed_str
   declare -A arr
-  arr[316]=$colors_bright_black
+  arr[316]=$colors_background
   arr[317]=$colors_foreground
   arr[323]=$colors_blue
   arr[325]=$colors_background
@@ -118,8 +118,6 @@ apply_dunst() {
   done
   sed -i -e "$sed_str" "$PROGRAMS"/dunst/dunstrc
   pid=$(pidof dunst); kill $pid && dunst &
-  # sleep 1
-  # notify-send -u critical "critical"; notify-send -u normal "normal"; notify-send -u low "low"
 }
 
 apply_xob() {
@@ -182,6 +180,24 @@ apply_cava() {
   sed -i -e "$sed_str" ~/.config/cava/config
 }
 
+apply_xresource() {
+  declare sed_str
+  declare -A arr
+  arr["dwm.normbgcolor"]=$colors_background
+  arr["dwm.normbordercolor"]=$colors_bright_black
+  arr["dwm.normfgcolor"]=$colors_foreground
+  arr["dwm.selfgcolor"]=$colors_background
+  arr["dwm.selbordercolor"]=$colors_cyan
+  arr["dwm.selbgcolor"]=$colors_foreground
+  for key in ${!arr[@]}; do
+    sed_str+="/${key}/ s/\:.*/\: ${arr[$key]}/ ; "
+  done
+  sed -i -e "$sed_str" ~/.config/X/Xresources
+  xrdb ~/.config/X/Xresources
+  xdotool key "Super_L+F5"
+}
+
+apply_xresource
 apply_alacritty
 apply_nvim
 apply_polybar
