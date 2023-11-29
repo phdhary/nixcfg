@@ -11,6 +11,7 @@ if not vim.loop.fs_stat(lazypath) then
 	}
 end
 vim.opt.rtp:prepend(lazypath)
+vim.opt.rtp:append(vim.fn.stdpath "state")
 
 vim.g.mapleader = " "
 

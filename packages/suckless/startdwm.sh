@@ -9,8 +9,9 @@ do
   xset dpms 600 600 0 
   rfkill block bluetooth 
   xrdb ~/.config/X/Xresources
+  cat ~/.config/dunst/dunstrc ~/.local/state/dunst/current_color >> /tmp/dunstconfig
   _kill_and_run /usr/libexec/xfce-polkit 
-  _kill_and_run dunst 
+  _kill_and_run dunst -conf /tmp/dunstconfig
   _kill_and_run slstatus 
   _kill_and_run xob_server 
   _kill_and_run wrapped_picom 

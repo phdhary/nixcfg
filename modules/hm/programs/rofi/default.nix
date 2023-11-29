@@ -14,6 +14,14 @@ in {
       rofi-pulse-select
       # rofi-wayland
     ];
+    home.activation.generateRofiStateFile =
+      lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+        target_dir=~/.local/state/rofi
+        if [ ! -f $target_dir/current_color.rasi ]; then
+          mkdir -p $target_dir
+          cp ${builtins.toPath ./current_color.rasi} $target_dir/current_color.rasi
+        fi
+      '';
     xdg.configFile = {
       "rofi/encus.rasi".source = mkOutOfStoreSymlink (runtimePath ./encus.rasi);
       "rofi/config.rasi".source =

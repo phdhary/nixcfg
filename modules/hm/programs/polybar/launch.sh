@@ -18,9 +18,9 @@ elif [ "$(pidof i3)" != "" ]; then
 fi
 
 echo "---" | tee -a /tmp/polybar_"$INTERNAL_MONITOR".log
-polybar --reload "$INTERNAL_MONITOR" 2>&1 | tee -a /tmp/polybar_"$INTERNAL_MONITOR".log & disown
+polybar "$INTERNAL_MONITOR" 2>&1 | tee -a /tmp/polybar_"$INTERNAL_MONITOR".log & disown
 
 if [[ $(xrandr -q | grep "HDMI-2 connected") ]]; then
   echo "---" | tee -a /tmp/polybar_"$EXTERNAL_MONITOR".log
-  polybar --reload "$EXTERNAL_MONITOR" 2>&1 | tee -a /tmp/polybar_"$EXTERNAL_MONITOR".log & disown
+  polybar "$EXTERNAL_MONITOR" 2>&1 | tee -a /tmp/polybar_"$EXTERNAL_MONITOR".log & disown
 fi

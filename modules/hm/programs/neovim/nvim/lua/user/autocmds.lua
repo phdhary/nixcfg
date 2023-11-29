@@ -188,7 +188,8 @@ autocmd("User", {
 	group = group,
 	pattern = "LazyVimStarted",
 	callback = function()
-		vim.cmd.colorscheme(require("user.config").colorscheme)
+    vim.cmd "luafile ~/.local/state/nvim/lua/user/current_colorscheme.lua"
+		vim.cmd.colorscheme(vim.g.current_colorscheme)
 		vim.cmd.doautocmd "ColorScheme" -- for triggering hl adjustment autocmds
 	end,
 	desc = "set colorscheme on enter",
@@ -199,6 +200,7 @@ autocmd("Signal", {
 	pattern = "SIGUSR1",
 	callback = function()
 		vim.defer_fn(function()
+      vim.cmd "luafile ~/.local/state/nvim/lua/user/current_colorscheme.lua"
 			require("user.utils").reload_package_with_name "user.config"
 			local current_colorscheme = require("user.config").colorscheme
 			if vim.g.colors_name == current_colorscheme then

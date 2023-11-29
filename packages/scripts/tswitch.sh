@@ -7,7 +7,7 @@ WM="$HM"/wm
 
 list=()
 themes=$(\ls -1 "$PROGRAMS"/alacritty/themes/ | sed 's/.yml//')
-current=$(cat "$PROGRAMS"/alacritty/current_theme.yml | tail -1 | awk '{print $2}' | cut -c28- | sed 's/.yml//')
+current=$(cat ~/.local/state/alacritty/current_theme.yml | tail -1 | awk '{print $2}' | cut -c28- | sed 's/.yml//')
 # add current first
 list+=("$current")
 # add the rest of themes
@@ -60,11 +60,11 @@ colors_bright_cyan=$(query_color 2 "cyan")
 colors_bright_white=$(query_color 2 "white")
 
 apply_alacritty() {
-  sed -i -r "2s/$current/$selected/" "$PROGRAMS"/alacritty/current_theme.yml
+  sed -i -r "2s/$current/$selected/" ~/.local/state/alacritty/current_theme.yml
 }
 
 apply_nvim() {
-  sed -i -r "/colorscheme/ s/\=.*/\= \"$selected\",/" "$PROGRAMS"/neovim/nvim/lua/user/config.lua
+  sed -i -r "/vim.g.current_colorscheme/ s/\".*/\"$selected\"/" ~/.local/state/nvim/lua/user/current_colorscheme.lua
   killall -USR1 nvim
 }
 
@@ -81,8 +81,9 @@ apply_polybar() {
   for key in ${!arr[@]}; do
     sed_str+="0,/${key}/ s/${key}.*/${key} = ${arr[$key]}/ ; "
   done
-  sed -i -e "$sed_str" "$PROGRAMS"/polybar/config.ini
-  # polybar-msg cmd restart
+  # sed -i -e "$sed_str" "$PROGRAMS"/polybar/current.ini
+  sed -i -e "$sed_str" ~/.local/state/polybar/current.ini
+  polybar-msg cmd restart
 }
 
 apply_bspwm() {
@@ -101,23 +102,26 @@ apply_bspwm() {
   for key in ${!arr[@]}; do
     sed_str+="/${key}/s/'#.*'/'${arr[$key]}'/ ; "
   done
-  sed -i -e "$sed_str" "$WM"/bspwm/bspwmrc
+  # sed -i -e "$sed_str" "$PROGRAMS"/bspwm/current_border_color
+  sed -i -e "$sed_str" ~/.local/state/bspwm/current_border_color
 }
 
 apply_dunst() {
   declare sed_str
   declare -A arr
-  arr[316]=$colors_background
-  arr[317]=$colors_foreground
-  arr[323]=$colors_blue
-  arr[325]=$colors_background
-  arr[331]=$colors_red
-  arr[332]=$colors_background
+  arr[4]=$colors_background
+  arr[5]=$colors_foreground
+  arr[11]=$colors_blue
+  arr[12]=$colors_background
+  arr[19]=$colors_red
+  arr[20]=$colors_background
   for key in ${!arr[@]}; do
     sed_str+="${key}s/=.*/= \"${arr[$key]}\"/ ; "
   done
-  sed -i -e "$sed_str" "$PROGRAMS"/dunst/dunstrc
-  pid=$(pidof dunst); kill $pid && dunst &
+  # sed -i -e "$sed_str" "$PROGRAMS"/dunst/current_color
+  sed -i -e "$sed_str" ~/.local/state/dunst/current_color
+  cat ~/.config/dunst/dunstrc ~/.local/state/dunst/current_color >> /tmp/dunstconfig
+  pid=$(pidof dunst); kill $pid && dunst -conf /tmp/dunstconfig &
 }
 
 apply_xob() {
@@ -132,7 +136,7 @@ apply_xob() {
   for key in ${!arr[@]}; do
     sed_str+="${key}s/=.*/= \"${arr[$key]}\";/ ; "
   done
-  sed -i -e "$sed_str" "$PROGRAMS"/xob/styles.cfg
+  sed -i -e "$sed_str" ~/.config/xob/styles.cfg
   nohup xob_server >/dev/null 2>&1
 }
 
@@ -149,7 +153,8 @@ apply_rofi() {
   for key in ${!arr[@]}; do
     sed_str+="${key}s/\:.*/: ${arr[$key]};/ ; "
   done
-  sed -i -e "$sed_str" "$PROGRAMS"/rofi/encus.rasi
+  # sed -i -e "$sed_str" "$PROGRAMS"/rofi/current_color.rasi
+  sed -i -e "$sed_str" ~/.local/state/rofi/current_color.rasi
 }
 
 toggle_gnome() {

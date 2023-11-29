@@ -1,0 +1,9 @@
+* {
+	bg: #1E1E2E;
+	bg-border: #45475A;
+	bg-selected: #CDD6F4;
+	fg: #CDD6F4;
+	fg-selected: #1E1E2E;
+  urgent: #F38BA8;
+  prompt: #F5C2E7;
+}

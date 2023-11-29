@@ -81,5 +81,15 @@ in {
       recursive = true;
       source = mkOutOfStoreSymlink (runtimePath ./nvim);
     };
+    home.activation.generateNeovimStateFile =
+      lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+        target_dir=~/.local/state/nvim/lua/user
+        if [ ! -f $target_dir/current_colorscheme.lua ]; then
+          mkdir -p $target_dir
+          cp ${
+            builtins.toPath ./current_colorscheme.lua
+          } $target_dir/current_colorscheme.lua
+        fi
+      '';
   };
 }

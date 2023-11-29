@@ -1,11 +1,4 @@
 * {
-	bg: #080808;
-	bg-border: #323437;
-	bg-selected: #bdbdbd;
-	fg: #bdbdbd;
-	fg-selected: #080808;
-  urgent: #ff5454;
-  prompt: #cf87e8;
 	font: "Symbols Nerd Font 14,SF Pro Display 16";
   width: 50ch;
   // width: 70%;
@@ -15,6 +8,8 @@
   background-color: transparent;
   cursor: pointer;
 }
+
+@import "~/.local/state/rofi/current_color.rasi"
 
 element-text, element-icon , mode-switcher {
 	background-color: inherit;

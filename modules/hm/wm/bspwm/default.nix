@@ -9,7 +9,10 @@ in {
     xdg.configFile = recursiveSymlink {
       directory = "bspwm";
       path = ./.;
-      filter = list: lib.filter (f: (!lib.hasSuffix ".nix" f)) list;
+      filter = list:
+        lib.filter (f:
+          (!lib.hasSuffix ".nix" f) && (!lib.hasInfix "current_border_color" f))
+        list;
     };
     ${namespace}.programs = {
       dunst.enable = true;
@@ -21,5 +24,16 @@ in {
       };
       xob.enable = true;
     };
+    home.activation.generateBspwmStateFile =
+      lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+        target_dir=~/.local/state/bspwm
+        if [ ! -f $target_dir/current_border_color ]; then
+          mkdir -p $target_dir
+          cp ${
+            builtins.toPath ./current_border_color
+          } $target_dir/current_border_color
+          chmod +x $target_dir/current_border_color
+        fi
+      '';
   };
 }

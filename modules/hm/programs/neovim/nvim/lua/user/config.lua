@@ -1,5 +1,5 @@
 return {
-	colorscheme = "moonfly",
+	colorscheme = vim.g.current_colorscheme,
 	-- border = "single",
 	border = { " ", " ", " ", " ", " ", " ", " ", " " },
 	-- border = { "🭽", "▔", "🭾", "▕", "🭿", "▁", "🭼", "▏" },
