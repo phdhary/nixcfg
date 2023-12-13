@@ -5,6 +5,19 @@ let
 in {
   hm-cleanup = mkSimpleScript "hm-cleanup";
   tswitch = mkSimpleScript "tswitch";
+  rofi-utility = let name = "rofi-utility";
+  in pkgs.stdenv.mkDerivation {
+    inherit name;
+    src = ./.;
+    installPhase = ''
+      mkdir -p $out/bin;
+      cp -v ${name}.sh $out/bin/${name}
+      substituteInPlace $out/bin/${name} \
+        --replace @rofi-pulse-select@ ${pkgs.rofi-pulse-select}/bin/rofi-pulse-select \
+        --replace @rofi-bluetooth@ ${pkgs.rofi-bluetooth}/bin/rofi-bluetooth \
+        --replace @redshift@ ${pkgs.redshift}/bin/redshift; 
+    '';
+  };
   batresudah = let name = "batresudah";
   in pkgs.stdenv.mkDerivation {
     inherit name;

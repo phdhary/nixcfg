@@ -37,6 +37,10 @@ super + space; b
 super + space; c
   ~/.config/nixcfg/packages/scripts/tswitch.sh
 
+# open rofi utility
+super + space; u
+  rofi-utility
+
 # function keys {{{
 
 XF86Audio{Lower,Raise}Volume

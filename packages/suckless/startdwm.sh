@@ -18,6 +18,7 @@ do
   _kill_and_run caffeine start
   _kill_and_run nm-applet --indicator
   _kill_and_run ~/.config/nixcfg/packages/scripts/notify-mpd.sh
+  _kill_and_run clipmenud
   dwm >/dev/null 2>&1
   # dwm 2> ~/.dwm.log
   # /home/laken/.config/nixcfg/result/bin/dwm >/dev/null 2>&1
