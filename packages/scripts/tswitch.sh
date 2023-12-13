@@ -59,6 +59,18 @@ colors_bright_magenta=$(query_color 2 "magenta")
 colors_bright_cyan=$(query_color 2 "cyan")
 colors_bright_white=$(query_color 2 "white")
 
+adjust_brightness() {
+  hsl=$(dye -x hsl $1 | awk '{print $1 " " $2}')
+  alpha=$(dye -x hsl $1 | awk '{print $3}' | sed -e 's/\%// ; s/)// ;')
+  if [ "$theme_mode" = "light" ]; then
+    alpha=$((alpha - 10))
+  else
+    alpha=$((alpha + 10))
+  fi
+  hsl+=" $alpha%)"
+  dye -h hex "$hsl"
+}
+
 apply_alacritty() {
   sed -i -r "2s/$current/$selected/" ~/.local/state/alacritty/current_theme.yml
 }
@@ -172,12 +184,15 @@ apply_cava() {
 apply_xresource() {
   declare sed_str
   declare -A arr
+  normbordercolor=$(adjust_brightness $colors_background)
+  selbordercolor=$colors_foreground
+  # test "$theme_mode" = "light" && selbordercolor=$colors_bright_magenta
   arr["dwm.normbgcolor"]=$colors_background
-  arr["dwm.normbordercolor"]=$colors_bright_black
+  arr["dwm.normbordercolor"]=$normbordercolor
   arr["dwm.normfgcolor"]=$colors_foreground
   arr["dwm.selfgcolor"]=$colors_background
-  arr["dwm.selbordercolor"]=$colors_cyan
-  arr["dwm.selbgcolor"]=$colors_foreground
+  arr["dwm.selbordercolor"]=$selbordercolor
+  arr["dwm.selbgcolor"]=$selbordercolor
   for key in ${!arr[@]}; do
     sed_str+="/${key}/ s/\:.*/\: ${arr[$key]}/ ; "
   done

@@ -40,6 +40,17 @@ in {
         --replace @nvim@ ${pkgs.neovim}/bin/nvim;
     '';
   };
+  dyetide = pkgs.stdenv.mkDerivation {
+    name = "dyetide";
+    src = pkgs.fetchgit {
+      url = "https://codeberg.org/z3rOR0ne/dyetide";
+      sha256 = "sha256-6tIdzfwM//AufQ3xsZRoHKaaXSrHMHmKngtGXzT8u5Q=";
+    };
+    installPhase = ''
+      install -Dm755 dyetide $out/bin/dyetide
+      install -Dm755 dye $out/bin/dye
+    '';
+  };
   dunst-volume = let name = "dunst-volume";
   in pkgs.stdenv.mkDerivation {
     inherit name;
