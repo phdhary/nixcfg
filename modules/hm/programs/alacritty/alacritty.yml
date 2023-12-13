@@ -20,6 +20,7 @@ window:
 font: 
   size: 13.0
   normal:
+    # family: Monaspace Radon
     family: JetBrains Mono Alacritty
     # family: JetBrains Mono 
     # family: Liga SFMono Nerd Font
@@ -71,6 +72,22 @@ key_bindings:
       args:
         - -e
         - yazi
+  - key: 52
+    mods: Shift|Control
+    command: 
+      program: alacritty 
+      args:
+        - msg
+        - config
+        - window.opacity=1.0
+  - key: 51
+    mods: Shift|Control
+    command: 
+      program: alacritty
+      args:
+        - msg
+        - config
+        - window.opacity=0.9
 
 hints:
   enabled:

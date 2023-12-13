@@ -1,49 +1,5 @@
 return {
 	{
-		"echasnovski/mini.base16",
-		enabled = false,
-		version = "*",
-		config = function()
-			local palette = require("mini.base16").mini_palette("#1a1b26", "#c0caf5", 45)
-			require("mini.base16").setup {
-				palette = palette,
-				use_cterm = true,
-				plugins = { default = true },
-			}
-		end,
-	},
-	{
-		"Shatur/neovim-ayu",
-		event = "VimEnter",
-		config = function()
-			local colors, is_mirage = require "ayu.colors", false
-			colors.generate(is_mirage)
-			require("ayu").setup {
-				mirage = is_mirage,
-				overrides = function()
-					return {
-						["@function"] = { bold = true, fg = colors.func },
-						["@function.builtin"] = { bold = true, fg = colors.accent },
-						FloatBorder = { bg = colors.panel_border, fg = colors.guide_normal },
-						GitSignsAddLn = { link = "DiffAdd" },
-						Keyword = { italic = false, fg = colors.keyword },
-						LineNr = { fg = colors.comment },
-						NormalFloat = { bg = colors.panel_border },
-						PmenuSel = { bg = colors.selection_bg, fg = "NONE" },
-						TelescopeBorder = { fg = colors.selection_inactive },
-						TelescopePreviewBorder = { bg = colors.panel_border, fg = colors.panel_border },
-						TelescopePreviewNormal = { bg = colors.panel_border },
-						TelescopePromptBorder = { fg = colors.line, bg = colors.line },
-						TelescopePromptNormal = { bg = colors.line },
-						TelescopeResultsBorder = { fg = colors.panel_shadow, bg = colors.panel_shadow },
-						TelescopeResultsNormal = { fg = colors.fg, bg = colors.panel_shadow },
-						TelescopeTitle = { fg = colors.ui, bold = true },
-					}
-				end,
-			}
-		end,
-	},
-	{
 		"rebelot/kanagawa.nvim",
 		event = "VimEnter",
 		-- build = [[
