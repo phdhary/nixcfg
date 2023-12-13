@@ -13,7 +13,6 @@ do
   _kill_and_run /usr/libexec/xfce-polkit 
   _kill_and_run dunst -conf /tmp/dunstconfig
   _kill_and_run slstatus 
-  _kill_and_run xob_server 
   _kill_and_run wrapped_picom 
   _kill_and_run sxhkd -c ~/.config/sxhkd/sxhkdrc.common 
   _kill_and_run caffeine start

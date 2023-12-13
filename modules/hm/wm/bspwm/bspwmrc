@@ -62,7 +62,6 @@ _run_once caffeine start
 
 nitrogen --restore
 xset dpms 600 600 0
-xob_server &
 rfkill block bluetooth
 
 pgrep bspswallow.sh || ~/.config/bspwm/scripts/bspswallow.sh &

@@ -124,22 +124,6 @@ apply_dunst() {
   pid=$(pidof dunst); kill $pid && dunst -conf /tmp/dunstconfig &
 }
 
-apply_xob() {
-  declare sed_str
-  declare -A arr
-  arr[13]=$colors_foreground
-  arr[14]=$colors_background
-  arr[15]=$colors_bright_black
-  arr[18]=$colors_bright_black
-  arr[19]=$colors_background
-  arr[20]=$colors_bright_black
-  for key in ${!arr[@]}; do
-    sed_str+="${key}s/=.*/= \"${arr[$key]}\";/ ; "
-  done
-  sed -i -e "$sed_str" ~/.config/xob/styles.cfg
-  nohup xob_server >/dev/null 2>&1
-}
-
 apply_rofi() {
   declare sed_str
   declare -A arr
@@ -208,7 +192,6 @@ apply_nvim
 apply_polybar
 apply_bspwm
 apply_dunst
-apply_xob
 apply_rofi
 apply_cava
 toggle_gnome

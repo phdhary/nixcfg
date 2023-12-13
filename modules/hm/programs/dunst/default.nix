@@ -1,4 +1,4 @@
-{ config, lib, namespace, pkgs, ... }:
+{ config, lib, namespace, pkgs, packages, ... }:
 let
   cfg = config.${namespace}.programs.dunst;
   inherit (config.${namespace}.lib) runtimePath;
@@ -12,7 +12,8 @@ in {
     };
   };
   config = lib.mkIf cfg.enable {
-    home.packages = [ cfg.package ];
+    home.packages = [ cfg.package ]
+      ++ (with packages; [ dunst-volume dunst-brightness ]);
     home.activation.generateDunstStateFile =
       lib.hm.dag.entryAfter [ "writeBoundary" ] ''
         target_dir=~/.local/state/dunst

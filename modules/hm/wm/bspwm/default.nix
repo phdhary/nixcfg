@@ -22,7 +22,6 @@ in {
         enable = true;
         enable-bspwm-mappings = true;
       };
-      xob.enable = true;
     };
     home.activation.generateBspwmStateFile =
       lib.hm.dag.entryAfter [ "writeBoundary" ] ''

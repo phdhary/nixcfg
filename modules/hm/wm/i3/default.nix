@@ -19,7 +19,6 @@ in {
         enable = true;
         enable-i3-mappings = true;
       };
-      xob.enable = true;
     };
   };
 }

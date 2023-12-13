@@ -27,4 +27,26 @@ in {
         --replace @nvim@ ${pkgs.neovim}/bin/nvim;
     '';
   };
+  dunst-volume = let name = "dunst-volume";
+  in pkgs.stdenv.mkDerivation {
+    inherit name;
+    src = ./.;
+    installPhase = ''
+      mkdir -p $out/bin;
+      cp -v ${name}.sh $out/bin/${name}
+      substituteInPlace $out/bin/${name} \
+        --replace @pamixer@ ${pkgs.pamixer}/bin/pamixer;
+    '';
+  };
+  dunst-brightness = let name = "dunst-brightness";
+  in pkgs.stdenv.mkDerivation {
+    inherit name;
+    src = ./.;
+    installPhase = ''
+      mkdir -p $out/bin;
+      cp -v ${name}.sh $out/bin/${name}
+      substituteInPlace $out/bin/${name} \
+        --replace @brightnessctl@ ${pkgs.brightnessctl}/bin/brightnessctl;
+    '';
+  };
 }

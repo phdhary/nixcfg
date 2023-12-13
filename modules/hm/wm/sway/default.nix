@@ -18,7 +18,6 @@ in {
         enable = true;
         # enable-sway-mappings = true;
       };
-      xob.enable = true;
     };
   };
 }

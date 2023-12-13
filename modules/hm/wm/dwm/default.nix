@@ -19,7 +19,6 @@ in {
     ${namespace}.programs = {
       dunst.enable = true;
       picom.enable = true;
-      xob.enable = true;
       sxhkd.enable = true;
     };
   };
