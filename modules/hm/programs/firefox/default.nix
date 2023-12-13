@@ -5,7 +5,7 @@ in {
     enable = lib.mkEnableOption "Firefox Browser";
     package = lib.mkOption {
       type = lib.types.package;
-      default = pkgs.latest.firefox-nightly-bin;
+      default = pkgs.flake-firefox-nightly.firefox-nightly-bin;
     };
   };
 
