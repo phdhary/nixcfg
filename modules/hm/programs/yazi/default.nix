@@ -28,6 +28,5 @@ in {
       categories = [ "ConsoleOnly" "System" "FileTools" "FileManager" ];
       terminal = true;
     };
-
   };
 }
