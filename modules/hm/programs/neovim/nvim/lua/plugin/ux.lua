@@ -10,26 +10,26 @@ return {
 			{ "<leader>X", "<CMD>lua require('mini.bufremove').delete(0, true)<CR>" },
 		},
 	},
-	{
-		"folke/flash.nvim",
-		-- event = "VeryLazy",
-		opts = {
-			highlight = { backdrop = false },
-			modes = {
-				char = { enabled = false },
-				search = { enabled = false },
-			},
-		},
-    -- stylua: ignore
-		keys = {
-			-- { "s", mode = { "n", "o", "x" }, function() require("flash").jump { search = { mode = function(str) return "\\<" .. str end, }, } end, desc = "Flash", },
-			{ "s", mode = { "n", "o", "x" }, function() require("flash").jump() end , desc = "Flash", },
-			-- { "S", mode = { "n", "o", "x" }, function() require("flash").treesitter() end, desc = "Flash Treesitter", },
-			{ "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash", },
-			{ "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search", },
-			{ "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search", },
-		},
-	},
+	-- {
+	-- 	"folke/flash.nvim",
+	-- 	-- event = "VeryLazy",
+	-- 	opts = {
+	-- 		highlight = { backdrop = false },
+	-- 		modes = {
+	-- 			char = { enabled = false },
+	-- 			search = { enabled = false },
+	-- 		},
+	-- 	},
+ --    -- stylua: ignore
+	-- 	keys = {
+	-- 		-- { "s", mode = { "n", "o", "x" }, function() require("flash").jump { search = { mode = function(str) return "\\<" .. str end, }, } end, desc = "Flash", },
+	-- 		{ "s", mode = { "n", "o", "x" }, function() require("flash").jump() end , desc = "Flash", },
+	-- 		-- { "S", mode = { "n", "o", "x" }, function() require("flash").treesitter() end, desc = "Flash Treesitter", },
+	-- 		{ "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash", },
+	-- 		{ "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search", },
+	-- 		{ "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search", },
+	-- 	},
+	-- },
 	{
 		"windwp/nvim-spectre",
 		config = true,
