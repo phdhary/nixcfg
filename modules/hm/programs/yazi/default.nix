@@ -8,7 +8,7 @@ in {
     enable = mkEnableOption "yazi";
     package = mkOption {
       type = types.package;
-      default = pkgs.unstable-fdd89.yazi;
+      default = pkgs.nixpkgs-23-11.yazi;
     };
   };
 

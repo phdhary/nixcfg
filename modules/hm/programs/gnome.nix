@@ -29,7 +29,7 @@ in {
       gnome44Extensions."arcmenu@arcmenu.com"
       unstable.gnome44Extensions."sane-airplane-mode@kippi"
       unstable.gnome44Extensions."search-light@icedman.github.com"
-      # unstable-fdd89.gnome44Extensions."gsconnect@andyholmes.github.io" # doesn't work
+      # unstable.gnome44Extensions."gsconnect@andyholmes.github.io" # doesn't work
     ];
   };
 }

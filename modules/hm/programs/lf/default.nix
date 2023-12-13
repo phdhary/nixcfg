@@ -9,7 +9,7 @@ in {
   config = mkIf cfg.enable {
     programs.lf = {
       enable = true;
-      package = pkgs.unstable-fdd89.lf;
+      package = pkgs.lf;
       settings = {
         ignorecase = true;
         smartcase = true;

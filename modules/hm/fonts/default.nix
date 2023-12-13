@@ -14,6 +14,7 @@ in {
         # noto-fonts-lgc-plus
         # noto-fonts-color-emoji
         (unstable.nerdfonts.override { fonts = [ "NerdFontsSymbolsOnly" ]; })
+        (nixpkgs-23-11.monaspace)
       ] ++ (with packages; [ font-sf-pro ]);
     fonts.fontconfig.enable = true;
   };
