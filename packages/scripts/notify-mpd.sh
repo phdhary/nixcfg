@@ -16,5 +16,5 @@ do
   icon_flag="-i /tmp/mpc_current.jpg";
   [ $is_album_exist -eq 1 ] && icon_flag="";
   dunstify -C 1234
-  dunstify -u low -r 1234 "$artist" "$title" $icon_flag -t 5000;
+  dunstify -u low -r 1234 "$artist" "$title" $icon_flag;
 done

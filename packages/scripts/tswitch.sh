@@ -4,10 +4,11 @@ NIXCFG_ROOT=~/.config/nixcfg
 HM="$NIXCFG_ROOT"/modules/hm
 PROGRAMS="$HM"/programs
 WM="$HM"/wm
+STATE=~/.local/state
 
 list=()
 themes=$(\ls -1 "$PROGRAMS"/alacritty/themes/ | sed 's/.yml//')
-current=$(cat ~/.local/state/alacritty/current_theme.yml | tail -1 | awk '{print $2}' | cut -c28- | sed 's/.yml//')
+current=$(cat $STATE/alacritty/current_theme.yml | tail -1 | awk '{print $2}' | cut -c28- | sed 's/.yml//')
 # add current first
 list+=("$current")
 # add the rest of themes
@@ -17,12 +18,12 @@ done
 
 # selected=$(printf "%s\n" "${list[@]}" | fzf --layout=reverse)
 # selected=$(printf "%s\n" "${list[@]}" | dmenu -fn "SF Pro Display")
-selected=$(printf "%s\n" "${list[@]}" | rofi -dmenu -no-custom -p " " -matching fuzzy -theme-str '#window { width: 25%; }')
-[ -z "$selected" -o "$selected" = "$current" ] && exit
+selected=$(printf "%s\n" "${list[@]}" | rofi -dmenu -no-custom -p " " -matching fuzzy)
 
 declare theme_mode
 case "$selected" in
-  *"light"*|*"lotus"*|*"day"*|*"latte"*|*"dawn"*) theme_mode="light" ;;
+  ""|"$current") exit ;;
+  *light*|*lotus*|*day*|*latte*|*dawn*) theme_mode="light" ;;
   *) theme_mode="dark" ;;
 esac
 
@@ -72,11 +73,11 @@ adjust_brightness() {
 }
 
 apply_alacritty() {
-  sed -i -r "2s/$current/$selected/" ~/.local/state/alacritty/current_theme.yml
+  sed -i -r "2s/$current/$selected/" $STATE/alacritty/current_theme.yml
 }
 
 apply_nvim() {
-  sed -i -r "/vim.g.current_colorscheme/ s/\".*/\"$selected\"/" ~/.local/state/nvim/lua/user/current_colorscheme.lua
+  sed -i -r "/vim.g.current_colorscheme/ s/\".*/\"$selected\"/" $STATE/nvim/lua/user/current_colorscheme.lua
   killall -USR1 nvim
 }
 
@@ -94,19 +95,16 @@ apply_polybar() {
     sed_str+="0,/${key}/ s/${key}.*/${key} = ${arr[$key]}/ ; "
   done
   # sed -i -e "$sed_str" "$PROGRAMS"/polybar/current.ini
-  sed -i -e "$sed_str" ~/.local/state/polybar/current.ini
+  sed -i -e "$sed_str" $STATE/polybar/current.ini
   polybar-msg cmd restart
 }
 
 apply_bspwm() {
-  local normal_border_color=$colors_bright_black
-  declare focused_border_color
   declare sed_str
   declare -A arr
-  case "$theme_mode" in
-    light) focused_border_color=$colors_magenta ;;
-    dark) focused_border_color=$colors_blue ;;
-  esac
+  local normal_border_color=$colors_bright_black
+  focused_border_color=$colors_blue
+  test "$theme_mode" = "light" && focused_border_color=$colors_magenta 
   bspc config 'normal_border_color' "$normal_border_color"
   bspc config 'focused_border_color' "$focused_border_color"
   arr["normal_border_color"]=$normal_border_color
@@ -115,7 +113,7 @@ apply_bspwm() {
     sed_str+="/${key}/s/'#.*'/'${arr[$key]}'/ ; "
   done
   # sed -i -e "$sed_str" "$PROGRAMS"/bspwm/current_border_color
-  sed -i -e "$sed_str" ~/.local/state/bspwm/current_border_color
+  sed -i -e "$sed_str" $STATE/bspwm/current_border_color
 }
 
 apply_dunst() {
@@ -131,39 +129,36 @@ apply_dunst() {
     sed_str+="${key}s/=.*/= \"${arr[$key]}\"/ ; "
   done
   # sed -i -e "$sed_str" "$PROGRAMS"/dunst/current_color
-  sed -i -e "$sed_str" ~/.local/state/dunst/current_color
-  cat ~/.config/dunst/dunstrc ~/.local/state/dunst/current_color >> /tmp/dunstconfig
+  sed -i -e "$sed_str" $STATE/dunst/current_color
+  cat ~/.config/dunst/dunstrc $STATE/dunst/current_color >> /tmp/dunstconfig
   pid=$(pidof dunst); kill $pid && dunst -conf /tmp/dunstconfig &
 }
 
 apply_rofi() {
   declare sed_str
   declare -A arr
-  arr[2]=$colors_background;
-  arr[3]=$colors_black;
-  arr[4]=$colors_foreground;
-  arr[5]=$colors_foreground;
-  arr[6]=$colors_background;
-  arr[7]=$colors_red;
-  arr[8]=$colors_magenta;
+  bg_selected=$colors_foreground
+  # test "$theme_mode" = "light" && bg_selected=$colors_bright_magenta
+  arr["bg"]=$colors_background;
+  arr["bg\-border"]=$colors_black;
+  arr["bg\-selected"]=$bg_selected;
+  arr["fg"]=$colors_foreground;
+  arr["fg\-selected"]=$colors_background;
+  arr["urgent"]=$colors_red;
+  arr["prompt"]=$colors_magenta;
   for key in ${!arr[@]}; do
-    sed_str+="${key}s/\:.*/: ${arr[$key]};/ ; "
+    sed_str+="0,/${key}/ s/${key}\:.*/${key}: ${arr[$key]};/ ; "
   done
   # sed -i -e "$sed_str" "$PROGRAMS"/rofi/current_color.rasi
-  sed -i -e "$sed_str" ~/.local/state/rofi/current_color.rasi
+  sed -i -e "$sed_str" $STATE/rofi/current_color.rasi
 }
 
 toggle_gnome() {
-  declare mode
-  case "$theme_mode" in
-    light) mode="default" ;;
-    dark) mode="prefer-dark" ;;
-  esac
+  mode="prefer-dark" 
+  test "$theme_mode" = "light" && mode="default"
   gsettings set org.gnome.desktop.interface color-scheme "$mode"
-  case "$mode" in
-    default) mode=0 ;;
-    prefer-dark) mode=1 ;;
-  esac
+  mode=1
+  test "$theme_mode" = "light" && mode=0
   sed -i "0,/gtk-application-prefer-dark-theme/ s/=.*/=$mode/" ~/.config/gtk-3.0/settings.ini
   # pkill nm-applet && nm-applet --indicator & >/dev/null 2>&1 
   # caffeine kill && caffeine start & >/dev/null 2>&1 
@@ -201,7 +196,6 @@ apply_xresource() {
   xdotool key "Super_L+F5"
 }
 
-apply_xresource
 apply_alacritty
 apply_nvim
 apply_polybar
@@ -210,3 +204,6 @@ apply_dunst
 apply_rofi
 apply_cava
 toggle_gnome
+apply_xresource
+
+notify-send -u low "$selected" "applied"
