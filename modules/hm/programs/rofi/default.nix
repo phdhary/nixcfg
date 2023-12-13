@@ -24,6 +24,7 @@ in {
       '';
     xdg.configFile = {
       "rofi/encus.rasi".source = mkOutOfStoreSymlink (runtimePath ./encus.rasi);
+      "rofi/dmenu.rasi".source = mkOutOfStoreSymlink (runtimePath ./dmenu.rasi);
       "rofi/config.rasi".source =
         mkOutOfStoreSymlink (runtimePath ./config.rasi);
     };

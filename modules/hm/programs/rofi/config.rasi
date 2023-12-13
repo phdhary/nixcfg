@@ -19,4 +19,5 @@ configuration {
     close-on-delete: false;
   }
 }
-@theme "encus.rasi"
+// @theme "encus.rasi"
+@theme "dmenu.rasi"
